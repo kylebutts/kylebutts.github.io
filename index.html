@@ -1,0 +1,156 @@
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Kyle F. Butts</title>
+
+    <link href="//fonts.googleapis.com/css?family=Lato:400,700,900" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Merriweather|Muli:300" rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <script src="https://kit.fontawesome.com/e7b3ba2953.js" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/site.css">
+</head>
+
+<body>
+    <!-- Header Space -->
+    <header class="container app-header">
+    </header>
+
+    <!-- Content -->
+    <div class="container">
+
+        <!-- Name and CV -->
+            <div class="row app-home">
+                
+                <!-- Cartoon of Me -->
+                <div class="col-xs-12 col-md-4 app-home-image">
+                    <img src="img/Kyle Butts Cartoon - small.jpg" 
+                    alt="Cartoon of Kyle F. Butts">
+                </div>
+
+                <!-- Banner -->
+                <div class="col-xs-12 col-md-8 app-home-text">
+                    <h1>
+                        <a href="/">
+                            <span class="name">Kyle F. Butts</span>
+                        </a>
+                    </h1>
+
+                    <p>
+                        PhD Student at 
+                        <a href="https://www.colorado.edu/economics/" class="app-link">
+                            CU Boulder Economics
+                        </a>
+                    </p>
+                    
+                    
+                    <a href="files/2020-08-11_ Kyle Butts CV.pdf" class="app-chip">
+                        <i class="far fa-file-pdf"></i> curriculum vitae
+                    </a>
+                    
+                    <a href="https://www.github.com/kylebutts" class="app-chip">
+                        <i class="fab fa-github"></i>  Github
+                    </a>
+
+                    <a href="https://www.twitter.com/kylefbutts" class="app-chip">
+                        <i class="fab fa-twitter"></i> Twitter
+                    </a>
+                </div>
+            </div>
+
+
+        <!-- Reseach -->
+            <hr class="space-lg">
+            <div class="row section-header">
+                <div class="col-xs-12 app-block">
+                    <h2>Research in Progress</h2>
+                </div>
+            </div>
+
+            <!-- Difference-in-Differences with Spatial Spillover -->    
+            <div class="row research">
+                <div class="col-xs-12">
+                    <div class="research-title">
+                        Differences-in-Differences with Spatial Interference
+                    </div>
+                    
+                    <div class="research-links">
+                        <div class="app-chip abstract-btn">
+                            <i class="fas fa-align-justify"></i> Abstract
+                        </div>
+                        <a href="files/spillover_slides.pdf" class="app-chip">
+                            <i class="far fa-file-pdf"></i> Slides
+                        </a>
+                        <!-- 
+                        <a href="" class="app-chip">
+                            <i class="far fa-file-pdf"></i> PDF
+                        </a>
+                        <a href="" class="app-chip">
+                            <i class="fa fa-code-branch"></i> Code
+                        </a> 
+                        -->
+                    </div>
+
+                    <div class="research-abstract">
+                        <span>Abstract</span>
+                        <p>
+                            Empirical work often uses treatment variables defined by geographic boundaries. When researchers ignore the common problem that the effects of treatment cross over borders, differences-in-differences produces biased estimates for the average treatment effect. In this paper, I identify two sources of bias. First, the control group no longer identifies the counterfactual trend because their outcomes are affected by treatment. Second, changes in treated units' outcomes reflect the effect of their own treatment status and the effect from the treatment status of "close" units. I use Monte Carlo simulations to demonstrate when the biases are particularly large. Further, I show that a common solution used in the literature of removing 'contaminated' control units only prevents one source of bias. Lastly, I propose improved estimation strategies that can remove both sources of bias.  
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        
+        <!-- Teaching -->
+            <hr class="space-lg">
+            <div class="row section-header">
+                <div class="col-xs-12 app-block">
+                    <h2>Teaching</h2>
+                </div>
+            </div>
+
+            <div class="row teaching">
+                <div class="col-xs-12">
+                    <div class="teaching-title">
+                        Introduction to Probability and Statistics <i> (Econ 3818, University of Colorado Boulder) </i>
+                    </div>
+
+                    <div class="teaching-link">
+                        <a class="app-chip" href="https://github.com/kylebutts/Econ_3818">
+                            <i class="fab fa-github"></i>  Course Material
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        <hr class="space-xl">
+    </div>
+
+
+    <!-- JQuery -->
+    <script
+			  src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+			  integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs="
+              crossorigin="anonymous">
+    </script>
+    <script>
+        $(".abstract-btn").click(function(){
+            // Change Button Text
+            // if ($(this).is(':visible')) {
+            //     $(this).text("Hide Abstract");                
+            // } else {
+            //     $(this).text("View Abstract");                
+            // }  
+
+            // Close Abstract
+            $(this).closest(".research").find(".research-abstract").toggle()                          
+        });
+    </script>
+
+</body>
+
+</html>
