@@ -34,31 +34,42 @@
 
                 <!-- Banner -->
                 <div class="col-xs-12 col-md-8 app-home-text">
-                    <h1>
-                        <a href="/">
-                            <span class="name">Kyle F. Butts</span>
-                        </a>
-                    </h1>
+                    <div class="row align-content-center">
+                        <div class="col-12">
+                            <h1>
+                                <a href="/">
+                                    <span class="name">Kyle F. Butts</span>
+                                </a>
+                            </h1>
+                            
+                            <p class="school">
+                                PhD Student at 
+                                <a href="https://www.colorado.edu/economics/" class="app-link">
+                                    CU Boulder Economics
+                                </a>
+                            </p>
+                        </div>
+                        
+                    </div>
 
-                    <p>
-                        PhD Student at 
-                        <a href="https://www.colorado.edu/economics/" class="app-link">
-                            CU Boulder Economics
-                        </a>
-                    </p>
+                    <div class="row">
+                        <div class="col-12"> 
+                            <div class="unit-links">
+                                <a href="files/2020-08-11_ Kyle Butts CV.pdf" class="app-chip">
+                                    <i class="far fa-file-pdf"></i> curriculum vitae
+                                </a>
+                                
+                                <a href="https://www.github.com/kylebutts" class="app-chip">
+                                    <i class="fab fa-github"></i>  Github
+                                </a>
+                                
+                                <a href="https://www.twitter.com/kylefbutts" class="app-chip">
+                                    <i class="fab fa-twitter"></i> Twitter
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                     
-                    
-                    <a href="files/2020-08-11_ Kyle Butts CV.pdf" class="app-chip">
-                        <i class="far fa-file-pdf"></i> curriculum vitae
-                    </a>
-                    
-                    <a href="https://www.github.com/kylebutts" class="app-chip">
-                        <i class="fab fa-github"></i>  Github
-                    </a>
-
-                    <a href="https://www.twitter.com/kylefbutts" class="app-chip">
-                        <i class="fab fa-twitter"></i> Twitter
-                    </a>
                 </div>
             </div>
 
@@ -66,25 +77,27 @@
         <!-- Reseach -->
             <hr class="space-lg">
             <div class="row section-header">
-                <div class="col-xs-12 app-block">
-                    <h2>Research in Progress</h2>
-                </div>
+                <h2>Research in Progress</h2>
             </div>
 
             <!-- Difference-in-Differences with Spatial Spillover -->    
-            <div class="row research">
+            <div class="row unit research">
                 <div class="col-xs-12">
-                    <div class="research-title">
+                    <div class="unit-title">
                         Differences-in-Differences with Spatial Interference
                     </div>
                     
-                    <div class="research-links">
+                    <div class="unit-links">
                         <div class="app-chip abstract-btn">
                             <i class="fas fa-align-justify"></i> Abstract
                         </div>
                         <a href="files/spillover_slides.pdf" class="app-chip">
                             <i class="far fa-file-pdf"></i> Slides
                         </a>
+                        <div class="app-chip figure-btn">
+                            <i class="far fa-chart-bar"></i> Figures
+                        </div>
+
                         <!-- 
                         <a href="" class="app-chip">
                             <i class="far fa-file-pdf"></i> PDF
@@ -95,11 +108,17 @@
                         -->
                     </div>
 
-                    <div class="research-abstract">
+                    <div class="research-box research-abstract">
                         <span>Abstract</span>
                         <p>
                             Empirical work often uses treatment variables defined by geographic boundaries. When researchers ignore the common problem that the effects of treatment cross over borders, differences-in-differences produces biased estimates for the average treatment effect. In this paper, I identify two sources of bias. First, the control group no longer identifies the counterfactual trend because their outcomes are affected by treatment. Second, changes in treated units' outcomes reflect the effect of their own treatment status and the effect from the treatment status of "close" units. I use Monte Carlo simulations to demonstrate when the biases are particularly large. Further, I show that a common solution used in the literature of removing 'contaminated' control units only prevents one source of bias. Lastly, I propose improved estimation strategies that can remove both sources of bias.  
                         </p>
+                    </div>
+
+                    <div class="research-box research-figure">
+                        <span>Figure 1</span>
+                        
+                        <img src="img/figure-map_te_spill_all.png">
                     </div>
                 </div>
             </div>
@@ -108,24 +127,120 @@
         <!-- Teaching -->
             <hr class="space-lg">
             <div class="row section-header">
-                <div class="col-xs-12 app-block">
                     <h2>Teaching</h2>
-                </div>
             </div>
 
-            <div class="row teaching">
+            <div class="row unit">
                 <div class="col-xs-12">
-                    <div class="teaching-title">
+                    <div class="unit-title-sm">
                         Introduction to Probability and Statistics <i> (Econ 3818, University of Colorado Boulder) </i>
                     </div>
 
-                    <div class="teaching-link">
+                    <div class="unit-links">
                         <a class="app-chip" href="https://github.com/kylebutts/Econ_3818">
                             <i class="fab fa-github"></i>  Course Material
                         </a>
                     </div>
                 </div>
             </div>
+
+
+
+        <!-- Resources -->
+                <hr class="space-lg">
+                <div class="row section-header">
+                    <h2>Open Source Resources</h2>
+                </div>
+
+                <div class="row unit">
+                    <div class="col-xs-12">
+                        <div class="unit-title-sm">
+                            <a href="https://github.com/kylebutts/templates/" class="app-link">Latex Article Template</a>
+                        </div>
+    
+                        <div class="unit-links">
+                            <div class="app-chip expand-btn" href="">
+                                <i class="far fa-file-pdf"></i> Example Paper
+                            </div>
+                        </div>
+
+                        <div class="row expandable hidden"> 
+                            <iframe class="pdf"
+                            src="files/templates/article.pdf" width="100%" height = "1000px"></iframe>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row unit">
+                    <div class="col-xs-12">
+                        <div class="unit-title-sm">
+                            <a href="https://github.com/kylebutts/templates/" class="app-link">Beamer Slides Template</a>
+                        </div>
+    
+                        <div class="unit-links">
+                            <div class="app-chip expand-btn" href="">
+                                <i class="far fa-file-pdf"></i> Example Slides
+                            </div>
+                        </div>
+
+                        <div class="row expandable hidden"> 
+                            <iframe class="pdf"
+                            src="files/templates/slides.pdf" width="100%" height = "1000px"></iframe>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row unit">
+                    <div class="col-xs-12">
+                        <div class="unit-title-sm">
+                            <a href="https://github.com/kylebutts/templates/" class="app-link">ggplot2 Theme</a>
+                        </div>
+    
+                        <div class="unit-links">
+                            <div class="app-chip expand-btn" href="">
+                                <i class="far fa-chart-bar"></i>  Example Figures
+                            </div>
+                        </div>
+
+                        <div class="row expandable hidden">
+                            <div class="half-width-box">
+                                <img style="width:100%;" src="img/ggplot-theme/theme4.png">
+                            </div>
+                            <div class="half-width-box">
+                                <img style="width:100%;" src="img/ggplot-theme/theme2.png">
+                            </div>
+
+                            <div class="half-width-box">
+                                <div class="half-width-text">Option: left-align title</div> 
+
+                                <img style="width:100%;" src="img/ggplot-theme/theme1.png">
+                            </div>
+
+                            <div class="half-width-box">
+                                <div class="half-width-text">Option: Resize all text</div> 
+
+                                <img style="width:100%;" src="img/ggplot-theme/theme6.png">
+                            </div>
+
+
+                            <div class="half-width-box">
+                                <div class="half-width-text">Option: match slide theme</div>
+
+                                <img style="width:100%;" src="img/ggplot-theme/theme5.png">
+                            </div>
+
+                            <div class="half-width-box">
+                                <div class="half-width-text">Works well with maps</div>
+
+                                <img style="width:100%;" src="img/ggplot-theme/theme3.png">
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+                
+
+
 
         <hr class="space-xl">
     </div>
@@ -139,16 +254,19 @@
     </script>
     <script>
         $(".abstract-btn").click(function(){
-            // Change Button Text
-            // if ($(this).is(':visible')) {
-            //     $(this).text("Hide Abstract");                
-            // } else {
-            //     $(this).text("View Abstract");                
-            // }  
-
-            // Close Abstract
-            $(this).closest(".research").find(".research-abstract").toggle()                          
+            // Toggle Abstract
+            $(this).closest(".research").find(".research-abstract").toggle()                        
         });
+
+        $(".figure-btn").click(function(){
+            // Toggle Figures
+            $(this).closest(".research").find(".research-figure").toggle()          
+        })
+
+        $(".expand-btn").click(function(){
+            // Toggle 
+            $(this).closest(".row").find(".expandable").toggleClass("hidden") 
+        })
     </script>
 
 </body>
