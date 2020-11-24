@@ -90,12 +90,14 @@
                     <div class="unit-links">
                         <div class="app-chip abstract-btn">
                             <i class="fas fa-align-justify"></i> Abstract
+                            <i class="fas fa-caret-up"></i>
                         </div>
                         <a href="files/spillover_slides.pdf" class="app-chip">
                             <i class="far fa-file-pdf"></i> Slides
                         </a>
                         <div class="app-chip figure-btn">
                             <i class="far fa-chart-bar"></i> Figures
+                            <i class="fas fa-caret-down"></i>
                         </div>
 
                         <!-- 
@@ -115,7 +117,7 @@
                         </p>
                     </div>
 
-                    <div class="research-box research-figure">
+                    <div class="research-box research-figure hidden">
                         <span>Figure 1</span>
                         
                         <img src="img/figure-map_te_spill_all.png">
@@ -198,10 +200,13 @@
     
                         <div class="unit-links">
                             <div class="app-chip expand-btn" href="">
-                                <i class="far fa-chart-bar"></i>  Example Figures
+                                <i class="far fa-chart-bar"></i>  
+                                Example Figures
+                                <i class="fas fa-caret-down"></i>
                             </div>
                         </div>
 
+                        <!-- expandable = button reveals-->
                         <div class="row expandable hidden">
                             <div class="half-width-box">
                                 <img style="width:100%;" src="img/ggplot-theme/theme4.png">
@@ -253,18 +258,24 @@
               crossorigin="anonymous">
     </script>
     <script>
+        // Toggle Abstract
         $(".abstract-btn").click(function(){
-            // Toggle Abstract
-            $(this).closest(".research").find(".research-abstract").toggle()                        
+            $(this).find(".fa-caret-down, .fa-caret-up").toggleClass("fa-caret-down fa-caret-up")
+
+            $(this).closest(".research").find(".research-abstract").toggleClass("hidden")                        
         });
 
+        // Toggle Figures
         $(".figure-btn").click(function(){
-            // Toggle Figures
-            $(this).closest(".research").find(".research-figure").toggle()          
+            $(this).find(".fa-caret-down, .fa-caret-up").toggleClass("fa-caret-down fa-caret-up")
+
+            $(this).closest(".research").find(".research-figure").toggleClass("hidden")          
         })
 
+        // Toggle 
         $(".expand-btn").click(function(){
-            // Toggle 
+            $(this).find(".fa-caret-down, .fa-caret-up").toggleClass("fa-caret-down fa-caret-up")
+            
             $(this).closest(".row").find(".expandable").toggleClass("hidden") 
         })
     </script>
