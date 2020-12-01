@@ -7,6 +7,7 @@ Root variables https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom
   --color-light-grey: #f0f0f0;
   --color-dark-grey:  #9e9e9e;
   --color-highlight: #FFBD8D;
+  --color-slides: #ececec;
   --measurement: 2px;
 
 }
@@ -49,7 +50,7 @@ html {
 
 /*
     Possible Colors:
-    #283593
+    #283593 
     #FFBD8D
 */
 
@@ -108,7 +109,7 @@ html {
 
 @media (min-width: 768px) {
   .app-home-image img {
-    width: 100%;
+    width: 90%;
   }
 }
 
@@ -198,8 +199,17 @@ html {
 /* Section Header */
 
 .row.section-header {
-  border-top: 2px solid var(--color-dark-grey);
-  font-family: 'Merriweather', serif;
+  display: block;
+  border-bottom: 2px solid var(--color-light-grey);
+  padding-bottom: 0px;
+  margin-bottom: 8px;
+  font-family: 'Lato', serif;
+  font-size: 14px;
+  line-height: 6px;
+}
+.row.section-header > h2 {
+  display: block;
+  text-align: center;
 }
 
 /* Unit */
@@ -211,6 +221,9 @@ html {
   font-size: 18px;
   font-weight: bold;
   font-family: 'Merriweather', serif;
+}
+.unit-byline {
+  font-style: italic;
 }
 .unit-title-sm {
   padding: 8px 0;
@@ -330,6 +343,12 @@ a.app-chip:visited {
   padding: 16px 0;
 }
 
+/* General Sibling: all but first research block */
+.research ~ .research {
+  border-top: 2px solid var(--color-light-grey);
+  margin-top: 32px;
+}
+
 .research-title {
   padding: 8px 0;
   font-size: 18px;
@@ -339,7 +358,8 @@ a.app-chip:visited {
 
 .research-box {
   padding: 8px 16px;
-  background-color: #ececec;
+  background-color: var(--color-slides);
+  margin-top: 16px;
 }
 
 @media (min-width: 768px) {
