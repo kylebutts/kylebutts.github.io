@@ -169,8 +169,8 @@
                         </div>
 
                         <div class="row expandable hidden"> 
-                            <object data="files/templates/article.pdf" type="application/pdf" width="100%" height = "1000px">
-                                <embed src="files/templates/article.pdf" type="application/pdf" width="100%" height = "1000px"/>
+                            <object class="inline-pdf" data="files/templates/article.pdf" type="application/pdf">
+                                <embed class="inline-pdf" src="files/templates/article.pdf" type="application/pdf" />
                             </object>
                         </div>
                     </div>
@@ -189,8 +189,8 @@
                         </div>
 
                         <div class="row expandable hidden"> 
-                            <object data="files/templates/slides.pdf" type="application/pdf" width="100%" height = "1000px">
-                                <embed src="files/templates/slides.pdf" type="application/pdf" width="100%" height = "1000px"/>
+                            <object class="inline-pdf" data="files/templates/slides.pdf" type="application/pdf">
+                                <embed class="inline-pdf" src="files/templates/slides.pdf" type="application/pdf" />
                             </object>
                         </div>
                     </div>
@@ -262,13 +262,20 @@
               crossorigin="anonymous">
     </script>
     <script>
+        // Toggle by ID 
+        // http://jsfiddle.net/heera/933Ht/
+        // on button use `onclick="toggleHidden('id')"`
+        function toggleHidden(id){
+            var div = document.getElementById(id);
+            div.classList.toggle('hidden');
+        }
+
         // Toggle Abstract
         $(".abstract-btn").click(function(){
             $(this).find(".fa-caret-down, .fa-caret-up").toggleClass("fa-caret-down fa-caret-up")
 
             $(this).closest(".research").find(".research-abstract").toggleClass("hidden")                        
         });
-
         // Toggle Figures
         $(".figure-btn").click(function(){
             $(this).find(".fa-caret-down, .fa-caret-up").toggleClass("fa-caret-down fa-caret-up")
