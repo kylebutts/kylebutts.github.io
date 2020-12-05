@@ -6,11 +6,21 @@ Root variables https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom
   --color-black: #000000;
   --color-light-grey: #f0f0f0;
   --color-dark-grey:  #9e9e9e;
-  --color-highlight: #FFBD8D;
+  --color-highlight: #b6a9bd;
+  --color-dark-highlight:#705380;
   --color-slides: #ececec;
   --measurement: 2px;
-
 }
+
+
+
+
+/*
+    Possible Colors:
+    #283593 
+    #FFBD8D
+    #93869a
+*/
 
 
 html {
@@ -45,14 +55,6 @@ html {
   }
 } 
 
-
-
-
-/*
-    Possible Colors:
-    #283593 
-    #FFBD8D
-*/
 
 /* hr space */
 
@@ -200,7 +202,7 @@ html {
 
 .row.section-header {
   display: block;
-  border-bottom: 2px solid var(--color-light-grey);
+  border-bottom: 2px solid var(--color-highlight);
   padding-bottom: 0px;
   margin-bottom: 8px;
   font-family: 'Lato', serif;
@@ -261,7 +263,7 @@ html {
   cursor: pointer;
   position: relative;
 
-  transition: all .15s linear;
+  transition: all 0.15s linear;
   transition-property: all;
 }
 
@@ -274,24 +276,8 @@ html {
 .unit-links .app-chip:before, .unit-links .app-chip:after {
   content: '';
   position: absolute;
-  transition: all 0.125s ease-in-out;
+  transition: all 0.15s ease-in-out;
 }
-/* Fancy Hover
-.unit-links .app-chip:after {
-  border: 2px dashed var(--color-dark-grey);
-  bottom: -2px;
-  left: -2px;
-  right: -2px;
-  top: -2px;
-  z-index: -1;
-}
-.unit-links .app-chip:hover:after, .unit-links .app-chip:focus:after {
-  bottom: -6px;
-  left: 2px;
-  right: -6px;
-  top: 2px;
-} 
-*/
 
 
 /* Font Awesome icons */
@@ -317,16 +303,6 @@ a.app-chip:visited {
 
 /* Links */
 
-.app-link {
-  font-size: 20px;
-  text-decoration: none;
-  background: repeating-linear-gradient(180deg, transparent, transparent 23px, var(--color-highlight) 23px, var(--color-highlight) 24px, transparent 24px, transparent);
-}
-
-.app-link:hover {
-  text-decoration: none;
-  background: repeating-linear-gradient(180deg, transparent, transparent 23px, var(--color-highlight) 23px, var(--color-highlight) 25px, transparent 25px, transparent);
-}
 
 .app-link,
 .app-link:hover,
@@ -335,6 +311,23 @@ a.app-chip:visited {
   border-bottom: none;
   text-decoration: none;
 }
+
+.app-link {
+  background-image: linear-gradient(120deg, var(--color-highlight) 0%, var(--color-highlight) 100%);
+  background-repeat: no-repeat;
+  background-size: 100% 0.2em;
+  background-position: 0 88%;
+  transition: background-size 0.15s ease-in;
+
+  font-size: 20px;
+  padding: 8px 4px;
+}
+
+.app-link:hover {
+  background-size: 100% 88%;
+}
+
+
 
 
 /* Research */
