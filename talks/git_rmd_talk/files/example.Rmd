@@ -1,0 +1,41 @@
+---
+title: "Example R Markdown file"
+author: "Kyle Butts"
+date: "12/28/2020"
+output: html_document
+---
+
+
+# Header 1
+
+## Subheader
+
+### Subsubheader
+
+Markdown provides an easy way to make standard types of formatted text, like
+
+- *italics*
+- **bold**
+- `code`
+- [links](www.kylebutts.com)
+- Latex equations, $E = mc^{2}$
+
+$$ 
+	y_{it} = X_{it} \beta + \varepsilon_{it}
+$$
+
+
+
+```{r}
+if (!require("viridis")) install.packages("viridis")
+library(viridis)
+image(volcano, col = viridis(200))
+```
+
+
+```{r echo = FALSE, results = 'asis'}
+if (!require("kableExtra")) install.packages("kableExtra")
+library(kableExtra)
+kableExtra::kable(mtcars[1:5, ], caption = "A knitr kable.") %>% kableExtra::kable_minimal()
+```
+
