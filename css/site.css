@@ -32,6 +32,10 @@ html {
   /* background-color: #f8f8ff; */
 }
 
+h1, h2, h3 {
+  font-family: 'Merriweather', serif;
+}
+
 .col-xs-12 {
   width: 100%;
 }
@@ -268,8 +272,8 @@ html {
 }
 
 .app-chip:hover {
-  background-color: var(--color-dark-grey);
-  border: 2px solid var(--color-dark-grey);
+  background-color: var(--color-highlight);
+  border: 2px solid var(--color-highlight);
 }
 
 
