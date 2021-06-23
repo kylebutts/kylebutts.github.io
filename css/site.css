@@ -1,7 +1,8 @@
 /* from http://www.phdpages.com/ */
 
 /* 
-Root variables https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties */
+Root variables https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties 
+*/
 :root{
   --color-black: #000000;
   --color-light-grey: #f0f0f0;
@@ -353,30 +354,63 @@ a.app-chip:visited {
   font-family: 'Merriweather', serif;
 }
 
-.research-box {
+
+/* Box */
+
+.grey-box {
   padding: 8px 16px;
   background-color: var(--color-slides);
   margin-top: 16px;
 }
 
 @media (min-width: 768px) {
-  .research-box {
+  .grey-box {
     padding: 8px 32px;
   }
 }
 
-.research-box span {
+.grey-box span {
   display: block;
   font-weight: bold;
   margin-top: 16px;
   font-family: 'Merriweather', serif;
+  font-style: italic;
 }
 
-.research-box img {
+.grey-box img {
   display: block;
   width: 100%;
 }
 
+.grey-box p {
+  font-size: 1.1rem;
+  line-height: 1.8rem;
+}
+
+.grey-box-link,
+.grey-box-link:hover,
+.grey-box-link:visited {
+  color: inherit;
+  border-bottom: none;
+  text-decoration: none;
+}
+
+.grey-box-link {
+  background-image: linear-gradient(120deg, var(--color-highlight) 0%, var(--color-highlight) 100%);
+  background-repeat: no-repeat;
+  background-size: 100% 0.15em;
+  background-position: 0 92%;
+  transition: background-size 0.15s ease-in;
+
+  font-size: 1.1rem;
+  padding: 4px 4px;
+}
+
+.grey-box-link:hover {
+  background-size: 100% 100%;
+}
+
+/* Inline PDF */ 
 
 .inline-pdf {
   width: 100%;
