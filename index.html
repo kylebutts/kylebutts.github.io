@@ -97,11 +97,11 @@
                 </div>
                 
                 <div class="unit-links">
-                    <div class="app-chip abstract-btn">
+                    <div class="app-chip expand-btn" id="btn-spillover-abs">
                         <i class="fas fa-align-justify"></i> Abstract
                         <i class="fas fa-caret-up"></i>
                     </div>
-                    <div class="app-chip figure-btn">
+                    <div class="app-chip expand-btn" id="btn-spillover-fig">
                         <i class="far fa-chart-bar"></i> Figures
                         <i class="fas fa-caret-down"></i>
                     </div>
@@ -116,14 +116,14 @@
                     </a> 
                 </div>
 
-                <div class="grey-box research-abstract">
+                <div class="grey-box research-abstract" id="expand-spillover-abs">
                     <span>Abstract</span>
                     <p>
                         Empirical work often uses treatment assigned following geographic boundaries. When the effects of treatment cross over borders, classical difference-in-differences estimation produces biased estimates for the average treatment effect. In this paper, I introduce a potential outcomes framework to model spillover effects and decompose the estimate's bias in two parts: (1) the control group no longer identifies the counterfactual trend because their outcomes are affected by treatment and (2) changes in treated units' outcomes reflect the effect of their own treatment status and the effect from the treatment status of "close" units. I propose estimation strategies that can remove both sources of bias and semi-parametrically estimate the spillover effects themselves. I extend <a class="grey-box-link" href="https://pedrohcgs.github.io/files/Callaway_SantAnna_2020.pdf" style="font-size: 1.1rem;">Callaway and Sant'Anna (2020)</a> to allow for event-study estimates that control for spillovers. To highlight the importance of spillover effects, I revisit analyses of three place-based interventions.  
                     </p>
                 </div>
 
-                <div class="grey-box research-figure hidden">
+                <div class="grey-box research-figure hidden" id="expand-spillover-fig">
                     <p>
                         <span>Figure</span> Example Map of Spillover Effects
                     </p>                   
@@ -146,6 +146,14 @@
                 </div>
 
                 <div class="unit-links">
+                    <div class="app-chip expand-btn" id="btn-did2s-about">
+                        <i class="fas fa-align-justify"></i> About
+                        <i class="fas fa-caret-up"></i>
+                    </div>
+                    <div class="app-chip expand-btn" id="btn-did2s-fig">
+                        <i class="fas fa-align-justify"></i> Figure
+                        <i class="fas fa-caret-down"></i>
+                    </div>
                     <div class="app-chip" href="http://kylebutts.com/did2s/index.html">
                         <i class="fa fa-code-branch"></i> R Package
                     </div>
@@ -155,7 +163,7 @@
                 </div>
 
 
-                <div class="grey-box">
+                <div class="grey-box" id="expand-did2s-about">
                     <span>About</span>
                     <p>
                         The goal of did2s is to estimate TWFE models without running into the problem of staggered treatment adoption. This package, available in both R and Stata, implement the method by <a class="grey-box-link" href="https://jrgcmu.github.io/2sdd_current.pdf" style="font-size: 1.1rem;">Gardner (2021)</a>. This method entails the following two-step estimation procedure
@@ -173,7 +181,7 @@
                     </p>
                 </div>
 
-                <div class="grey-box">
+                <div class="grey-box hidden" id="expand-did2s-fig">
                     <p>
                         <span>Figure</span> Comparing TWFE and Two-Stage Difference-in-Differences Estimates
                     </p>
@@ -191,32 +199,21 @@
                 </div>
 
                 <div class="unit-links">
-                    <div class="app-chip expand-btn" href="">
-                        <i class="far fa-file-pdf"></i> Example Paper<i class="fas fa-caret-down" aria-hidden="true"></i>
+                    <div class="app-chip expand-btn" href="" id="btn-article-template">
+                        <i class="far fa-file-pdf"></i>Example Paper<i class="fas fa-caret-down" aria-hidden="true"></i>
+                    </div>
+                    <div class="app-chip expand-btn" id="btn-slides">
+                        <i class="far fa-file-pdf"></i>Example Slides<i class="fas fa-caret-down" aria-hidden="true"></i>
                     </div>
                 </div>
 
-                <div class="row expandable hidden"> 
+                <div class="row expandable hidden" id="expand-article-template"> 
                     <object class="inline-pdf" data="files/templates/article.pdf" type="application/pdf">
                         <embed class="inline-pdf" src="files/templates/article.pdf" type="application/pdf" />
                     </object>
                 </div>
-            </div>
-        </div>
 
-        <div class="row unit">
-            <div class="col-xs-12">
-                <div class="unit-title-sm">
-                    <a href="https://github.com/kylebutts/templates/" class="app-link">Beamer Slides Template</a>
-                </div>
-
-                <div class="unit-links">
-                    <div class="app-chip expand-btn " href="">
-                        <i class="far fa-file-pdf"></i> Example Slides<i class="fas fa-caret-down" aria-hidden="true"></i>
-                    </div>
-                </div>
-
-                <div class="row expandable hidden"> 
+                <div class="row expandable hidden" id="expand-slides"> 
                     <object class="inline-pdf" data="files/templates/slides.pdf" type="application/pdf">
                         <embed class="inline-pdf" src="files/templates/slides.pdf" type="application/pdf" />
                     </object>
@@ -233,7 +230,7 @@
         </div>
 
         <div class="row unit">
-            <div class="col-xs-12">
+            <div class="col-xs-12 col-md-6">
                 <div class="unit-title-sm">
                     Introduction to Probability and Statistics <br> <i>(Econ 3818, University of Colorado Boulder) </i>
                 </div>
@@ -245,7 +242,7 @@
                 </div>
             </div>
 
-            <div class="col-xs-12">
+            <div class="col-xs-12 col-md-6">
                 <div class="unit-title-sm">
                     Natural Resource Economics <br> <i> (Econ 3535, University of Colorado Boulder) </i>
                 </div>
@@ -269,33 +266,16 @@
               crossorigin="anonymous">
     </script>
     <script>
-        // Toggle by ID 
-        // http://jsfiddle.net/heera/933Ht/
-        // on button use `onclick="toggleHidden('id')"`
-        function toggleHidden(id){
-            var div = document.getElementById(id);
-            div.classList.toggle('hidden');
-        }
-
-        // Toggle Abstract
-        $(".abstract-btn").click(function(){
+        $('.expand-btn').click(function(){
+            // Change caret on button
             $(this).find(".fa-caret-down, .fa-caret-up").toggleClass("fa-caret-down fa-caret-up")
 
-            $(this).closest(".research").find(".research-abstract").toggleClass("hidden")                        
+            // Button will have id #btn-IDname
+            // Hide/unhide #expand-IDname
+            var IDname = $(this).attr("id").substr(4);
+            console.log(IDname)
+            $('#expand-'+IDname).toggleClass("hidden");
         });
-        // Toggle Figures
-        $(".figure-btn").click(function(){
-            $(this).find(".fa-caret-down, .fa-caret-up").toggleClass("fa-caret-down fa-caret-up")
-
-            $(this).closest(".research").find(".research-figure").toggleClass("hidden")          
-        })
-
-        // Toggle 
-        $(".expand-btn").click(function(){
-            $(this).find(".fa-caret-down, .fa-caret-up").toggleClass("fa-caret-down fa-caret-up")
-            
-            $(this).closest(".row").find(".expandable").toggleClass("hidden") 
-        })
     </script>
 
 </body>
