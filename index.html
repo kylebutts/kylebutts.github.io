@@ -1,321 +1,376 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Kyle F. Butts</title>
-
-    <link href="//fonts.googleapis.com/css?family=Lato:400,700,900" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Merriweather|Muli|Arapey" rel="stylesheet">
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-TVZTCHHW24"></script>
     <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+        window.dataLayer = window.dataLayer || [];
 
-    gtag('config', 'G-TVZTCHHW24');
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'G-TVZTCHHW24');
     </script>
-
 
     <!-- Font Awesome Icons -->
     <script src="https://kit.fontawesome.com/e7b3ba2953.js" crossorigin="anonymous"></script>
 
-    <link rel="stylesheet" href="css/bootstrap.css">
-    <link rel="stylesheet" href="css/site.css">
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@100..900&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@100..900&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&display=swap" rel="stylesheet"> 
+
+    <!-- Compiled Tailwind CSS -->
+    <link rel="stylesheet" href="css/build.css">
 </head>
 
 <body>
-    <!-- Header Space -->
-    <header class="container app-header">
-    </header>
 
-    <!-- Content -->
-    <div class="container">
+    <!-- Splash -->
+    <div class="w-full">
+        <div class="grid grid-cols-1 md:grid-cols-3 md:gap-4 p-2 sm:p-8 mx-auto items-end max-w-4xl lg:max-w-4xl ">
 
-        <!-- Name and CV -->
-            <div class="row app-home">
-                
-                <!-- Cartoon of Me -->
-                <div class="col-xs-12 col-md-5 app-home-image">
-                    <img src="img/Kyle Butts Cartoon - small.jpg" 
-                    alt="Cartoon of Kyle F. Butts">
+            <!-- Cartoon -->
+            <div class="col-span-1">
+                <div class="w-56 my-8 mx-auto md:w-full md:mb-0">
+                    <img src="img/cartoon_small.jpg" alt="Cartoon of Kyle Butts" />
+                </div>
+            </div>
+
+            <!-- About -->
+            <div class="col-span-1 md:col-span-2 float-right">
+                <!-- Name and School -->
+                <h2
+                    class="pb-2 text-5xl font-bold tracking-wide text-center md:text-right text-gray-800 cols-span-2 font-slab lg:text-6l">
+                    Kyle F. Butts</h2>
+
+                <p class="pt-2 pb-6 text-2xl font-fira font-light text-center md:text-right text-coral-500">
+                    Economics PhD Student at
+                    <a href="https://www.colorado.edu/economics">
+                        <span class="font-normal">
+                            CU Boulder
+                        </span>
+                    </a>
+                </p>
+
+                <!-- Buttons -->
+                <div class="flex flex-col flex-wrap space-y-2 sm:space-y-0 sm:flex-row sm:space-x-2 sm:justify-center md:justify-end">
+                    <button href="files/2021-02-02_ Kyle Butts CV.pdf" class="btn btn-coral py-2 px-4 group">
+                        <i class="far fa-file-pdf pr-2 text-gray-500 group-hover:text-gray-700"></i> 
+                        <span class="pl-1">CV</span>
+                    </button>
+
+                    <button href="https://www.github.com/kylebutts" class="btn btn-coral py-2 px-4  group">
+                        <i class="fab fa-github pr-2 text-gray-500 group-hover:text-gray-700"></i> 
+                        <span class="pl-1">Github</span>
+                    </button>
+
+                    <button href="https://www.twitter.com/kylefbutts" class="btn btn-coral py-2 px-4 group">
+                        <i class="fab fa-twitter pr-2 text-gray-500 group-hover:text-gray-700"></i> 
+                        <span class="pl-1">Twitter</span>
+                    </button>
                 </div>
 
-                <!-- Banner -->
-                <div class="col-xs-12 col-md-7 app-home-text">
-                    <div class="row align-content-center">
-                        <div class="col-12">
-                            <h1>
-                                <span class="name">Kyle F. Butts</span>
-                            </h1>
-                            
-                            <p class="school">
-                                PhD Student at 
-                                <a href="https://www.colorado.edu/economics/" class="app-link">
-                                    CU Boulder Economics
-                                </a>
-                            </p>
-                        </div>
-                        
-                    </div>
+                <!-- Extra space -->
+                <div class="h-4"></div>
+            </div>
 
-                    <div class="row">
-                        <div class="col-12"> 
-                            <div class="unit-links">
-                                <a href="files/2021-02-02_ Kyle Butts CV.pdf" class="app-chip">
-                                    <i class="far fa-file-pdf"></i> curriculum vitae
-                                </a>
-                                
-                                <a href="https://www.github.com/kylebutts" class="app-chip">
-                                    <i class="fab fa-github"></i>  Github
-                                </a>
-                                
-                                <a href="https://www.twitter.com/kylefbutts" class="app-chip">
-                                    <i class="fab fa-twitter"></i> Twitter
-                                </a>
-                            </div>
+
+
+        </div>
+    </div>
+
+    <!-- Research -->
+    <div class="w-full">  
+        <div class="max-w-4xl p-2 sm:p-8 mx-auto">
+            <!-- Section Header -->
+            <div class="text-center mx-auto md:w-1/2 py-4 my-8 bg-gradient-to-tr from-alice-400 to-alice-600 rounded-lg">
+                <h2 class="text-alice-50 font-extrabold text-center text-4xl leading-none tracking-wider">
+                    Research
+                </h2>
+            </div>
+
+            <!-- Difference-in-Differences with Spatial Spillover -->    
+            <div class="border-t-2 border-b-2 border-gray-300 py-4 px-2 mt-8">
+                <div class="">
+                    <h2 class="font-slab pb-4 text-xl">
+                        Differences-in-Differences with Spatial Interference
+                    </h2>
+                    
+                    <div class="grid gap-2 grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5">
+                        <div class="btn btn-alice expand-btn py-1 px-2" id="btn-spillover-abs">
+                                <i class="fas fa-align-justify  pl-1 pr-2"></i> <span class="flex-grow ml-0 pl-1">Abstract</span>
+                                <i class="fas fa-caret-up"></i>
                         </div>
+                        <div class="btn btn-alice expand-btn py-1 px-2" id="btn-spillover-fig">
+                                <i class="far fa-chart-bar pl-1 pr-2"></i> 
+                                <span class="flex-grow ml-0 pl-1">Figures</span>
+                                <i class="fas fa-caret-down"></i>
+                        </div>
+                        <a href="https://arxiv.org/abs/2105.03737" class="btn btn-alice py-1 px-2">
+                            <i class="far fa-file-pdf pl-1 pr-2"></i> 
+                            <span class="pl-1">Paper</span>
+                        </a>
+                        <a href="files/spillover_slides.pdf" class="btn btn-alice py-1 px-2">
+                                <i class="far fa-file-pdf pl-1 pr-2"></i> 
+                                <span class="pl-1">Slides</span>
+                        </a>
+                        <a href="https://github.com/kylebutts/Spatial-Spillover" class="btn btn-alice py-1 px-2">
+                                <i class="fa fa-code-branch pl-1 pr-2"></i> 
+                                <span class="pl-1">Code</span>
+                        </a> 
                     </div>
                     
+                    <div class="sm:px-4">
+                        <div class="my-8 py-4 px-4 bg-alice-50 stack-sm border-gray-800 border-2" id="expand-spillover-abs">
+                            <span class="font-fira font-bold">Abstract:</span>
+                            <p class="mt-2 font-slab">
+                                Empirical work often uses treatment assigned following geographic boundaries. When the effects of treatment cross over borders, classical difference-in-differences estimation produces biased estimates for the average treatment effect. In this paper, I introduce a potential outcomes framework to model spillover effects and decompose the estimate's bias in two parts: (1) the control group no longer identifies the counterfactual trend because their outcomes are affected by treatment and (2) changes in treated units' outcomes reflect the effect of their own treatment status and the effect from the treatment status of "close" units. I propose estimation strategies that can remove both sources of bias and semi-parametrically estimate the spillover effects themselves. I extend <a class="link-alice" href="https://pedrohcgs.github.io/files/Callaway_SantAnna_2020.pdf">Callaway and Sant'Anna (2020)</a> to allow for event-study estimates that control for spillovers. To highlight the importance of spillover effects, I revisit analyses of three place-based interventions.  
+                            </p>
+                        </div>
+
+                        <div class="my-8 py-4 px-4 bg-alice-50 stack-sm border-gray-800 border-2 hidden" id="expand-spillover-fig">
+                            <span class="font-fira font-bold">Figure:</span> 
+                            <span class="font-slab">
+                                Example Map of Spillover Effects
+                            </span>
+                            <p class="mt-2">
+                                <img src="img/figure-map_te_spill_all.png">
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
 
 
-        <!-- Reseach -->
-        <hr class="space-lg">
-        <div class="row section-header">
-            <h2>Research in Progress</h2>
+            <!-- Difference-in-Differences with Geocoded Microdata -->
+            <div class="border-t-2 border-b-2 border-gray-300 py-4 px-2 mt-8">
+                <div class="">
+                    <h2 class="font-slab pb-4 text-xl">
+                        Differences-in-Differences with Geocode Microdata
+                    </h2>
+                    
+                    <div class="grid gap-2 grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5">
+                        <div class="btn btn-alice expand-btn py-1 px-2" id="btn-rings-abs">
+                                <i class="fas fa-align-justify  pl-1 pr-2"></i> <span class="flex-grow ml-0 pl-1">Abstract</span>
+                                <i class="fas fa-caret-up"></i>
+                        </div>
+                        <div class="btn btn-alice expand-btn py-1 px-2" id="btn-rings-fig">
+                                <i class="far fa-chart-bar pl-1 pr-2"></i> 
+                                <span class="flex-grow ml-0 pl-1">Figures</span>
+                                <i class="fas fa-caret-down"></i>
+                        </div>
+                        <a href="files/Rings.pdf" class="btn btn-alice py-1 px-2">
+                            <i class="far fa-file-pdf pl-1 pr-2"></i> 
+                            <span class="pl-1">Paper</span>
+                        </a>
+                    </div>
+                    
+                    <div class="sm:px-4">
+                        <div class="my-8 py-4 px-4 bg-alice-50 stack-sm border-gray-800 border-2" id="expand-rings-abs">
+                            <span class="font-fira font-bold">Abstract:</span>
+                            <p class="mt-2 font-slab">
+                                This paper formalizes a common approach for estimating effects of treatment at a specific location using geocoded microdata. This estimator compares units immediately next to treatment (an inner-ring) to units just slightly further away (an outer-ring). This paper formalizes the necessary assumptions to identify the average treatment effect among the effected units and illustrates potential pitfalls when these assumptions fail. Since one of these assumptions requires knowledge of exactly how far treatment effects are experienced, I propose a new method that relaxes this assumption and allows for non-parametric estimation using partitioning-based least squares developed in <a class = "link-alice" href="https://nppackages.github.io/references/Cattaneo-Farrell-Feng_2020_AoS.pdf">Cattaneo et. al. (2020)</a>. This method allows for researchers to estimate how treatment effects evolve over distance. Lastly, I illustrate the advantage of this method by revisiting the effects of increased crime risk on home values studied in <a class = "link-alice" href="https://www.aeaweb.org/articles?id=10.1257/aer.98.3.1103">Linden and Rockoff (2008)</a>.  
+                            </p>
+                        </div>
+
+                        <div class="my-8 py-4 px-4 bg-alice-50 stack-sm border-gray-800 border-2 hidden" id="expand-rings-fig">
+                            <span class="font-fira font-bold">Figure:</span> 
+                            <span class="font-slab">
+                                Example Map of Spillover Effects
+                            </span>
+                            <p class="mt-2">
+                                <img src="img/rings_ex.png">
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>   
         </div>
-
-        <!-- Difference-in-Differences with Spatial Spillover -->    
-        <div class="row unit research">
-            <div class="col-xs-12">
-                <div class="unit-title">
-                    Differences-in-Differences with Spatial Interference
-                </div>
-                
-                <div class="unit-links">
-                    <div class="app-chip expand-btn" id="btn-spillover-abs">
-                        <i class="fas fa-align-justify"></i> Abstract
-                        <i class="fas fa-caret-up"></i>
-                    </div>
-                    <div class="app-chip expand-btn" id="btn-spillover-fig">
-                        <i class="far fa-chart-bar"></i> Figures
-                        <i class="fas fa-caret-down"></i>
-                    </div>
-                    <a href="files/spillover_slides.pdf" class="app-chip">
-                        <i class="far fa-file-pdf"></i> Slides
-                    </a>
-                    <a href="https://arxiv.org/abs/2105.03737" class="app-chip">
-                        <i class="far fa-file-pdf"></i> Working Paper
-                    </a>
-                    <a href="https://github.com/kylebutts/Spatial-Spillover" class="app-chip">
-                        <i class="fa fa-code-branch"></i> Code
-                    </a> 
-                </div>
-
-                <div class="grey-box research-abstract" id="expand-spillover-abs">
-                    <span>Abstract</span>
-                    <p>
-                        Empirical work often uses treatment assigned following geographic boundaries. When the effects of treatment cross over borders, classical difference-in-differences estimation produces biased estimates for the average treatment effect. In this paper, I introduce a potential outcomes framework to model spillover effects and decompose the estimate's bias in two parts: (1) the control group no longer identifies the counterfactual trend because their outcomes are affected by treatment and (2) changes in treated units' outcomes reflect the effect of their own treatment status and the effect from the treatment status of "close" units. I propose estimation strategies that can remove both sources of bias and semi-parametrically estimate the spillover effects themselves. I extend <a class="grey-box-link" href="https://pedrohcgs.github.io/files/Callaway_SantAnna_2020.pdf" style="font-size: 1.1rem;">Callaway and Sant'Anna (2020)</a> to allow for event-study estimates that control for spillovers. To highlight the importance of spillover effects, I revisit analyses of three place-based interventions.  
-                    </p>
-                </div>
-
-                <div class="grey-box research-figure hidden" id="expand-spillover-fig">
-                    <p>
-                        <span>Figure</span> Example Map of Spillover Effects
-                    </p>                   
-                    <img src="img/figure-map_te_spill_all.png">
-                </div>
-            </div>
-        </div>
-
-
-        <!-- Difference-in-Differences with Geocoded Microdata -->    
-        <div class="row unit research">
-            <div class="col-xs-12">
-                <div class="unit-title">
-                    Differences-in-Differences with Geocode Microdata
-                </div>
-                
-                <div class="unit-links">
-                    <div class="app-chip expand-btn" id="btn-rings-abs">
-                        <i class="fas fa-align-justify"></i> Abstract
-                        <i class="fas fa-caret-up"></i>
-                    </div>
-                    <div class="app-chip expand-btn" id="btn-rings-fig">
-                        <i class="far fa-chart-bar"></i> Figures
-                        <i class="fas fa-caret-down"></i>
-                    </div>
-                    <a href="files/Rings.pdf" class="app-chip">
-                        <i class="far fa-file-pdf"></i> Working Paper
-                    </a>
-                </div>
-
-                <div class="grey-box research-abstract" id="expand-rings-abs">
-                    <span>Abstract</span>
-                    <p>
-                        This paper formalizes a common approach for estimating effects of treatment at a specific location using geocoded microdata. This estimator compares units immediately next to treatment (an inner-ring) to units just slightly further away (an outer-ring). This paper formalizes the necessary assumptions to identify the average treatment effect among the effected units and illustrates potential pitfalls when these assumptions fail. Since one of these assumptions requires knowledge of exactly how far treatment effects are experienced, I propose a new method that relaxes this assumption and allows for non-parametric estimation using partitioning-based least squares developed in <a class = "grey-box-link" href="https://nppackages.github.io/references/Cattaneo-Farrell-Feng_2020_AoS.pdf">Cattaneo et. al. (2020)</a>. This method allows for researchers to estimate how treatment effects evolve over distance. Lastly, I illustrate the advantage of this method by revisiting the effects of increased crime risk on home values studied in <a class = "grey-box-link" href="https://www.aeaweb.org/articles?id=10.1257/aer.98.3.1103">Linden and Rockoff (2008)</a>.
-                    </p>
-                </div>
-
-                <div class="grey-box research-figure hidden" id="expand-rings-fig">
-                    <p>
-                        <span>Figure</span> Example of Problems With Standard Method
-                    </p>                   
-                    <img src="img/rings_ex.png">
-                </div>
-            </div>
-        </div>
-
-
-        <!-- Resources -->
-        <hr class="space-lg">
-        <div class="row section-header">
-            <h2>Public Goods</h2>
-        </div>
-
-        <div class="row unit">
-            <div class="col-xs-12">
-                <div class="unit-title-sm">
-                    <a href="http://kylebutts.com/did2s/articles/Two-Stage-Difference-in-Differences.html" class="app-link">Two-Stage Difference-in-Differences: <code>did2s</code></a>
-                </div>
-
-                <div class="unit-links">
-                    <div class="app-chip expand-btn" id="btn-did2s-about">
-                        <i class="fas fa-align-justify"></i> About
-                        <i class="fas fa-caret-up"></i>
-                    </div>
-                    <div class="app-chip expand-btn" id="btn-did2s-fig">
-                        <i class="fas fa-align-justify"></i> Figure
-                        <i class="fas fa-caret-down"></i>
-                    </div>
-                    <div class="app-chip" href="http://kylebutts.com/did2s/index.html">
-                        <i class="fa fa-code-branch"></i> R Package
-                    </div>
-                    <div class="app-chip" href="https://github.com/kylebutts/did2s_stata/">
-                        <i class="fa fa-code-branch"></i> Stata Package
-                    </div>
-                </div>
-
-
-                <div class="grey-box" id="expand-did2s-about">
-                    <span>About</span>
-                    <p>
-                        The goal of did2s is to estimate TWFE models without running into the problem of staggered treatment adoption. This package, available in both R and Stata, implement the method by <a class="grey-box-link" href="https://jrgcmu.github.io/2sdd_current.pdf" style="font-size: 1.1rem;">Gardner (2021)</a>. This method entails the following two-step estimation procedure
-
-                        <ol>
-                            <li>
-                                Estimate unit and time fixed effects using never-treated/not-yet-treated observations and then residualize these outcomes for all observations.
-                            </li>
-                            <li>
-                                Regress residualized outcome variable on treatment dummies to estimate the treatment effect of interest.
-                            </li>
-                        </ol>
-
-                        More information on the methodology is available in this <a class="grey-box-link" href="http://kylebutts.com/did2s/articles/Two-Stage-Difference-in-Differences.html" style="font-size: 1.1rem;">vignette</a>.
-                    </p>
-                </div>
-
-                <div class="grey-box hidden" id="expand-did2s-fig">
-                    <p>
-                        <span>Figure</span> Comparing TWFE and Two-Stage Difference-in-Differences Estimates
-                    </p>
-
-                    <img src="img/did2s.png">
-                </div>
-            </div>
-        </div>
-
-
-        <div class="row unit">
-            <div class="col-xs-12">
-                <div class="unit-title-sm">
-                    <a href="https://github.com/kylebutts/templates/" class="app-link">Latex Article and Slides Template</a>
-                </div>
-
-                <div class="unit-links">
-                    <div class="app-chip expand-btn" href="" id="btn-article-template">
-                        <i class="far fa-file-pdf"></i>Example Paper<i class="fas fa-caret-down" aria-hidden="true"></i>
-                    </div>
-                    <div class="app-chip expand-btn" id="btn-slides">
-                        <i class="far fa-file-pdf"></i>Example Slides<i class="fas fa-caret-down" aria-hidden="true"></i>
-                    </div>
-                </div>
-
-                <div class="row expandable hidden" id="expand-article-template"> 
-                    <object class="inline-pdf" data="files/templates/article.pdf" type="application/pdf">
-                        <embed class="inline-pdf" src="files/templates/article.pdf" type="application/pdf" />
-                    </object>
-                </div>
-
-                <div class="row expandable hidden" id="expand-slides"> 
-                    <object class="inline-pdf" data="files/templates/slides.pdf" type="application/pdf">
-                        <embed class="inline-pdf" src="files/templates/slides.pdf" type="application/pdf" />
-                    </object>
-                </div>
-            </div>
-        </div>
-                
-
-
-        <!-- Teaching -->
-        <hr class="space-lg">
-        <div class="row section-header">
-                <h2>Teaching</h2>
-        </div>
-
-        <div class="row unit">
-            <div class="col-xs-12 col-md-6">
-                <div class="unit-title-sm">
-                    Introduction to Probability and Statistics <br> <i>(Econ 3818, University of Colorado Boulder) </i>
-                </div>
-
-                <div class="unit-links">
-                    <a class="app-chip" href="https://github.com/kylebutts/ECON3818_F2020">
-                        <i class="fab fa-github"></i>  Course Material
-                    </a>
-                </div>
-            </div>
-
-            <div class="col-xs-12 col-md-6">
-                <div class="unit-title-sm">
-                    Natural Resource Economics <br> <i> (Econ 3535, University of Colorado Boulder) </i>
-                </div>
-
-                <div class="unit-links">
-                    <a class="app-chip" href="https://github.com/kylebutts/ECON3535_S2021">
-                        <i class="fab fa-github"></i>  Course Material
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <hr class="space-xl">
     </div>
 
 
+    <!-- Public Goods -->
+    <div class="w-full">  
+        <div class="max-w-4xl p-2 sm:p-8 mx-auto">
+            <!-- Section Header -->
+            <div class="text-center mx-auto md:w-1/2 py-4 my-8 bg-gradient-to-tr from-coral-400 to-coral-600 rounded-lg">
+                <h2 class="text-kelly-50 font-extrabold text-center text-4xl leading-none tracking-wider">
+                    Public Goods
+                </h2>
+            </div>
+
+            <!-- Two-stage Difference-in-Differences -->
+            <div class="border-t-2 border-b-2 border-gray-300 py-4 px-2 mt-8">
+                <div class="">
+                    <h2 class="font-slab pb-4 text-xl">
+                        Two-Stage Difference-in-Differences
+                    </h2>
+                    
+                    <div class="grid gap-2 grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5">
+                        <div class="btn btn-coral expand-btn py-1 px-2" id="btn-did2s-about">
+                                <i class="fas fa-align-justify  pl-1 pr-2"></i> <span class="flex-grow ml-0 pl-1">About</span>
+                                <i class="fas fa-caret-up"></i>
+                        </div>
+                        <div class="btn btn-coral expand-btn py-1 px-2" id="btn-did2s-fig">
+                                <i class="far fa-chart-bar pl-1 pr-2"></i> 
+                                <span class="flex-grow ml-0 pl-1">Figures</span>
+                                <i class="fas fa-caret-down"></i>
+                        </div>
+                        <a href="files/did2s_article.pdf" class="btn btn-coral py-1 px-2">
+                            <i class="far fa-file-pdf pl-1 pr-2"></i> 
+                            <span class="pl-1">Paper</span>
+                        </a>
+                        <a href="http://kylebutts.com/did2s/index.html" class="btn btn-coral py-1 px-2">
+                            <i class="fa fa-code-branch pl-1 pr-2"></i> 
+                            <span class="pl-1">R Package</span>
+                        </a> 
+                        <a href="https://github.com/kylebutts/did2s_stata/" class="btn btn-coral py-1 px-2">
+                            <i class="fa fa-code-branch pl-1 pr-2"></i> 
+                            <span class="pl-1">Stata Package</span>
+                    </a> 
+                    </div>
+                    
+                    <div class="sm:px-4">
+                        <div class="my-8 py-4 px-4 bg-coral-50 stack-sm border-gray-800 border-2" id="expand-rings-abs">
+                            <span class="font-fira font-bold">About:</span>
+                            <p class="mt-2 font-slab">
+                                The goal of <code>did2s</code> is to estimate two-way fixed effects models without running into the problem of staggered treatment adoption. This package, available in both <code>R</code> and <code>Stata</code>, implement the method by <a class="link-coral" href="https://jrgcmu.github.io/2sdd_current.pdf">Gardner (2021)</a>. This method entails the following two-step estimation procedure:
+
+                                <ol class="list-decimal pl-6 py-2">
+                                    <li>
+                                        Estimate unit and time fixed effects using never-treated/not-yet-treated observations and then residualize these outcomes for all observations.
+                                    </li>
+                                    <li>
+                                        Regress residualized outcome variable on treatment dummies to estimate the treatment effect of interest.
+                                    </li>
+                                </ol>
+
+                                More information on the methodology is available in the <a class="link-coral" href="files/did2s_article.pdf">summary article</a> or in this <a class="link-coral" href="http://kylebutts.com/did2s/articles/Two-Stage-Difference-in-Differences.html">vignette</a>.
+                            </p>
+                        </div>
+
+                        <div class="my-8 py-4 px-4 bg-coral-50 stack-sm border-gray-800 border-2 hidden" id="expand-did2s-fig">
+                            <span class="font-fira font-bold">Figure:</span> 
+                            <span class="font-slab">
+                                Comparing TWFE and Two-Stage Difference-in-Differences Estimate
+                            </span>
+                            <p class="mt-2">
+                                <img src="img/did2s.png">
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>  
+
+
+            <!-- Latex Templates -->
+            <div class="border-t-2 border-b-2 border-gray-300 py-4 px-2 mt-8">
+                <div class="">
+                    <h2 class="font-slab pb-4 text-xl">
+                        Latex Article and Slides Template
+                    </h2>
+                    
+                    <div class="grid gap-2 grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5">
+                        <a href="https://github.com/kylebutts/templates" class="btn btn-coral py-1 px-2">
+                            <i class="fa fa-code-branch pl-1 pr-2"></i> 
+                            <span class="pl-1">Source Code</span>
+                        </a> 
+
+                        <a class="btn btn-coral py-1 px-2" href = "https://raw.githubusercontent.com/kylebutts/templates/master/latex-slides/auxiliary/slides.pdf">
+                            <i class="fas fa-file-pdf pl-1 pr-2"></i> <span class="flex-grow ml-0 pl-1">Slides</span>
+                        </a>
+
+                        <a class="btn btn-coral py-1 px-2" href = "https://raw.githubusercontent.com/kylebutts/templates/master/latex-slides/auxiliary/slides.pdf">
+                            <i class="fas fa-file-pdf pl-1 pr-2"></i> <span class="flex-grow ml-0 pl-1">Paper</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="sm:px-4">
+                    <div class="my-8 py-4 px-4 bg-coral-50 stack-sm border-gray-800 border-2" id="expand-rings-abs">
+                        <span class="font-fira font-bold">About:</span>
+                        <p class="mt-2 font-slab">
+                            This a set of latex templates for beautiful articles and slides. The preamble contains well commented code where every package is well documented to avoid "preamble creep". You can preview the <a class = "link-coral" href="https://raw.githubusercontent.com/kylebutts/templates/master/latex-slides/auxiliary/slides.pdf">slides</a> and the <a class = "link-coral" href="https://raw.githubusercontent.com/kylebutts/templates/master/latex-article/auxiliary/article.pdf">article</a>.
+                        </p>
+                    </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <!-- Teaching -->
+    <div class="w-full">  
+        <div class="max-w-4xl p-2 sm:p-8 mx-auto">
+            <!-- Section Header -->
+            <div class="text-center mx-auto md:w-1/2 py-4 my-8 bg-gradient-to-tr from-kelly-400 to-kelly-600 rounded-lg">
+                <h2 class="text-kelly-50 font-extrabold text-center text-4xl leading-none tracking-wider">
+                    Teaching
+                </h2>
+            </div>
+
+
+
+        <div class="grid grid-flow-row grid-cols-1 space-y-8 sm:space-y-0 sm:grid-cols-2 sm:space-x-4 ">
+            <!-- Econ 3818 -->
+            <div>
+                <h2 class="font-slab pb-2 text-lg">
+                    Introduction to Probability and Statistics 
+                </h2>
+                <span class="italic">(Econ 3818, University of Colorado Boulder) </span>
+
+                <button href="https://github.com/kylebutts/ECON3818_F2021" class="btn btn-kelly py-2 px-4 mt-4 group">
+                    <i class="fab fa-github pr-2 text-gray-500 group-hover:text-gray-700"></i> 
+                    <span class="pl-1">Course Material</span>
+                </button>
+            </div>
+
+            <!-- Econ 3535 -->
+            <div>
+                <h2 class="font-slab pb-2 text-lg">
+                    Natural Resource Economics 
+                </h2>
+                <span class="italic"> (Econ 3535, University of Colorado Boulder) </span>
+
+
+                <button href="https://github.com/kylebutts/ECON3535_S2021" class="btn btn-kelly py-2 px-4 mt-4 group">
+                    <i class="fab fa-github pr-2 text-gray-500 group-hover:text-gray-700"></i> 
+                    <span class="pl-1">Course Material</span>
+                </button>
+            </div>
+        </div>
+        </div>
+    </div>
+    
+
+    <!-- Bottom Spacer -->
+    <div class="w-full h-64"></div>
+
     <!-- JQuery -->
     <script
-			  src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-			  integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs="
-              crossorigin="anonymous">
+    src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous">
     </script>
     <script>
-        $('.expand-btn').click(function(){
-            // Change caret on button
-            $(this).find(".fa-caret-down, .fa-caret-up").toggleClass("fa-caret-down fa-caret-up")
+    $('.expand-btn').click(function(){
+        // Change caret on button
+        $(this).find(".fa-caret-down, .fa-caret-up").toggleClass("fa-caret-down fa-caret-up")
 
-            // Button will have id #btn-IDname
-            // Hide/unhide #expand-IDname
-            var IDname = $(this).attr("id").substr(4);
-            console.log(IDname)
-            $('#expand-'+IDname).toggleClass("hidden");
-        });
+        // Button will have id #btn-IDname
+        // Hide/unhide #expand-IDname
+        var IDname = $(this).attr("id").substr(4);
+        console.log(IDname)
+        $('#expand-'+IDname).toggleClass("hidden");
+    });
     </script>
-
 </body>
 
 </html>
