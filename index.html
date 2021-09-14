@@ -63,20 +63,20 @@
 
                 <!-- Buttons -->
                 <div class="flex flex-col flex-wrap space-y-2 sm:space-y-0 sm:flex-row sm:space-x-2 sm:justify-center md:justify-end">
-                    <button href="files/2021-02-02_ Kyle Butts CV.pdf" class="btn btn-coral py-2 px-4 group">
+                    <a href="files/2021-02-02_ Kyle Butts CV.pdf" class="btn btn-coral py-2 px-4 group">
                         <i class="far fa-file-pdf pr-2 text-gray-500 group-hover:text-gray-700"></i> 
                         <span class="pl-1">CV</span>
-                    </button>
+                    </a>
 
-                    <button href="https://www.github.com/kylebutts" class="btn btn-coral py-2 px-4  group">
+                    <a href="https://www.github.com/kylebutts" class="btn btn-coral py-2 px-4  group">
                         <i class="fab fa-github pr-2 text-gray-500 group-hover:text-gray-700"></i> 
                         <span class="pl-1">Github</span>
-                    </button>
+                    </a>
 
-                    <button href="https://www.twitter.com/kylefbutts" class="btn btn-coral py-2 px-4 group">
+                    <a href="https://www.twitter.com/kylefbutts" class="btn btn-coral py-2 px-4 group">
                         <i class="fab fa-twitter pr-2 text-gray-500 group-hover:text-gray-700"></i> 
                         <span class="pl-1">Twitter</span>
-                    </button>
+                    </a>
                 </div>
 
                 <!-- Extra space -->
@@ -92,10 +92,12 @@
     <div class="w-full">  
         <div class="max-w-4xl p-2 sm:p-8 mx-auto">
             <!-- Section Header -->
-            <div class="text-center mx-auto py-4 my-8 bg-gradient-to-tr from-alice-400 to-alice-600">
-                <h2 class="text-alice-50 font-extrabold text-center text-4xl leading-none tracking-wider">
-                    Research
-                </h2>
+            <div class="text-center mx-auto p-2 my-8 bg-gradient-to-tr from-alice-400 to-alice-600 rounded-md">
+                <div class="py-4 px-2 bg-white rounded-sm">
+                    <h2 class="text-alice-700 font-extrabold text-center text-4xl leading-none tracking-wider">
+                        Research
+                    </h2>
+                </div>
             </div>
 
             <!-- Difference-in-Differences with Spatial Spillover -->    
@@ -194,6 +196,46 @@
                     </div>
                 </div>
             </div>   
+
+            <!-- Spatial Difference-in-Discontinuities -->
+            <div class="border-t-2 border-b-2 border-gray-300 py-4 px-2 mt-8">
+                <div class="">
+                    <h2 class="font-slab pb-4 text-xl">
+                        Spatial Difference-in-Discontinuities
+                    </h2>
+                    
+                    <div class="grid gap-2 grid-cols-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5">
+                        <div class="btn btn-alice expand-btn py-1 px-2" id="btn-diff-in-disc-abs">
+                                <i class="fas fa-align-justify  pl-1 pr-2"></i> <span class="flex-grow ml-0 pl-1">Abstract</span>
+                                <i class="fas fa-caret-up"></i>
+                        </div>
+                        <a href="files/Spatial_Difference-in-Discontinuities.pdf" class="btn btn-alice py-1 px-2">
+                            <i class="far fa-file-pdf pl-1 pr-2"></i> 
+                            <span class="pl-1">Paper</span>
+                        </a>
+                    </div>
+                    
+                    <div class="sm:px-4">
+                        <div class="my-8 py-4 px-4 bg-alice-50 stack-sm border-gray-800 border-2" id="expand-diff-in-disc-abs">
+                            <span class="font-fira font-bold">Abstract:</span>
+                            <p class="mt-2 font-slab">
+                                A recent econometric literature has critiqued the use of regression discontinuities where administrative borders serves as the `cutoff'. Identification in this context is difficult since multiple treatments can change at the cutoff and individuals can easily sort on either side of the border. This note extends the difference-in-discontinuities framework discussed in <a class = "link-alice" href="https://www.aeaweb.org/articles?id=10.1257/app.20150076">Grembi et. al. (2016)</a>. to a geographic setting. The paper formalizes the identifying assumptions in this context which will allow for the removal of time-invariant sorting and compound-treatments similar to the difference-in-differences methodology.
+                                
+                            </p>
+                        </div>
+
+                        <div class="my-8 py-4 px-4 bg-alice-50 stack-sm border-gray-800 border-2 hidden" id="expand-rings-fig">
+                            <span class="font-fira font-bold">Figure:</span> 
+                            <span class="font-slab">
+                                Example Map of Spillover Effects
+                            </span>
+                            <p class="mt-2">
+                                <img src="img/rings_ex.svg">
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -202,10 +244,12 @@
     <div class="w-full">  
         <div class="max-w-4xl p-2 sm:p-8 mx-auto">
             <!-- Section Header -->
-            <div class="text-center mx-auto py-4 my-8 bg-gradient-to-tr from-coral-400 to-coral-600">
-                <h2 class="text-kelly-50 font-extrabold text-center text-4xl leading-none tracking-wider">
-                    Public Goods
-                </h2>
+            <div class="text-center mx-auto p-2 my-8 bg-gradient-to-tr from-coral-400 to-coral-600 rounded-md">
+                <div class="py-4 px-2 bg-white rounded-sm">
+                    <h2 class="text-coral-700 font-extrabold text-center text-4xl leading-none tracking-wider">
+                        Public Goods
+                    </h2>
+                </div>
             </div>
 
             <!-- Two-stage Difference-in-Differences -->
@@ -311,15 +355,17 @@
     <div class="w-full">  
         <div class="max-w-4xl p-2 sm:p-8 mx-auto">
             <!-- Section Header -->
-            <div class="text-center mx-auto py-4 my-8 bg-gradient-to-tr from-kelly-400 to-kelly-600">
-                <h2 class="text-kelly-50 font-extrabold text-center text-4xl leading-none tracking-wider">
-                    Teaching
-                </h2>
+            <div class="text-center mx-auto p-2 my-8 bg-gradient-to-tr from-kelly-400 to-kelly-600 rounded-md">
+                <div class="py-4 px-2 bg-white rounded-sm">
+                    <h2 class="text-kelly-700 font-extrabold text-center text-4xl leading-none tracking-wider">
+                        Teaching
+                    </h2>
+                </div>
             </div>
 
 
 
-        <div class="grid grid-flow-row grid-cols-2 space-y-8 sm:space-y-0 sm:grid-cols-2 sm:space-x-4 ">
+        <div class="grid grid-flow-row grid-cols-1 space-y-8 sm:space-y-0 sm:grid-cols-2 sm:space-x-4 ">
             <!-- Econ 3818 -->
             <div>
                 <h2 class="font-slab pb-2 text-lg">
@@ -327,7 +373,7 @@
                 </h2>
                 <span class="italic">(Econ 3818, University of Colorado Boulder) </span>
 
-                <a href="https://github.com/kylebutts/ECON3818_F2021" class="btn btn-kelly py-2 px-4 mt-4 group ">
+                <a href="https://github.com/kylebutts/ECON3818_F2021" class="btn btn-kelly py-2 px-4 mt-4 group md:w-1/2">
                     <i class="fab fa-github pr-2 text-gray-500 group-hover:text-gray-700"></i> 
                     <span class="pl-1">Course Material</span>
                 </a>
@@ -341,7 +387,7 @@
                 <span class="italic"> (Econ 3535, University of Colorado Boulder) </span>
 
 
-                <a href="https://github.com/kylebutts/ECON3535_S2021" class="btn btn-kelly py-2 px-4 mt-4 group ">
+                <a href="https://github.com/kylebutts/ECON3535_S2021" class="btn btn-kelly py-2 px-4 mt-4 group md:w-1/2">
                     <i class="fab fa-github pr-2 text-gray-500 group-hover:text-gray-700"></i> 
                     <span class="pl-1">Course Material</span>
                 </a>

@@ -77,6 +77,8 @@
     }
     .btn-coral {
         @apply bg-transparent border-coral-200 hover:bg-coral-50 hover:border-coral-300;
+
+        box-shadow: 2px 2px 0 #b65219;
     }
     .btn-coral:hover {
         box-shadow: 1px 1px 0 #b65219;
@@ -85,10 +87,10 @@
     .btn-kelly {
         @apply bg-transparent border-kelly-200 hover:bg-kelly-50 hover:border-kelly-300;
 
-        box-shadow: 2px 2px 0 #0c5a70;
+        box-shadow: 2px 2px 0 #7b7280;
     }
     .btn-kelly:hover {
-        box-shadow: 1px 1px 0 #0c5a70;
+        box-shadow: 1px 1px 0 #7b7280;
         transform: translate(1px,1px);
     }
     .btn-slate {
