@@ -1,0 +1,36 @@
+---
+import Layout from "../../layouts/Layout.astro";
+const courses = [
+  {
+    title: "Natural Resource Economics",
+    course_num: "Econ 3535",
+    github: "https://github.com/kylebutts/ECON3535_S2022/",
+    when: "S2021 and S2022 at CU Boulder",
+  },
+  {
+    title: "Introduction to Probability and Statistics",
+    course_num: "Econ 3818",
+    github: "https://github.com/kylebutts/ECON3818_F2021/",
+    when: "F2020 and F2021 at CU Boulder",
+  },
+];
+---
+
+<Layout content prose>
+  <ul class="flex flex-col gap-y-size-lg">
+    {courses.map((course) => (
+    <li
+      class="block px-size-3xs prose:px-size-xs py-size-sm hover:bg-mine-shaft-200/30 hover:shadow-md border-y-2 border-transparent hover:border-mine-shaft-600 dark:hover:bg-mine-shaft-700 dark:hover:shadow-none relative ">
+      <a href={course.github} class="block">
+        <h2
+          class="cursor-pointer tracking-tightest font-white dark:font-mine-shaft-900 text-size-1 font-bold">
+          {course.course_num}: {course.title}</h2>
+      </a>
+
+      <div class="prose mt-size-sm text-size-0">
+        <p set:html={course.when}></p>
+      </div>
+    </li>
+    ))}
+  </ul>
+</Layout>

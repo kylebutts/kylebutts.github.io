@@ -1,0 +1,19 @@
+---
+import MenuItemsInline from "./MenuItemsInline";
+import DarkModeButton from "./DarkModeButton";
+import MenuItemsDropdown from "./MenuItemsDropdown"
+---
+
+
+<nav class="flex w-full flex-row prose:flex-col justify-between gap-size-2xs pb-size-2xs border-b-[1px] border-mine-shaft-800 dark:border-mine-shaft-100">
+  <h1 class="text-size-1 font-bold tracking-tight">
+    <a href="/">Kyle Butts</a>
+  </h1>
+  <div class="flex prose:items-end justify-between">
+    <MenuItemsInline client:load />
+    <div class="flex items-center gap-size-3xs">
+      <MenuItemsDropdown client:idle />
+      <DarkModeButton client:idle />
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,9 @@
+---
+import "../styles/content.css"
+const { flow = false, prose = false, As = "div" } = Astro.props
+---
+
+<div class={`content ${flow ? "flow" : "" } ${prose ? "prose" : ""} 
+  `}>
+  <slot />
+</div>

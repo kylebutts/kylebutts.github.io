@@ -1,0 +1,24 @@
+---
+import LargeBlock from "./LargeBlock.astro";
+
+const { src, alt } = Astro.props
+const isSvg = src.endsWith(".svg");
+---
+
+<LargeBlock dotted>
+<figure>
+  {isSvg ? (
+    <div class='relative'>
+      <object data={src} type="image/svg+xml" alt={alt} class="mb-2 w-full">
+      </object>
+    </div>
+  ) : (
+    <div class='relative'>
+      <img src={src} alt={alt} class="mb-2 w-full" />
+    </div>
+  )}
+  <figcaption class="text-xl mt-8">
+    <b>Figure:</b> {alt}
+  </figcaption>
+</figure>
+</LargeBlock>

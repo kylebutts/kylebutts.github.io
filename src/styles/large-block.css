@@ -1,0 +1,10 @@
+
+.large-block.dotted {
+  background-image: radial-gradient(var(--dotted-bg-color) 1px, transparent 0);
+  background-position: 50% center;
+  background-size: 18px 18px;
+}
+
+.large-block.flex-class {
+  @apply flex flex-col items-center gap-y-12;
+}

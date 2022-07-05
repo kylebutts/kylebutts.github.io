@@ -1,0 +1,24 @@
+---
+title: 'Causal Mechanisms in Difference-in-Differences Estimators'
+author:
+  - name: "Kyle Butts"
+    url: https://kylebutts.com
+    affiliation: CU Boulder
+  - name: Brantly Callaway
+    url: https://bcallaway11.github.io
+    affiliation: University of Georgia
+category:
+  - Work in Progress
+  - Applied Econometrics
+status: 'Work in Progress'
+display: true
+layout: "../../layouts/PaperLayout.astro"
+setup: |
+  import { Bg, Color, Figure, LinkBlock, LargeBlock } from "../../components/mdx/"
+---
+
+## Abstract
+
+After finding a significant effect of a treatment on outcomes, a researcher typically turns to understanding the underlying causal mechanisms at play. In some cases, finding evidence in favor of a causal pathway supports the underlying story. In others, researchers aim to rule out alternative channels to strengthen their proposed mechanism. However, little econometric theory has been proposed to systematically test different causal pathways. This paper proposes a semi-parametric estimator that allows researchers to decompose an estimated treatment effect into potential causal mechanisms and a remainder term that represents the effect of alternative pathways.
+
+

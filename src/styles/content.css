@@ -1,0 +1,145 @@
+.content {
+	@apply text-mine-shaft-800 dark:text-mine-shaft-100 my-size-md;
+	--flow-space: var(--size-sm);
+	display: grid;
+	grid-template-columns: var(--size-2xs-xs) var(--size-2xs-xs) min(1024px, calc(100% - 4 * var(--size-2xs-xs))) var(--size-2xs-xs) var(--size-2xs-xs);
+  padding: 0;
+}
+
+@media (min-width: 1024px) {
+  .content {
+    grid-template-columns: 2fr 1fr min(1024px, 100%) 1fr 2fr;
+    padding: 0;
+  }
+}
+
+@media (min-width: 1300px) {
+  .content {
+    grid-template-columns: 2fr 138px min(1024px, 100%) 138px 2fr;
+    padding: 0;
+  }
+}
+
+/* Sometimes one layer in on content when using `display: contents` */
+.content > *,
+.content > astro-island > *,
+.content > astro-slot > *,
+.content > [data-rehype-pretty-code-fragment] > * {
+	grid-column: 3;
+}
+
+/* Large Block */
+.content > .wide-bleed {
+	width: 100%;
+	margin-top: var(--size-xl);
+	grid-column: 2 / 5;
+	border-width: 2px;
+	padding: var(--size-md-lg) var(--size-sm-md);
+	overflow-x: auto;
+}
+/* Negative margin on repeated wide-bleed */
+.content > .wide-bleed + .wide-bleed {
+	z-index: 10;
+	margin-top: 0;
+	border-top: 0;
+}
+.content > .wide-bleed + :is(:not(.wide-bleed)) {
+	margin-top: var(--size-xl);
+}
+@media (max-width: 1040px) {
+	.content > .wide-bleed {
+		grid-column: 1 / 6;
+		border-width: 2px 0 2px 0;
+		border-radius: 0;
+	}
+}
+
+/* Full Bleed */
+.content > .full-bleed {
+	width: 100%;
+	grid-column: 1 / 6;
+}
+
+/*** 
+FLOW 
+***/
+
+.flow > * + * {
+	margin-top: var(--flow-space, --size-sm-md);
+}
+.flow :is(h1, h2) {
+	--flow-space: var(--size-2xl);
+}
+.flow :is(h3) {
+	--flow-space: var(--size-xl);
+}
+.flow :is(p, li) {
+	font-size: var(--size-0);
+	max-width: 80ch;
+}
+.flow :is(ol, ul) > li + li {
+	margin-top: var(--size-xs);
+}
+
+/***
+PROSE 
+***/
+
+/* Typography */
+.prose > * + * {
+	margin-top: var(--flow-space, --size-sm-md);
+}
+
+/* Text */
+.prose :where(p):not(:where([class~="not-prose"] *)) {
+	font-size: var(--size-0);
+	max-width: 80ch;
+	line-height: 1.5;
+}
+
+.prose :where(a):not(:where([class~="not-prose"] *)) {
+	@apply italic underline decoration-2 decoration-alice-400 hover:decoration-alice-500;
+}
+
+/* Headings */
+.prose :where(h1):not(:where([class~="not-prose"] *)) {
+	@apply text-size-2 font-bold tracking-tight;
+  --flow-space: var(--size-xl-2xl);
+	letter-spacing: var(--tracking-s);
+	line-height: 1.1;
+}
+.prose :where(h2):not(:where([class~="not-prose"] *)) {
+	@apply font-bold tracking-tight text-kelly-500 dark:text-kelly-400 text-size-1;
+  --flow-space: var(--size-xl-2xl);
+	letter-spacing: var(--tracking-s);
+	line-height: 1.1;
+}
+.prose :where(h3):not(:where([class~="not-prose"] *)) {
+	@apply underline decoration-2 decoration-mine-shaft-400 text-size-1;
+  --flow-space: var(--size-xl-2xl);
+	letter-spacing: var(--tracking-s);
+	line-height: 1.1;
+}
+
+.prose > :is(h1, h2, h3) + p {
+  --flow-space: var(--size-md);
+}
+
+/* List */
+.prose :where(ul):not(:where([class~="not-prose"] *)) {
+	@apply list-inside list-disc pl-size-3xs marker:text-alice-400 lg:pl-[1.5555556em];
+}
+.prose :where(ol):not(:where([class~="not-prose"] *)) {
+	@apply list-inside list-decimal marker:text-alice-400;
+}
+.prose :where(li):not(:where([class~="not-prose"] *)) {
+	font-size: var(--size-0);
+	max-width: 80ch;
+}
+.prose :where(:is(ol, ul) > li + li):not(:where([class~="not-prose"] *)) {
+	margin-top: var(--size-xs);
+}
+.prose :where(:is(ol, ul) > li > p):not(:where([class~="not-prose"] *)) {
+	display: inline;
+}
+

@@ -1,0 +1,49 @@
+---
+import Content from "../components/Content.astro";
+import MenuBar from "../components/MenuBar/MenuBar.astro";
+import SetupDarkMode from "../components/MenuBar/SetupDarkMode.astro";
+import "../styles/global.css"
+
+const { title } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <title>{title}</title>
+
+  <!-- Katex for equations -->
+  <link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/katex@0.15.0/dist/katex.min.css"
+    cross-origin="anonymous" />
+
+  <!-- Jetbrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" cross-origin="true" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100;0,300;0,700;0,800;1,300"
+    rel="stylesheet" />
+
+  <!-- Tailwind CSS -->
+  <style href="../styles/globals.css"></style>
+</head>
+
+<body>
+  <SetupDarkMode />
+
+  <div
+    class="min-h-screen w-full bg-mine-shaft-100 font-jetbrains text-mine-shaft-900 dark:bg-mine-shaft-900 dark:text-mine-shaft-50">
+    <div class="pt-size-xs prose:pt-size-sm-md pb-size-2xl">
+      <Content >
+        <MenuBar client:load />
+      </Content>
+        <slot />
+    </div>
+  </div>
+</body>
+
+</html>

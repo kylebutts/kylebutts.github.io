@@ -1,0 +1,29 @@
+---
+import Layout from "../../layouts/Layout.astro";
+const repos = await Astro.glob('./*.md');
+---
+
+<Layout content prose>
+  <ul class="flex flex-col gap-y-size-lg">
+    {repos.map((repo, i) => {
+    // get slug of file name
+    let slug = repo.file.match(/([\w-_]*).md$/)[1]
+
+    return (
+    <li
+      class="block px-size-3xs prose:px-size-xs py-size-sm hover:bg-mine-shaft-200/30 hover:shadow-md border-y-2 border-transparent hover:border-mine-shaft-600 dark:hover:bg-mine-shaft-700 dark:hover:shadow-none relative ">
+      <a href={`/open-source/${slug}`}
+        class="block">
+        <h2
+          class="cursor-pointer tracking-tightest font-white dark:font-mine-shaft-900 text-size-1 font-bold"
+          set:html={repo.frontmatter.title} />
+      </a>
+
+      <div class="prose mt-size-sm text-size-0">
+        <p set:html={repo.frontmatter.description}></p>  
+      </div>
+    </li>
+    );
+    })}
+  </ul>
+</Layout>

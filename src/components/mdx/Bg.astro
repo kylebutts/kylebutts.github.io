@@ -1,0 +1,18 @@
+---
+const { kelly = false, coral = false, daisy = false, alice = false
+} = Astro.props
+
+const bgColor = kelly
+  ? "dark:bg-kelly-600 bg-kelly-500"
+  : coral
+    ? "dark:bg-coral-600 bg-coral-500"
+    : daisy
+      ? "dark:bg-daisy-600 bg-daisy-500"
+      : alice
+        ? "dark:bg-alice-600 bg-alice-500"
+        : "dark:bg-ruby-600 bg-ruby-500";
+---
+
+<span class={`rounded-[5px] py-[3px] px-[5px] text-mine-shaft-100 ${bgColor} `}>
+  <slot />
+</span>

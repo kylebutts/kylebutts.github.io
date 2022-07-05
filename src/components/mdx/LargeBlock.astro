@@ -1,0 +1,19 @@
+---
+import "../../styles/large-block.css"
+
+const { title, flex = false, dotted = false } = Astro.props
+
+const flexClasses = flex ? "flex flex-col items-center gap-y-12" : "";
+const dottedClasses = dotted ? "dotted" : ""
+---
+
+<div class={`large-block not-prose wide-bleed max-w-[1480px] mx-auto relative
+  group border-mine-shaft-600 bg-mine-shaft-50 dark:bg-mine-shaft-700
+  dark:shadow-none ${dottedClasses} ${flexClasses}`}>
+  {
+  title != null ?
+  <h2 class="text-center text-xl font-bold my-size-sm">{title}</h2> :
+  null
+  }
+  <slot />
+</div>

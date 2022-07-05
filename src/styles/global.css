@@ -1,0 +1,61 @@
+@import url(content.css);
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --dotted-bg-color: #1c1c1d30;
+  --tracking: -0.05ch;
+  --tracking-s: -0.075ch;
+  --size-3xs: clamp(0.31rem, calc(0.29rem + 0.12vw), 0.38rem);
+  --size-2xs: clamp(0.69rem, calc(0.66rem + 0.12vw), 0.75rem);
+  --size-xs: clamp(1.00rem, calc(0.95rem + 0.24vw), 1.13rem);
+  --size-sm: clamp(1.31rem, calc(1.24rem + 0.37vw), 1.50rem);
+  --size-md: clamp(2.00rem, calc(1.90rem + 0.49vw), 2.25rem);
+  --size-lg: clamp(2.63rem, calc(2.48rem + 0.73vw), 3.00rem);
+  --size-xl: clamp(3.94rem, calc(3.72rem + 1.10vw), 4.50rem);
+  --size-2xl: clamp(5.25rem, calc(4.96rem + 1.46vw), 6.00rem);
+  --size-3xl: clamp(7.88rem, calc(7.44rem + 2.20vw), 9.00rem);
+  --size-3xs-2xs: clamp(0.31rem, calc(0.14rem + 0.85vw), 0.75rem);
+  --size-2xs-xs: clamp(0.69rem, calc(0.52rem + 0.85vw), 1.13rem);
+  --size-xs-sm: clamp(1.00rem, calc(0.80rem + 0.98vw), 1.50rem);
+  --size-sm-md: clamp(1.31rem, calc(0.95rem + 1.83vw), 2.25rem);
+  --size-md-lg: clamp(2.00rem, calc(1.61rem + 1.95vw), 3.00rem);
+  --size-lg-xl: clamp(2.63rem, calc(1.89rem + 3.66vw), 4.50rem);
+  --size-xl-2xl: clamp(3.94rem, calc(3.13rem + 4.02vw), 6.00rem);
+  --size-2xl-3xl: clamp(5.25rem, calc(3.79rem + 7.32vw), 9.00rem);
+  --size-base: clamp(1.00rem, 1.00rem + 0.00vw, 1.00rem);
+  --size--2: clamp(0.56rem, calc(0.75rem + -0.27vw), 0.69rem);
+  --size--1: clamp(0.83rem, calc(0.83rem + 0.00vw), 0.83rem);
+  --size-0: clamp(1.00rem, calc(0.90rem + 0.49vw), 1.25rem);
+  --size-1: clamp(1.20rem, calc(0.94rem + 1.32vw), 1.88rem);
+  --size-2: clamp(1.44rem, calc(0.90rem + 2.68vw), 2.81rem);
+  --size-3: clamp(1.73rem, calc(0.76rem + 4.86vw), 4.22rem);
+  --size-4: clamp(2.07rem, calc(0.41rem + 8.30vw), 6.33rem);
+  --size-5: clamp(2.49rem, calc(-0.25rem + 13.67vw), 9.49rem);
+}
+.dark {
+  --dotted-bg-color: #f5f5f530;
+}
+
+body {
+  line-height:1.5;
+}
+
+
+/* Code */
+pre {
+	@apply rounded-[5px] bg-[#fffaf3] text-[#b4637a] dark:bg-[#2a273f] dark:text-[#c4a7e7];
+  padding: 2rem 2rem;
+  overflow-x: auto;
+}
+pre[data-theme="dark"] {
+	@apply hidden dark:block;
+}
+pre[data-theme="light"] {
+	@apply block dark:hidden;
+}
+pre > code {
+	display: grid;
+}
+
