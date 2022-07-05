@@ -9,7 +9,7 @@ links:
   - name: ArXiv 
     url: https://arxiv.org/abs/2110.10192
   - name: Slides
-    url: ../public/files/Rings_slides.pdf
+    url: ../files/Rings_slides.pdf
 category: |
   - Working Paper
   - Applied Econometrics

@@ -1,5 +1,5 @@
 import { Menu, Transition } from "@headlessui/react"
-import { Fragment, useEffect, useRef, useState } from "react"
+import { Fragment } from "react"
 import { MenuIcon, AtSymbolIcon } from "@heroicons/react/solid/index.js"
 
 const generalMenuItems = [

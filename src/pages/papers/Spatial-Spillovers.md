@@ -9,7 +9,7 @@ links:
   - name: ArXiv
     url: https://arxiv.org/abs/2105.03737
   - name: Slides
-    url: ../public/files/Spillover_slides.pdf
+    url: ../files/Spillover_slides.pdf
 category: 
   - Working Paper
   - Applied Econometrics

@@ -12,7 +12,7 @@ links:
   - name: ArXiv
     url: https://arxiv.org/abs/2110.10192
   - name: Slides
-    url: "../public/files/did2s_slides.pdf"
+    url: "../files/did2s_slides.pdf"
 category: "Working Paper"
 status: "Conditionally Accepted at <i>R Journal</i>"
 display: true
