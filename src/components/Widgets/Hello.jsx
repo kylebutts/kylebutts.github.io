@@ -1,7 +1,7 @@
 import React from "react"
 
 const Hello = () => {
-	const memojis = ["/images/memoji_1.png", "/images/memoji_2.png"]
+	const memojis = ["/images/memoji_1.PNG", "/images/memoji_2.PNG"]
 	const [hovered, setHovered] = React.useState(false)
 
 	return (

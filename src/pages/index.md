@@ -4,7 +4,7 @@ setup: |
   import Hello from '../components/Widgets/Hello.jsx'
 ---
 
-<Hello />
+<Hello client:load />
 
 My name is Kyle.
 
