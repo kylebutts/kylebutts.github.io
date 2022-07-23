@@ -7,9 +7,10 @@ author:
   - name: Brantly Callaway
     url: https://bcallaway11.github.io
     affiliation: University of Georgia
+date: "2021-07-01"
 category:
-  - Work in Progress
-  - Applied Econometrics
+  - "Work in Progress"
+  - "Applied Econometrics"
 status: 'Work in Progress'
 display: true
 layout: "../../layouts/PaperLayout.astro"

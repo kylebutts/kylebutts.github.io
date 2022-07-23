@@ -1,6 +1,40 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-const papers = await Astro.glob('./*.md');
+import { Debug } from 'astro/components';
+let papers = await Astro.glob('./*.md');
+
+papers = papers.map((paper) => {
+  
+  if(paper.frontmatter.category?.includes("Published")) {
+    paper.frontmatter.order = 5
+  } else if(paper.frontmatter.category?.includes("R&R")) {
+    paper.frontmatter.order = 4
+  } else if(paper.frontmatter.category?.includes("Submitted")) {
+    paper.frontmatter.order = 3
+  } else if(paper.frontmatter.category?.includes("Working Paper")) {
+    paper.frontmatter.order = 2
+  } else if (paper.frontmatter.category?.includes("Work in Progress")) {
+    paper.frontmatter.order = 1
+  } else {
+    paper.frontmatter.order = 0
+  }
+
+  return(paper)
+}).sort((a, b) => {
+  if(a.frontmatter.order == b.frontmatter.order) {
+    let aDate = new Date(a.frontmatter.date)
+    let bDate = new Date(b.frontmatter.date)
+
+    // getTime is milliseconds since Jan 1, 1970, 00:00:00.000 GMT
+    return (
+      -1 * (aDate.getTime() - bDate.getTime())
+    )
+  } else {
+    return(
+      -1 * (a.frontmatter.order - b.frontmatter.order)
+    )
+  }
+})
 ---
 
 <Layout content prose>
@@ -22,8 +56,7 @@ const papers = await Astro.glob('./*.md');
       <h3 class="mt-size-3xs text-size-0 text-alice-400"
         set:html={paper.frontmatter.status} />
 
-      <div
-        class="text-md mt-size-md flex flex-row flex-wrap gap-size-xs">
+      <div class="text-md mt-size-md flex flex-row flex-wrap gap-size-xs">
         {paper.frontmatter.author.map((author) => (
         <div>
           <p class="text-size-0">

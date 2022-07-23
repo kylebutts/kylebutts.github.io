@@ -7,9 +7,11 @@ author:
   - name: Nicholas Brown
     url: https://sites.google.com/msu.edu/nicholasbrown
     affiliation: Queen's University
+date: "2022-06-01"
 category: 
-  - Work in Progress
-  - Applied Econometrics
+  - "Work in Progress"
+  - "Applied Econometrics"
+  - "Urban Economics"
 status: 'Work in Progress'
 display: true
 layout: "../../layouts/PaperLayout.astro"

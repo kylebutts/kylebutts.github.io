@@ -7,7 +7,8 @@ author:
     affiliation: CU Boulder
     affiliation_url:
 description: Introductory notes with detailed derivations of influence functions. I took these notes while trying to learn the material myself.
-category: "Econometrics"
+category: 
+  - "Econometrics"
 display: true
 layout: "../../layouts/ProseLayout.astro"
 setup: |
@@ -18,7 +19,7 @@ setup: |
 
 Note that this material is mainly a summary of the math in [Ben](https://j-kahn.com/files/influencefunctions.pdf) [Jann's](https://boris.unibe.ch/130362/1/jann-2019-influencefunctions.pdf) [notes](http://repec.sowi.unibe.ch/files/wp35/jann-2020-IF.pdf) compiled together with additional writing by myself.
 
-### Setup
+## Setup
 
 Let ${\bf z}_n = \{z_i\}_{i=1}^n$ be a random sample of data that comes from some true underlying distribution $F$. We take this data and compute some estimator with it: $\hat{\theta}({\bf z}_n)$ (scalar or vector). Note that this is a function of the sample we observe, ${\bf z}_n$. Some examples:
 
@@ -40,7 +41,7 @@ $$
 \tau = \mathbb{E}_F\left[ y_i \vert D_i = 1\right] - \mathbb{E}_F\left[ y_i \vert D_i = 0\right]
 $$
 
-### The influence function
+## The influence function
 
 First, we define a **contaminated distribution function**, $F_\epsilon(z_i)$, as:
 
@@ -62,7 +63,7 @@ $$
 
 This is a slight change of notation as we are now not specifying a particular sample ${\bf z}_n$, but instead the distribution it is drawn from. The influence function is worked out based on the actual population moments that give rise to the sample estimates. This will hopefully make more sense when we work out some examples below.
 
-### Influence function and Variance of Estimator
+## Influence function and Variance of Estimator
 
 What's helpful about knowing the influence function is that we can think of our sample estimator as being equal to the true value (so long as we have unbiasedness) plus $n$ disturbances of the distribution with weight $\epsilon = \frac{1}{n}$ for each. Each disturbance causes the true estimate to be influenced (or moved) by approximately $\frac{1}{n} * IF_{\hat{\theta}, F}(z_i)$ (derivative times a change in x). Since we are extrapolating the derivative by a distance of $\frac{1}{n}$, this gives rise to higher order terms from the Taylor expansion:
 
@@ -88,7 +89,7 @@ $$
 
 So, if you know the influence function, then you have large scale asymptotics for free! Then you can just plug in the sample estimates of $IF_{\hat{\theta}, F}(z_i)$ for each $z_i$ and you have the variance-covariance matrix for your estimator.
 
-## Example 1: Mean
+### Example 1: Mean
 
 $z_i$ is a scalar and our estimator is the population mean of the data, $\hat{\theta}(F) = \mathbb{E}_F\left[ z_i \right]$.
 
@@ -119,8 +120,6 @@ $$
 
 This makes intuitive sense. Observations $z_i$ are more influential to the sample estimator if they are further away from the population mean.
 
-### How to estimate?
-
 We can estimate $\mathbb{E}_F\left[ z_i \right]$ with the sample mean, and
 
 $$
@@ -135,7 +134,7 @@ $$
 
 which we can estimate this variance with $\frac{1}{n} \sum_{i=1}^n (z_i - \bar{z})^2$, the sample variance.
 
-## Example 2: Regression coefficients
+### Example 2: Regression coefficients
 
 $\{z_i \equiv (x_i, y_i)\}_{i=1}^n$ where $x_i$ is a $1\times k$ vector of covariates and $y_i$ is a scalar outcome. The estimator is
 
@@ -208,7 +207,7 @@ $$
 IF_{\hat{\beta}({\bf z}_n),F}(z_i) = - \mathbb{E}_F[X'X]^{-1} x_i' (y_i - x_i \beta)
 $$
 
-## Example 3: Treatment Effect
+### Example 3: Treatment Effect
 
 For the last example, we are looking at the average treatment effect among the treated which assumes that counterfactual untreated outcomes are uncorrelated with treatment, i.e. $y_i(0) \perp D_i$. Our data is $z_i = (y_i, D_i)$ which is iid. Out estimator is the sample analogue of:
 

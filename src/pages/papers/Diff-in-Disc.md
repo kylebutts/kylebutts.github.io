@@ -5,13 +5,16 @@ author:
     url: https://kylebutts.com
     affiliation: CU Boulder
     affiliation_url: 
+date: "2021-11-01"
 links: 
   - name: Published
     url: https://www.tandfonline.com/doi/abs/10.1080/13504851.2021.2005236
   - name: ArXiv
     url: https://arxiv.org/abs/2109.07406
-category: "Published"
-status: "<i>Applied Economics Letters</i>"
+category: 
+  - "Published"
+  - "Econometrics"
+status: "<i>Applied Economics Letters</i>, 2021"
 display: true
 layout: "../../layouts/PaperLayout.astro"
 setup: |

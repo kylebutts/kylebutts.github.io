@@ -10,10 +10,11 @@ links:
     url: https://arxiv.org/abs/2105.03737
   - name: Slides
     url: ../files/Spillover_slides.pdf
+date: "2021-06-01"
 category: 
-  - Working Paper
-  - Applied Econometrics
-  - Urban Economics
+  - "Working Paper"
+  - "Applied Econometrics"
+  - "Urban Economics"
 status: 'Submitted'
 display: true
 layout: "../../layouts/PaperLayout.astro"

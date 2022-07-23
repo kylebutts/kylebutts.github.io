@@ -5,14 +5,16 @@ author:
     url: https://kylebutts.com
     affiliation: CU Boulder
     affiliation_url: 
+date: "2022-01-01"
 links:
   - name: ArXiv 
     url: https://arxiv.org/abs/2110.10192
   - name: Slides
     url: ../files/Rings_slides.pdf
-category: |
-  - Working Paper
-  - Applied Econometrics
+category:
+  - "R&R"
+  - "Difference-in-Differences"
+  - "Applied Econometrics"
 status: 'R&R at <i>Journal of Urban Economics: Insights</i>'
 display: true
 layout: "../../layouts/PaperLayout.astro"

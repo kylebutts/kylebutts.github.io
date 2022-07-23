@@ -75,7 +75,7 @@ FLOW
 }
 .flow :is(p, li) {
 	font-size: var(--size-0);
-	max-width: 80ch;
+	max-width: 75ch;
 }
 .flow :is(ol, ul) > li + li {
 	margin-top: var(--size-xs);
@@ -103,19 +103,19 @@ PROSE
 
 /* Headings */
 .prose :where(h1):not(:where([class~="not-prose"] *)) {
-	@apply text-size-2 font-bold tracking-tight;
+	@apply text-size-3 font-bold tracking-tighter;
   --flow-space: var(--size-xl-2xl);
 	letter-spacing: var(--tracking-s);
 	line-height: 1.1;
 }
 .prose :where(h2):not(:where([class~="not-prose"] *)) {
-	@apply font-bold tracking-tight text-kelly-500 dark:text-kelly-400 text-size-1;
+	@apply font-bold tracking-tight text-size-2 border-t-[4px] border-mine-shaft-700 dark:border-mine-shaft-200 pt-size-2xs;
   --flow-space: var(--size-xl-2xl);
 	letter-spacing: var(--tracking-s);
 	line-height: 1.1;
 }
 .prose :where(h3):not(:where([class~="not-prose"] *)) {
-	@apply underline decoration-2 decoration-mine-shaft-400 text-size-1;
+	@apply text-size-1 italic border-t-[2px] border-mine-shaft-700 dark:border-mine-shaft-200 pt-size-2xs;
   --flow-space: var(--size-xl-2xl);
 	letter-spacing: var(--tracking-s);
 	line-height: 1.1;
@@ -124,6 +124,25 @@ PROSE
 .prose > :is(h1, h2, h3) + p {
   --flow-space: var(--size-md);
 }
+
+.prose > :is(.math-display) {
+  font-size: var(--size-0);
+}
+.prose > :is(blockquote) {
+  @apply border-l-[2px] border-mine-shaft-700 dark:border-mine-shaft-200 py-size-2xs;
+  padding-left: calc(3ch - 2px); 
+}
+.prose > :is(blockquote) > p {
+  max-width: 72ch;
+}
+
+.prose > :is(ol, ul) {
+  padding-left: 3ch;
+}
+.prose > :is(ol, ul) > li {
+  max-width: 72ch;
+}
+
 
 /* List */
 .prose :where(ul):not(:where([class~="not-prose"] *)) {

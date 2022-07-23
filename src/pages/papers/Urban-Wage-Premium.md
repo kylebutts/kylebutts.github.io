@@ -13,9 +13,10 @@ author:
     url: https://sites.google.com/site/kitchct/
     affiliation: Florida State University
     affiliation_url: 
+date: "2022-03-01"
 category: 
-  - Work in Progress
-  - Urban Economics
+  - "Work in Progress"
+  - "Urban Economics"
 status: 'Work in Progress'
 display: true
 layout: "../../layouts/PaperLayout.astro"

@@ -11,10 +11,11 @@ author:
     url: https://gary-wagner.github.io/
     affiliation: University of Louisiana
 category: 
-  - Working Paper
-  - Urban Economics
-  - Fiscal Multipliers
-  - Shift-share IV
+  - "R&R"
+  - "Urban Economics"
+  - "Fiscal Multipliers"
+  - "Applied Econometrics"
+date: "2022-04-15"
 status: 'R&R at <i>Journal of Urban Economics</i>'
 display: true
 layout: "../../layouts/PaperLayout.astro"

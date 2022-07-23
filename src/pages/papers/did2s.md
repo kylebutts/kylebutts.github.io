@@ -8,13 +8,17 @@ author:
   - name: "John Gardner"
     url: "https://jrgcmu.github.io/"
     affiliation: "University of Mississippi"
+date: "2022-07-21"
 links:
   - name: ArXiv
     url: https://arxiv.org/abs/2110.10192
   - name: Slides
     url: "../files/did2s_slides.pdf"
-category: "Working Paper"
-status: "Conditionally Accepted at <i>R Journal</i>"
+category: 
+  - "Published"
+  - "Applied Econometrics"
+  - "Difference-in-Differences"
+status: "Forthcoming, <i>R Journal</i>"
 display: true
 layout: "../../layouts/PaperLayout.astro"
 setup: |
