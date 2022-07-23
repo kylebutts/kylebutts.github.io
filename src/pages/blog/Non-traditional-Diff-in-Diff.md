@@ -1,0 +1,106 @@
+---
+title: "Non-traditional Diff-in-Diff"
+date: "2022-07-22"
+author:
+  - name: "Kyle Butts"
+    url: https://kylebutts.com
+    affiliation: CU Boulder
+    affiliation_url:
+description: |
+  Notes on how I think about non-traditional difference-in-differences settings. I first describe the intuition behind the basic two-stage diff-in-diff method and then use that insight to describe how to approach non-traditional settings (e.g. continuous treatment, treatment turning on and off, and multiple doses during period)
+category: 
+  - "Econometrics"
+display: true
+layout: "../../layouts/ProseLayout.astro"
+setup: |
+  import { Bg, Color, Figure, LinkBlock, LargeBlock } from "../../components/mdx/"
+---
+# Non-traditional Diff-in-Diffs
+
+From writing the `did2s` and `didimputation` packages, I've received a ton of emails asking me about non-standard settings. I've spent a lot of time thinking about these problems and I'm going to share my thoughts on estimating treatment effects in non-traditional difference-in-differences settings. I first describe the intuition behind the basic two-stage diff-in-diff method so that we can then use that insight to describe how to approach non-traditional settings (e.g. continuous treatment, treatment turning on and off, multiple treatments, and multiple doses during period).
+
+***Important disclaimer:*** This post is not econometric theory. It does not prove anything for any non-traditional setting. I do, however, think it's useful to try and provide advice to applied folks on how to best answer a question until the econometric tools catch up.
+
+## Standard two-stage diff-in-diff
+
+This article is not going to walk through problems with estimating the standard TWFE model with OLS:
+$$
+y_{it} = \mu_i + \mu_t + \tau D_{it} + \varepsilon_{it}
+$$
+I'm going to assume a working knowledge of the method. If not, you can read my [forthcoming R Journal article](https://arxiv.org/abs/2109.05913). I am, however, going to start with an overview of the two-stage diff-in-diff. The goal is to build intuition on why the method works in the standard setting, and explain how that intuition helps adapt this method to other settings. 
+
+### The First Stage
+
+In the first stage, you estimate the unit and time fixed effects using *only* the untreated and not-yet-treated observations (i.e. when $D_{it} = 0$). Note that the reason $\mu_t$ is constant across treated and never-treated units is because we assume parallel trends.
+ 
+Why use only $D_{it} = 0$? If you used post-treatment observations, you would bias your unit fixed effect estimates for the treated units (by absorbing treatment effects) and you would bias your time fixed effects (post-treatment periods would absorb treatment effects). 
+
+What about anticipation effects? If you have anticipation effects, then your pre-treatment observations for treated units would bias the unit and the time fixed effects (since they are not "untreated" during anticipation). That is why in my [R Journal article](https://arxiv.org/pdf/2109.05913.pdf), I write:
+> "For example, if you suspect that units could experience treatment effects 1 period ahead of treatment (a so-called anticipatory effect), then the treatment should begin one period ahead. These anticipation effects can be estimated, after adjusting the treatment variable, by using a reference year of say, $t = -2$ and looking at the estimate for relative year $-1$."
+
+Things we should think about in non-standard settings:
+
+1. *Do we have parallel trends for all the different kinds of treatment states?* For example, in the multiple treatment setting, we should ask if each treatment group share the same counterfactual trend $(\mu_t)$? Or, consider continuous treatment. Do we think that at each dose amount, units are on the same trend?
+
+2. *Are our estimates biased for unit and time fixed effects?* For example, in my paper on [spatial spillovers](https://arxiv.org/abs/2105.03737), I caution against using any "control" observations where that control unit is close to an actively treated unit in order to avoid biasing estimates of unit fixed effects. 
+
+
+
+
+### The Second Stage
+
+With our *unbiased* unit and time fixed effects, we can form estimates for the untreated potential outcome $\hat{Y}_{it}(0)$. After you subtract off this estimate $\tilde{Y}_{it} \equiv Y_{it} - \hat{Y}_{it}(0)$, so long as $\hat{Y}_{it}(0)$ is unbiased, then $\tilde{Y}_{it}$ is, on average, the treatment effect for that unit in that period. 
+To see this, remember that our treatment effect is defined as $\tau_{it} = Y_{it}(1) - Y_{it}(0)$ where we observe the first term for post-treatment observations, but we have to estimate $Y_{it}(0)$. Our estimate is only good if we are confident in the first-stage estimates!
+
+With the $\hat{\tau}_{it}$ estimates, we can average them however we wish! And how do we average things easily? We regress it on a bunch of indicators (e.g. relative-year indicators). 
+
+
+Things we should think about in non-standard settings:
+
+1. What way do you want to aggregate the treatment effects? If we have a good first-stage, then we have the $\hat{\tau}_{it}$ building blocks to play with (note that you're averaging $\tau_{it} + u_{it}$ since $\hat{Y}_{it}(0) \neq Y_{it}(0)$), but if you have a big enough set of $it$ you're averaging over, $u_{it} = 0$ from unbiasedness of $\hat{Y}_{it}
+(0)$.
+
+
+## Non-standard versions
+
+Okay, hopefully the previous section has built some intuition, but I'm going to give a few examples and talk through how I would think about it. Of course, I can't be exhaustive with this since each setting is unique (❄️). Nor am I going to prove anything. The aim of this post is to build intuition to help applied researchers do the best that you can. I could be wrong (and probably am)! But I think doing the best we can is what science is about.
+
+### What observations to use in a first-stage
+
+When thinking about the first stage, researchers should of course ask "do parallel trends hold?" (of course!) and "what observations should I use in a first-stage?". These two questions are closer together than you may think. Remember that parallel trends is a constraint on the untreated potential outcomes $Y_{it}(0)$! You should only use observations in the first-stage where you are observing $Y_{it}(0)$. For example, if your treated unit is experiencing anticipation effects, then that's not $Y_{it}(0)$. 
+
+Another example I get asked about frequently is treatment turning on and off multiple times. One assumption that you can make, I'm not sure if it makes sense in your setting (but it definitely doesn't make sense in all settings!) is that treatment effects are only experienced when treatment is currently on, i.e. *history* doesn't matter. In this setting, all observations with $D_{it}(0)$ can be included and should for efficiency reasons. However, if history does matter, you should only use observations before the *first* time a unit is treated. 
+
+As I alluded to above, I make this argument in my Spatial Spillovers paper. In that paper, I recommend not using control unit observations when they are near an actively treated observation. The reason is that when we look at a control unit near an actively treated unit, we are not observing $Y_{it}(0)$, i.e. the potential outcome when no treatment is affecting that unit. 
+
+
+### Second-stage and defining your estimand
+
+After we have convinced ourselves that we have defined the first-stage properly, we have our estimates of $Y_{it}(0)$ for the rest of the observations. Our goal is to figure our what to put for regressors in the second stage:
+$$
+Y_{it} - \hat{Y}_{it}(0) = \text{regressors}
+$$
+
+If regressors are a set of mututally exclusive indicators (e.g. relative year indicators), then we will just be averaging $\tau_{it}$ for different groups of $it$. For example, think of multiple mutually exclusive treatments. Including indicators for each treatment would estimate the average treatment effect for each treatment. You may have heard of this [new paper](https://arxiv.org/abs/2106.05024) about problems with estimating treatment effects for multiple treatment. Note that the two-stage estimator does not face this problem by avoiding the residualization of the treatment dummy variables. 
+
+What about a setting where treatment can occur multiple times for a unit. We could run the following 
+$$
+Y_{it} - \hat{Y}_{it}(0) = \# \text{of times treated}_{it},
+$$
+which would assume a linear treatment function. That is, each additional time treated causes the same treatment effect. Or perhaps, you could include a squared term if the effects of treatment are diminishing. The parametric assumption may help with precision, but a non-parametric way to estimate the treatment effect curve would be with individual indicator variables for each number of times treated (1, 2, 3, ...). 
+
+What about our treatment turning on and off setting? In this setting, there are many parameterizations as well. For example, you could test if treatment has "history" by including a dummy for "previously treated, but not currently treated" and seeing if it's statistically different from zero. 
+
+One more example that we'll touch on is a continuous dosage type treatment (read [this paper](https://arxiv.org/abs/2107.02637) if you're using a continuous treatment!). The setting we'll consider is one where different units receive different magnitudes of treatment, but the control units receive 0 dosage. What would happen if we estimated
+$$
+Y_{it} - \hat{Y}_{it}(0) = \text{dose}_{it} * \tau,
+$$
+where $\text{dose}_{it}$ represents the dosage a unit receives? We might hope that the coefficient $\tau$ represents the marginal effect of a unit increase in dosage, but we can not. The reason is that units could be selecting larger doses if they are have larger marginal effects (read [this paper](https://arxiv.org/abs/2107.02637) if you're using a continuous treatment!). In this case, comparing units at different dose amounts conflates a change in the treatment effect due to the larger dosage and a change in the treatment effect due to changing marginal effects.
+
+### Conclusion
+
+This post is a bit of an odd one to write. When your setting departs from the classic difference-in-differences setting, there's no single answer that fixes all the problems. But I wrote this post (a) because I get asked this a lot, so just like coding, my open-source philosophy is "don't repeat yourself", and (b) researchers are going to try their best and I *hope* that having a better intuition of the two-stage imputation estimator will help individuals make better choices in their setting. 
+
+
+
+
