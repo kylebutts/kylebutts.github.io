@@ -1,5 +1,5 @@
 ---
-import MenuItemsInline from "./MenuItemsInline";
+import MenuItemsInline from "./MenuItemsInline.astro";
 import DarkModeButton from "./DarkModeButton";
 import MenuItemsDropdown from "./MenuItemsDropdown"
 ---
@@ -10,7 +10,7 @@ import MenuItemsDropdown from "./MenuItemsDropdown"
     <a href="/">Kyle Butts</a>
   </h1>
   <div class="flex prose:items-end justify-between">
-    <MenuItemsInline client:load />
+    <MenuItemsInline />
     <div class="flex items-center gap-size-3xs">
       <MenuItemsDropdown client:idle />
       <DarkModeButton client:idle />
