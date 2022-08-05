@@ -26,5 +26,10 @@ export default defineConfig({
       },
     })
 	],
+  vite: {
+    ssr: {
+      external: ["svgo"],
+    },
+  },
 	outDir: "./docs"
 })

@@ -1,8 +1,13 @@
 ---
-import { items } from './data';
+const items = [
+  { name: "Papers", link: "/papers/" },
+  { name: "Open Source", link: "/open-source/" },
+  { name: "Teaching", link: "/teaching/" },
+  { name: "Blog", link: "/blog/" },
+];
 ---
 
-<ul class="gap-x-size-xs-sm hidden prose:flex text-size-0 font-light">
+<ul class="gap-size-xs-sm flex flex-wrap text-size-0 font-light">
   {items.map((item, i) => (
   <li class="relative hover:underline focus:underline decoration-alice-400">
     <a href={item.link}>{item.name}</a>

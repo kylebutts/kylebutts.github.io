@@ -25,20 +25,23 @@ import '@fontsource/jetbrains-mono/800.css';
 </head>
 
 <body>
+  <!-- Set theme on body -->
   <SetupDarkMode />
 
   <div
     class="min-h-screen w-full bg-mine-shaft-100 font-jetbrains text-mine-shaft-900 dark:bg-mine-shaft-900 dark:text-mine-shaft-50">
     <div class="pt-size-xs prose:pt-size-sm-md pb-size-2xl">
       <Content >
-        <MenuBar client:load />
+        <MenuBar />
       </Content>
-        <slot />
+        
+      <slot />
     </div>
   </div>
 
   <!-- Katex for equations -->
   <script>
+    // Load after the main thread is finished
     var cb = function() {
       var l = document.createElement('link');
       l.rel = 'stylesheet';

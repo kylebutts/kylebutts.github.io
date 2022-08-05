@@ -1,0 +1,27 @@
+---
+import { Icon } from 'astro-icon'
+---
+
+<script is:inline>
+  toggleDarkMode = () => {
+    // Get the user's theme preference from local storage, if it's available
+    let currentTheme = localStorage.getItem("theme");
+
+    // Defaults
+    if (currentTheme == "light") {
+      localStorage.setItem("theme", "dark")
+      document.body.classList.add("dark")
+    } else {
+      localStorage.setItem("theme", "light")
+
+      document.body.classList.remove("dark")
+    }
+  }
+</script>
+
+<button aria-label="Dark Mode Toggle" onclick="toggleDarkMode()">
+  <Icon name="ic:twotone-wb-sunny"
+    class="hidden dark:block h-5 w-5 prose:h-6 prose:w-6 lg:h-7 lg:w-7 text-kelly-400 dark:text-kelly-500 cursor-pointer" />
+  <Icon name="ic:twotone-dark-mode"
+    class="block dark:hidden h-5 w-5 prose:h-6 prose:w-6 lg:h-7 lg:w-7 text-kelly-400 dark:text-kelly-500 cursor-pointer" />
+</button>

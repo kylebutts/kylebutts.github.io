@@ -25,5 +25,8 @@
     "rehype-katex": "^6.0.2",
     "rehype-pretty-code": "^0.3.2",
     "remark-math": "^5.1.1"
+  },
+  "dependencies": {
+    "astro-icon": "^0.7.3"
   }
 }
