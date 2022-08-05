@@ -1,13 +1,13 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-const repos = await Astro.glob('./*.md');
+const repos = await Astro.glob('./*.mdx');
 ---
 
 <Layout content prose>
   <ul class="flex flex-col gap-y-size-lg">
     {repos.map((repo, i) => {
     // get slug of file name
-    let slug = repo.file.match(/([\w-_]*).md$/)[1]
+    let slug = repo.file.match(/([\w-_]*).mdx$/)[1]
 
     return (
     <li

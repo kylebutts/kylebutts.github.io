@@ -1,7 +1,7 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import { Debug } from 'astro/components';
-let papers = await Astro.glob('./*.md');
+let papers = await Astro.glob('./*.mdx');
 
 papers = papers.map((paper) => {
   
@@ -41,7 +41,7 @@ papers = papers.map((paper) => {
   <ul class="flex flex-col gap-y-size-lg">
     {papers.map((paper, i) => {
     // get slug of file name
-    let slug = paper.file.match(/([\w-_]*).md$/)[1]
+    let slug = paper.file.match(/([\w-_]*).mdx$/)[1]
 
     return (
     <li

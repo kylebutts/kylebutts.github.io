@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<!DOCTYPE html><html lang="en" class="astro-COMNSPVE">
+<!DOCTYPE html><html lang="en" class="astro-RSPDPQNQ">
 
 <head>
   <meta charset="UTF-8">
@@ -9,12 +8,12 @@
   <meta name="description" content="Academic site for Kyle Butts.">
 
   <!-- Katex for equations -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.0/dist/katex.min.css" cross-origin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.0/dist/katex.min.css" cross-origin="anonymous" rel="preload">
 
   <!-- Tailwind CSS -->
   
-<link rel="stylesheet" href="/assets/bb0aa130.3cc04c13.css" />
-<link rel="stylesheet" href="/assets/55696eec.e49487f7.css" /></head>
+<link rel="stylesheet" href="/assets/31fd0efb.8efb79ad.css" />
+<link rel="stylesheet" href="/assets/11504762.d279eec1.css" /></head>
 
 <body>
   <!-- Dark Mode --><script src="">
@@ -41,8 +40,8 @@
 </script>
 
 
-  <div class="min-h-screen w-full bg-mine-shaft-100 font-jetbrains text-mine-shaft-900 dark:bg-mine-shaft-900 dark:text-mine-shaft-50 astro-COMNSPVE">
-    <div class="pt-size-xs prose:pt-size-sm-md pb-size-2xl astro-COMNSPVE">
+  <div class="min-h-screen w-full bg-mine-shaft-100 font-jetbrains text-mine-shaft-900 dark:bg-mine-shaft-900 dark:text-mine-shaft-50 astro-RSPDPQNQ">
+    <div class="pt-size-xs prose:pt-size-sm-md pb-size-2xl astro-RSPDPQNQ">
       <div class="content   
   ">
   <nav class="flex w-full flex-row prose:flex-col justify-between gap-size-2xs pb-size-2xs border-b-[1px] border-mine-shaft-800 dark:border-mine-shaft-100">
@@ -77,7 +76,13 @@
     </div>
 </div><div class="mt-size-2xl"></div><div class="content flow prose 
   ">
-  <h2 id="abstract">Abstract</h2><p>A recent econometric literature has critiqued the use of regression discontinuities where administrative borders serve as the ‘cutoff’. Identification in this context is difficult since multiple treatments can change at the cut-off and individuals can easily sort on either side of the border. This note extends the difference-in-discontinuities framework discussed in <a href="https://www.aeaweb.org/articles?id=10.1257/app.20150076">Grembi et al. (2016)</a> to a geographic setting. This paper formalizes the identifying assumptions in this context, which will allow for the removal of time-invariant sorting and multiple treatments similar to the difference-in-differences methodology.</p><h2 id="5-minute-summary">5-Minute Summary</h2><p>An increasingly popular estimation strategy involves using administrative borders as cut-offs in a regression discontinuity (RD) setting, where the 'running variable' is the distance to the border. Identification using the 'continuity assumption' is problematic in these settings since <em>even in the absence of treatment</em> people can sort on either side of borders (e.g. for lower taxes or better schools) and many policies change at the same border (tax-laws, police-services, schools, etc.).</p><p>This paper extends the proposed 'difference-in-discontinuities' estimator (<a href="https://www.aeaweb.org/articles?id=10.1257/app.20150076">Grembi et al. (2016)</a>)  to the geographic RD setting. The intuition of the difference-in-discontinuities design is very similar to the difference-indifferences design. A pre-treatment RD identifies the time-invariant effects of other laws as well as the discontinuity in outcomes due to time-invariant sorting. A post-treatment RD identifies those previous two discontinuities plus the one caused by the treatment of interest. The difference between the two identifies the treatment effect.</p><div class="large-block not-prose wide-bleed max-w-[1480px] mx-auto relative
+  <h2 id="abstract">Abstract</h2>
+<p>A recent econometric literature has critiqued the use of regression discontinuities where administrative borders serve as the ‘cutoff’. Identification in this context is difficult since multiple treatments can change at the cut-off and individuals can easily sort on either side of the border. This note extends the difference-in-discontinuities framework discussed in <a href="https://www.aeaweb.org/articles?id=10.1257/app.20150076">Grembi et al. (2016)</a> to a geographic setting. This paper formalizes the identifying assumptions in this context, which will allow for the removal of time-invariant sorting and multiple treatments similar to the difference-in-differences methodology.</p>
+<h2 id="5-minute-summary">5-Minute Summary</h2>
+<p>An increasingly popular estimation strategy involves using administrative borders as cut-offs in a regression discontinuity (RD) setting, where the &#39;running variable&#39; is the distance to the border. Identification using the &#39;continuity assumption&#39; is problematic in these settings since <em>even in the absence of treatment</em> people can sort on either side of borders (e.g. for lower taxes or better schools) and many policies change at the same border (tax-laws, police-services, schools, etc.).</p>
+<p>This paper extends the proposed &#39;difference-in-discontinuities&#39; estimator (<a href="https://www.aeaweb.org/articles?id=10.1257/app.20150076">Grembi et al. (2016)</a>)  to the geographic RD setting. The intuition of the difference-in-discontinuities design is very similar to the difference-indifferences design. A pre-treatment RD identifies the time-invariant effects of other laws as well as the discontinuity in outcomes due to time-invariant sorting. A post-treatment RD identifies those previous two discontinuities plus the one caused by the treatment of interest. The difference between the two identifies the treatment effect.</p>
+<link rel="stylesheet" href="/assets/31fd0efb.8efb79ad.css" />
+<link rel="stylesheet" href="/assets/11504762.d279eec1.css" /><div class="large-block not-prose wide-bleed max-w-[1480px] mx-auto relative
   group border-mine-shaft-600 bg-mine-shaft-50 dark:bg-mine-shaft-700
   dark:shadow-none dotted ">
   
@@ -89,17 +94,20 @@
     <b>Figure:</b> Example identification in the geographic difference-in-discontinuities estimator
   </figcaption>
 </figure>
-</div><p>The paper goes into the theoretical assumptions that are necessary for the diff-in-disc method to work, but here is the intuition:</p><ul>
+</div>
+<p>The paper goes into the theoretical assumptions that are necessary for the diff-in-disc method to work, but here is the intuition:</p>
+<ul>
 <li>
-<p>The untreated potential outcome must be continuous at the cut-off. Note that this untreated potential outcome is conceptually the outcome without <em>any treatments</em> (including the ones implemented in the past). A time-invariant "jump" discontinuity will be differenced out.</p>
+<p>The untreated potential outcome must be continuous at the cut-off. Note that this untreated potential outcome is conceptually the outcome without <em>any treatments</em> (including the ones implemented in the past). A time-invariant &quot;jump&quot; discontinuity will be differenced out.</p>
 </li>
 <li>
-<p>The effects of all other treatments must be "fully observed" in the pre-period. If not, then you can't disentangle the effects of the treatment of interest from the other treatments.</p>
+<p>The effects of all other treatments must be &quot;fully observed&quot; in the pre-period. If not, then you can&#39;t disentangle the effects of the treatment of interest from the other treatments.</p>
 </li>
 <li>
 <p>There can be no sorting in the post-period from the treatment of interest. This is a standard assumption in RD that allows units near the cutoff to be similar in covariates.</p>
 </li>
-</ul><p>The paper concludes with a discussion of how to estimate the diff-in-disc estimator in a single RD regression on first-differenced outcomes using the modern robust RD tools. For more details on modern RD tools, see <a href="https://cattaneo.princeton.edu/books/Cattaneo-Idrobo-Titiunik_2019_CUP-Vol1.pdf">Cattaneo et. al. (2019)</a></p>
+</ul>
+<p>The paper concludes with a discussion of how to estimate the diff-in-disc estimator in a single RD regression on first-differenced outcomes using the modern robust RD tools. For more details on modern RD tools, see <a href="https://cattaneo.princeton.edu/books/Cattaneo-Idrobo-Titiunik_2019_CUP-Vol1.pdf">Cattaneo et. al. (2019)</a></p>
 </div>
     </div>
   </div>

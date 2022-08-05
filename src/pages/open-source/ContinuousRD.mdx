@@ -3,9 +3,8 @@ title: "{ContinuousRD}"
 description: |
   ContinuousRD is a package that implements regression discontinuity designs when the treatment variable is continuous following Dong, Lee, and Gou (2022)
 layout: "../../layouts/ProseLayout.astro"
-setup: |
-  import { Bg, Color, Figure, LinkBlock, LargeBlock } from "../../components/mdx/"
 ---
+import { Bg, Color, Figure, LinkBlock, LargeBlock } from "../../components/mdx/"
 
 # <a href="https://github.com/kylebutts/ContinuousRD">ContinuousRD</a>
 
@@ -78,7 +77,7 @@ $Y$ rescaled by the jump in $T$. Note that only quantiles that have a
 significant jump $q^+(u) - q^-(u) \neq 0$ are used to form estimates
 (since otherwise the denominator is 0).
 
-<img src="https://raw.githubusercontent.com/kylebutts/ContinuousRD/main/inst/example-identifcation.png" width="100%">
+<img src="https://raw.githubusercontent.com/kylebutts/ContinuousRD/main/inst/example-identifcation.png" width="100%" />
 
 A visual example using a made-up DGP similar to the paper’s main example
 is shown here for a given quantile $u = 0.1$. The left-figure shows the

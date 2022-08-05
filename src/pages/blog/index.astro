@@ -1,6 +1,6 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-let posts = await Astro.glob('./*.md');
+let posts = await Astro.glob('./*.mdx');
 
 posts = posts.sort((a, b) => {
   let aDate = new Date(a.frontmatter.date)
@@ -17,7 +17,7 @@ posts = posts.sort((a, b) => {
   <ul class="flex flex-col gap-y-size-lg">
     {posts.map((post, i) => {
     // get slug of file name
-    let slug = post.file.match(/([\w-_]*).md$/)[1]
+    let slug = post.file.match(/([\w-_]*).mdx$/)[1]
 
     return (
     <li
