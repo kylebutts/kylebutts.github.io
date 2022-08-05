@@ -24,19 +24,7 @@ export default defineConfig({
       shikiConfig: {
         theme: "rose-pine",
       },
-    }),
-		image(),
+    })
 	],
-  markdown: {
-    remarkPlugins: [remarkMath],
-    rehypePlugins: [rehypeCodeTitles, rehypeKatex],
-    syntaxHighlight: "shiki",
-    shikiConfig: {
-      theme: "rose-pine",
-    },
-  },
-	outDir: "./docs",
-  legacy: {
-    astroFlavoredMarkdown: true
-  },
+	outDir: "./docs"
 })
