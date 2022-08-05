@@ -19,7 +19,7 @@ const DarkModeButton = () => {
 	}, [theme])
 
 	return (
-		<button onClick={() => setTheme(theme == "light" ? "dark" : "light")}>
+		<button aria-label="Dark Mode Toggle" onClick={() => setTheme(theme == "light" ? "dark" : "light")}>
 			{theme == "light" ? (
 				<MoonIcon className="h-5 w-5 text-alice-500 dark:text-alice-400 cursor-pointer" />
 			) : (

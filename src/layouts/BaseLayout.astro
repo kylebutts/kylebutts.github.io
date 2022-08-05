@@ -2,9 +2,15 @@
 import Content from "../components/Content.astro";
 import MenuBar from "../components/MenuBar/MenuBar.astro";
 import SetupDarkMode from "../components/MenuBar/SetupDarkMode.astro";
+
 import "../styles/global.css"
 
-const { title } = Astro.props;
+// JetBrains Mono
+import '@fontsource/jetbrains-mono/100.css';
+import '@fontsource/jetbrains-mono/300.css';
+import '@fontsource/jetbrains-mono/300-italic.css';
+import '@fontsource/jetbrains-mono/700.css';
+import '@fontsource/jetbrains-mono/800.css';
 ---
 
 <!DOCTYPE html>
@@ -14,19 +20,13 @@ const { title } = Astro.props;
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width">
   <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-  <title>{title}</title>
+  <title>Kyle Butts</title>
+  <meta name="description" content="Academic site for Kyle Butts.">
 
   <!-- Katex for equations -->
   <link rel="stylesheet"
     href="https://cdn.jsdelivr.net/npm/katex@0.15.0/dist/katex.min.css"
     cross-origin="anonymous" />
-
-  <!-- Jetbrains Mono -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" cross-origin="true" />
-  <link
-    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100;0,300;0,700;0,800;1,300"
-    rel="stylesheet" />
 
   <!-- Tailwind CSS -->
   <style href="../styles/globals.css"></style>

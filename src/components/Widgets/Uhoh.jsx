@@ -11,7 +11,7 @@ const Hello = () => {
 	return (
 		<div className="not-prose flex items-center gap-x-size-sm">
 			<div className="flex h-36 w-36 justify-center">
-				<img src={memojis[2]} className="m-0 h-36 rounded-full" />
+				<img src={memojis[2]} alt="A memoji of Kyle Butts face-palming"  className="m-0 h-36 rounded-full" />
 			</div>
 			<h2
 				className="decoration-6 font-bold underline decoration-alice-400 decoration-4 "

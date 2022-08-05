@@ -16,9 +16,9 @@ const Hello = () => {
 				}}
 			>
 				{hovered ? (
-					<img src={memojis[1]} className="m-0 h-36 rounded-full" />
+					<img src={memojis[1]} alt="A memoji of Kyle Butts with a kazoo" className="m-0 h-36 rounded-full" />
 				) : (
-					<img src={memojis[0]} className="m-0 h-36 rounded-full" />
+					<img src={memojis[0]} alt="A memoji of Kyle Butts smiling" className="m-0 h-36 rounded-full" />
 				)}
 			</div>
 			<h2
