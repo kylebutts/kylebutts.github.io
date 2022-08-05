@@ -58,4 +58,7 @@ pre[data-theme="light"] {
 pre > code {
 	display: grid;
 }
+.language-id {
+  display: none;
+}
 
