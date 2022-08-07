@@ -3,6 +3,8 @@ import Content from "../components/Content.astro";
 import MenuBar from "../components/MenuBar/MenuBar.astro";
 import SetupDarkMode from "../components/MenuBar/SetupDarkMode.astro";
 
+import { GoogleAnalytics } from 'astro-analytics';
+
 import "../styles/global.css"
 
 // JetBrains Mono
@@ -22,6 +24,7 @@ import '@fontsource/jetbrains-mono/800.css';
   <link rel="icon" type="image/x-icon" href="/favicon.ico" />
   <title>Kyle Butts</title>
   <meta name="description" content="Academic site for Kyle Butts.">
+  <GoogleAnalytics id={326374528} />
 </head>
 
 <body>
