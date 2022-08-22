@@ -49,16 +49,15 @@ Things we should think about in non-standard settings:
 
 ### The Second Stage
 
-With our *unbiased* unit and time fixed effects, we can form estimates for the untreated potential outcome $\hat{Y}_{it}(0)$. After you subtract off this estimate $\tilde{Y}_{it} \equiv Y_{it} - \hat{Y}_{it}(0)$, so long as $\hat{Y}_{it}(0)$ is unbiased, then $\tilde{Y}_{it}$ is, on average, the treatment effect for that unit in that period. 
+With our *unbiased* unit and time fixed effects, we can form estimates for the untreated potential outcome $\hat{Y}_{it}(0)$. After you subtract off this estimate $\tilde{Y}_{it} \equiv Y_{it} - \hat{Y}_{it}(0)$, so long as $\hat{Y}_{it}(0)$ is unbiased, then $\tilde{Y}_{it}$ is a good proxy for the treatment effect for that unit in that period. To be clear, our estimate $\tilde{Y}_{it}$ is not equal to the treatment effect (because it contains the error term and the estimation errors for $\mu_i$ and $\eta_t$). But, if we average $\tilde{Y}_{it}$ over sufficiently large groups and a parallel trends assumption holds, then the average is an unbiased estimate for the average of the treatment effects.
+
 To see this, remember that our treatment effect is defined as $\tau_{it} = Y_{it}(1) - Y_{it}(0)$ where we observe the first term for post-treatment observations, but we have to estimate $Y_{it}(0)$. Our estimate is only good if we are confident in the first-stage estimates!
 
-With the $\hat{\tau}_{it}$ estimates, we can average them however we wish! And how do we average things easily? We regress it on a bunch of indicators (e.g. relative-year indicators). 
-
+With the $\hat{\tau}_{it}$ estimates, we can average them however we wish (over sufficiently large groups!)! And how do we average things easily? We regress it on a bunch of indicators (e.g. relative-year indicators). 
 
 Things we should think about in non-standard settings:
 
-1. What way do you want to aggregate the treatment effects? If we have a good first-stage, then we have the $\hat{\tau}_{it}$ building blocks to play with (note that you're averaging $\tau_{it} + u_{it}$ since $\hat{Y}_{it}(0) \neq Y_{it}(0)$), but if you have a big enough set of $it$ you're averaging over, $u_{it} = 0$ from unbiasedness of $\hat{Y}_{it}
-(0)$.
+1. What way do you want to aggregate the treatment effects? If we have a good first-stage, then we have the $\hat{\tau}_{it}$ building blocks to play with (note that you're averaging $\tau_{it} + u_{it}$ since $\hat{Y}_{it}(0) \neq Y_{it}(0)$), but if you have a big enough set of $it$ you're averaging over, $u_{it} = 0$ from unbiasedness of $\hat{Y}_{it}(0)$.
 
 
 ## Non-standard versions
@@ -69,10 +68,9 @@ Okay, hopefully the previous section has built some intuition, but I'm going to 
 
 When thinking about the first stage, researchers should of course ask "do parallel trends hold?" (of course!) and "what observations should I use in a first-stage?". These two questions are closer together than you may think. Remember that parallel trends is a constraint on the untreated potential outcomes $Y_{it}(0)$! You should only use observations in the first-stage where you are observing $Y_{it}(0)$. For example, if your treated unit is experiencing anticipation effects, then that's not $Y_{it}(0)$. 
 
-Another example I get asked about frequently is treatment turning on and off multiple times. One assumption that you can make, I'm not sure if it makes sense in your setting (but it definitely doesn't make sense in all settings!) is that treatment effects are only experienced when treatment is currently on, i.e. *history* doesn't matter. In this setting, all observations with $D_{it}(0)$ can be included and should for efficiency reasons. However, if history does matter, you should only use observations before the *first* time a unit is treated. 
+Another example I get asked about frequently is treatment turning on and off multiple times. One assumption that you can make, I'm not sure if it makes sense in your setting (it definitely doesn't make sense in all settings!) is that treatment effects are only experienced when treatment is currently on, i.e. *history* doesn't matter. In this setting, all observations with $D_{it} = 0$ can be included and should for efficiency reasons. However, if history does matter, you should only use observations before the *first* time a unit is treated. 
 
 As I alluded to above, I make this argument in my Spatial Spillovers paper. In that paper, I recommend not using control unit observations when they are near an actively treated observation. The reason is that when we look at a control unit near an actively treated unit, we are not observing $Y_{it}(0)$, i.e. the potential outcome when no treatment is affecting that unit. 
-
 
 ### Second-stage and defining your estimand
 
@@ -85,7 +83,7 @@ If regressors are a set of mututally exclusive indicators (e.g. relative year in
 
 What about a setting where treatment can occur multiple times for a unit. We could run the following 
 $$
-Y_{it} - \hat{Y}_{it}(0) = \# \text{of times treated}_{it},
+Y_{it} - \hat{Y}_{it}(0) = \gamma_0 + \gamma_1 \# \text{of times treated}_{it},
 $$
 which would assume a linear treatment function. That is, each additional time treated causes the same treatment effect. Or perhaps, you could include a squared term if the effects of treatment are diminishing. The parametric assumption may help with precision, but a non-parametric way to estimate the treatment effect curve would be with individual indicator variables for each number of times treated (1, 2, 3, ...). 
 
@@ -93,9 +91,10 @@ What about our treatment turning on and off setting? In this setting, there are 
 
 One more example that we'll touch on is a continuous dosage type treatment (read [this paper](https://arxiv.org/abs/2107.02637) if you're using a continuous treatment!). The setting we'll consider is one where different units receive different magnitudes of treatment, but the control units receive 0 dosage. What would happen if we estimated
 $$
-Y_{it} - \hat{Y}_{it}(0) = \text{dose}_{it} * \tau,
+Y_{it} - \hat{Y}_{it}(0) = \gamma_0 + \gamma_1 \text{dose}_{it} ,
 $$
-where $\text{dose}_{it}$ represents the dosage a unit receives? We might hope that the coefficient $\tau$ represents the marginal effect of a unit increase in dosage, but we can not. The reason is that units could be selecting larger doses if they are have larger marginal effects (read [this paper](https://arxiv.org/abs/2107.02637) if you're using a continuous treatment!). In this case, comparing units at different dose amounts conflates a change in the treatment effect due to the larger dosage and a change in the treatment effect due to changing marginal effects.
+where $\text{dose}_{it}$ represents the dosage a unit receives? We might hope that the coefficient $\gamma_1$ represents the average marginal effect of a unit increase in dosage, but we can not. The reason is that units could be selecting larger doses if they are have larger per-unit effects (read [this paper](https://arxiv.org/abs/2107.02637) if you're using a continuous treatment! It's sooooo good.). In this case, comparing units at different dose amounts conflates a change in the treatment effect due to the larger dosage and a change in the treatment effect due to changing marginal effects.
+
 
 ### Conclusion
 
