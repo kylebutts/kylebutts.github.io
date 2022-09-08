@@ -1,0 +1,81 @@
+---
+title: 'Generalized Imputation Estimators for Factor Models'
+author:
+  - name: "Kyle Butts"
+    url: https://kylebutts.com
+    affiliation: CU Boulder
+  - name: Nicholas Brown
+    url: https://sites.google.com/msu.edu/nicholasbrown
+    affiliation: Queen's University
+date: "2022-06-01"
+category: 
+  - "Working Paper"
+  - "Applied Econometrics"
+  - "Urban Economics"
+links:
+  - name: Paper
+    url: "../files/Generalized_Imputation_Estimators_for_Factor_Models.pdf"
+status: 'Work in Progress'
+display: true
+layout: "../../layouts/PaperLayout.astro"
+---
+import { Bg, Color, Figure, LinkBlock, LargeBlock } from "../../components/mdx/";
+
+## Abstract
+
+This paper considers a general identification strategy of average treatment effect parameters in panel data settings under a linear factor model allowing for staggered treatment adoption, treatment effect heterogeneity, and a fixed number of time periods. Our model nests the classic two-way fixed effect model while allowing for selection into treatment based on common-contemporaneous shocks. We provide a unifying result for identification of imputation-based estimators under a factor model. We propose a particular estimator, establish asymptotic properties, and provide statistical tests for the sufficiency of the two-way fixed effect model.
+
+## 5-Minute Summary
+
+This paper proposes a generalized imputation estimator for panel-data estimation of treatment effects. For a quick review, the imputation estimator proposed in [Gardner](https://arxiv.org/abs/2207.05943) and [Borusyak, Jaravel, and Spiess](https://arxiv.org/abs/2108.12419) estimates the standard two-way fixed effect model for untreated potential outcomes:
+$$
+y_{it}(\infty) = \mu_i + \lambda_t + u_{it}
+$$
+by using the untreated and not-yet-treated observations ($D_{it} = 0$). Then the untreated potential outcomes are "imputed" for treated observations. Averages of the difference between observed and imputed outcomes serve as estimates for average treatment effects. 
+
+This method, however, relies on a parallel trends assumption that treated units are on the same economic trajectory as the untreated units. Our generalized imputation estimator relaxes this assumption by allowing units to enter treatment based on their differential exposure to a set of unobservable but commonly experienced macroeconomic shocks. To do this, we use a factor model for potential outcomes 
+$$
+y_{it}(\infty) = \mu_i + \lambda_t + \bm f_t' \bm \gamma_i + u_{it}.
+$$ 
+where $\bm f_t$ is a $p \times 1$ vector of unobservable *factors* and $\bm \gamma_i$ is a $p \times 1$ vector of unobservable *factor loadings*. One possible motivation for this model is that the factor is a macroeconomic shock and the factor-loading $\bm \gamma_i$ denotes a unit's exposure to the shock. Another possibility lets the $\bm \gamma_i$ represent time-invariant characteristics with a marginal-effect on the outcome that changes over time. Under this more general model, we can allow selection into treatment based on differential exposure to contemporaneous shocks $\bm f_t$. For example, counties can select into treatment based on being highly exposed (large $\bm \gamma_i$) to national economic shocks ($\bm f_t$). 
+
+This factor model is a really commonly used device in the synthetic control literature and the [matrix completion](https://arxiv.org/abs/1710.10251) method. However, it is difficult to use these methods in all cases, since it requires a large number of pre-periods, which a lot of people don't have! The cool thing about this paper is we show how to estimate the factor model in short panels using instruments for the factor model. We think of these instruments as "proxies" for the factor model. For example, if you think units are selecting into treatment based on economic shocks, you could use a counties' baseline manufacturing share as an instrument. 
+
+
+We take from [Callaway and Sant'Anna](https://www.sciencedirect.com/science/article/abs/pii/S0304407620303948?via%3Dihub) and think about estimates of the group-time average treatment effect:
+$$
+ATT(g,t) = E(y_{it}(g) - y_{it}(\infty) \vert G_i = g),
+$$
+i.e. the average effect of treatment for units treated in period $g$ at time period $t$. These group-time ATTs can then be aggregated to an overall effect, event-study estimates, etc. However, we estimate these under the more general factor model. I'm currently working on a package that estimates these $ATT(g,t)$ and then "plugs-into" the `did` package and lets uses aggregate and plot their treatment effect estimates using Pedro and Brantly's really great suite of tools.
+
+
+
+
+### Econometric details
+
+I think the way we do this is really cool, so I'm going to geek out on the details. In the paper we show that *if* you are able to estimate the factors $\bm f_t$, then we can impute untreated potential outcomes using just observed $y$s. To do so, we proceed in three steps.
+
+First, we perform a within-transformation to remove unit and time fixed effects (using only untreated and not-yet-treated obsevations like any imputation estimator!). I will save the details for the paper, but some care is warranted in this step. After, our outcome is given as
+$$
+\tilde{y}_{it}(\infty) = \tilde{\bm f}_t' \tilde{\bm \gamma_i} + u_{it}
+$$
+where $\tilde{ }$ denotes the within-transformation. 
+
+Second, we have to estimate $\tilde{\bm f}_t$. There's many different ways to do this and in the paper we propose a particular one using instrumental variables. The beauty of our identification result is that it doesn't matter how you estimate $\tilde{\bm f}_t$ as long as it's consistent. With this estimate, we "impute" the untreated potential outcome as: 
+$$
+\hat{\tilde{y}}_{it}(\infty) = \tilde{\bm f}_t' (\tilde{\bm f}_{pre}' \tilde{\bm f}_{pre})^{-1} \tilde{\bm f}_{pre}' y_{i,pre}
+$$
+where $\tilde{y}_{i, pre}$ and $\tilde{\bm f}_{pre}$ is the pre-treatment rows of the outcome and the factor estimates. This transformation looks like a projection matrix. It takes $(\tilde{\bm f}_{pre}' \tilde{\bm f}_{pre})^{-1} \tilde{\bm f}_{pre}' y_{i,pre}$ which is an estimate for $\tilde{\bm \gamma}_i$ and then projects that on the period $t$ factor: $\tilde{\bm f}_t'$. 
+
+The final step is averaging over the observed outcome $y_{it}$ and the estimated untreated potential outcome $\hat{\tilde{y}}_{it}(\infty)$. Averaging over units yields a consistent estimate for the corresponding treatment effect. 
+
+I think this imputation method is *really* elegant and I'm so excited at figuring this out. I hope you find it cool too :-)
+
+
+
+
+
+
+
+
+

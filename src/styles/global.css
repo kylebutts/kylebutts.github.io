@@ -43,6 +43,14 @@ body {
 }
 
 
+/* Hide Katex HTML */
+.katex-html {
+  display: none;
+}
+.katex-mathml {
+  font-size: 1.35rem;
+}
+
 /* Code */
 pre {
 	@apply rounded-[5px] bg-[#fffaf3] text-[#b4637a] dark:bg-[#2a273f] dark:text-[#c4a7e7];

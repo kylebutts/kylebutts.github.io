@@ -15,8 +15,8 @@
   gtag('config', id);
 </script>
 
-<link rel="stylesheet" href="/assets/31fd0efb.8efb79ad.css" />
-<link rel="stylesheet" href="/assets/11504762.7ed160dc.css" /><script type="module">var n=function(){var e=document.createElement("link");e.rel="stylesheet",e.crossOrigin="anonymous",e.href="https://cdn.jsdelivr.net/npm/katex@0.15.0/dist/katex.min.css";var t=document.getElementsByTagName("head")[0];t.parentNode.insertBefore(e,t)},a=requestAnimationFrame||mozRequestAnimationFrame||webkitRequestAnimationFrame||msRequestAnimationFrame;a?a(n):window.addEventListener("load",n);
+<link rel="stylesheet" href="/assets/f1a26159.8a3e8e58.css" />
+<link rel="stylesheet" href="/assets/087686f5.906370df.css" /><script type="module">var n=function(){var e=document.createElement("link");e.rel="stylesheet",e.crossOrigin="anonymous",e.href="https://cdn.jsdelivr.net/npm/katex@0.15.0/dist/katex.min.css";var t=document.getElementsByTagName("head")[0];t.parentNode.insertBefore(e,t)},a=requestAnimationFrame||mozRequestAnimationFrame||webkitRequestAnimationFrame||msRequestAnimationFrame;a?a(n):window.addEventListener("load",n);
 </script></head>
 
 <body>
@@ -115,8 +115,8 @@
   ">
   <h1 id="non-traditional-diff-in-diffs">Non-traditional Diff-in-Diffs</h1>
 <p>From writing the <code>did2s</code> and <code>didimputation</code> packages, I&#39;ve received a ton of emails asking me about non-standard settings. I&#39;ve spent a lot of time thinking about these problems and I&#39;m going to share my thoughts on estimating treatment effects in non-traditional difference-in-differences settings. I first describe the intuition behind the basic two-stage diff-in-diff method so that we can then use that insight to describe how to approach non-traditional settings (e.g. continuous treatment, treatment turning on and off, multiple treatments, and multiple doses during period).</p>
-<p><link rel="stylesheet" href="/assets/31fd0efb.8efb79ad.css" />
-<link rel="stylesheet" href="/assets/11504762.7ed160dc.css" /><script type="module">var n=function(){var e=document.createElement("link");e.rel="stylesheet",e.crossOrigin="anonymous",e.href="https://cdn.jsdelivr.net/npm/katex@0.15.0/dist/katex.min.css";var t=document.getElementsByTagName("head")[0];t.parentNode.insertBefore(e,t)},a=requestAnimationFrame||mozRequestAnimationFrame||webkitRequestAnimationFrame||msRequestAnimationFrame;a?a(n):window.addEventListener("load",n);
+<p><link rel="stylesheet" href="/assets/f1a26159.8a3e8e58.css" />
+<link rel="stylesheet" href="/assets/087686f5.906370df.css" /><script type="module">var n=function(){var e=document.createElement("link");e.rel="stylesheet",e.crossOrigin="anonymous",e.href="https://cdn.jsdelivr.net/npm/katex@0.15.0/dist/katex.min.css";var t=document.getElementsByTagName("head")[0];t.parentNode.insertBefore(e,t)},a=requestAnimationFrame||mozRequestAnimationFrame||webkitRequestAnimationFrame||msRequestAnimationFrame;a?a(n):window.addEventListener("load",n);
 </script><span class="dark:text-ruby-600 text-ruby-500">
   Important disclaimer:
 </span> This post is not econometric theory. It does not prove anything for any non-traditional setting. I do, however, think it&#39;s useful to try and provide advice to applied folks on how to best answer a question until the econometric tools catch up.</p>
