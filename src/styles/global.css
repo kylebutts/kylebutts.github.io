@@ -44,9 +44,6 @@ body {
 
 
 /* Hide Katex HTML */
-.katex-html {
-  display: none;
-}
 .katex-mathml {
   font-size: 1.35rem;
 }
