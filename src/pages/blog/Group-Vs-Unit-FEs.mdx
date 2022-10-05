@@ -1,0 +1,257 @@
+---
+title: "Difference-in-Differences: Unit vs. Group FEs"
+date: "2022-10-05"
+author:
+  - name: "Kyle Butts"
+    url: https://kylebutts.com
+    affiliation: CU Boulder
+    affiliation_url:
+description: In difference-in-differences settings, should you allow for unit-level fixed effects or just treatment-cohort (group) fixed effects? With imputation, Jeff Wooldridge's paper shows it doesn't matter and group fixed effects can be *way* faster.
+category: 
+  - "Econometrics"
+display: true
+layout: "../../layouts/ProseLayout.astro"
+---
+
+import { Bg, Color, Figure, LinkBlock, LargeBlock } from "../../components/mdx/"
+
+# Introduction
+
+One thing about me, if you have not been able to tell, is that I'm a mega-nerd. As a mega-nerd, one of my interests is learning all about computational tricks. When computers had little memory, people had to get *reallly* creative to do things they wanted to do. One of my favorite facts is that the background image for one single screen of Super Mario Brothers is 8(!) times bigger than the amount of visual RAM on the NES. The video below is one of my favorites if these kinds of things excite you. 
+
+<iframe class="mx-auto my-size-md" width="560" height="315" src="https://www.youtube.com/embed/TPbroUDHG0s" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+In fact, a lot of tricks had to be developed to run even moderate regressions on old computers. For instance, the within-transformation that you learn about early in the econometrics sequence is a computation trick so that you can avoid having a bunch dummy variables loaded in RAM. 
+
+This post is about such a trick discovered by Prof. Wooldridge that can massively speed-up `did2s`. 
+
+## Unit vs. Group Fixed Effects
+
+Typically, when people run a difference-in-differences estimator they include time fixed effects, $\eta_t$, to capture macroeconomic shocks that affect units equally and they include unit fixed effects, $\mu_i$, to capture time-invariant characteristics of an individual. However, there's a bit of a problem. In short-panels, where the number of pre-treatment periods is small, there is no way to consistently estimate the unit fixed effects without very strong restrictions on the error term.
+
+Imputation, it would seem, would be doomed to fail since without consistent estimates of the unit fixed effects you would assume, you could not consistently impute the untreated potential outcome $y_{it}(0)$ 🤯. Group fixed-effects, or dummy variables for when you initially start treatment, can be consistently estimated so long as the number of units in each group is large. However, group fixed-effects masks over a lot of heterogeneity across units which is undesirable!
+
+
+
+## Not a problem!
+
+It turns out, via work by [Jeff Wooldridge](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3906345) and seperate work by [Nick Brown and I](http://localhost:3000/papers/Generalized-Imputation-Estimators), that the difference between unit and group fixed effects do not matter! In fact, they will produce *THE EXACT SAME ESTIMATES*. This is true in the imputation estimator (`did2s`) or the pooled OLS estimator he recommends! The advantage is group fixed effects will run way faster than individual fixed effects (especially in `did2s` who has to work with the matrix of dummy variables). Cool computational trick!! 
+
+But what about about the problem of inconsistent estimates of $\mu_i$? The reason this isn't a problem is that you don't need to consistently estimate $\mu_i$, but rather the *average* of $\mu_i$ across treated units. This is possible so long as you have enough treated units.
+
+## Proof by Code
+
+I think seeing is believing, so I'll show you a "proof by code". The dataset is available [here](https://gist.github.com/kylebutts/54cd2f2a4f575d17921536ba7c39528b). First, let's load the dataset and inspect the data.
+
+``` r
+library(data.table)
+library(fixest)
+library(did2s)
+#> ℹ did2s (v0.7.0). For more information on the methodology, visit <https://www.kylebutts.com/did2s>
+#> To cite did2s in publications use:
+#> 
+#>   Butts, Kyle (2021).  did2s: Two-Stage Difference-in-Differences
+#>   Following Gardner (2021). R package version 0.7.0.
+#> 
+#> A BibTeX entry for LaTeX users is
+#> 
+#>   @Manual{,
+#>     title = {did2s: Two-Stage Difference-in-Differences Following Gardner (2021)},
+#>     author = {Kyle Butts},
+#>     year = {2021},
+#>     url = {https://github.com/kylebutts/did2s/},
+#>   }
+
+# Staggered ----
+
+df <- fread("~/Downloads/did_staggered_6.csv")
+head(df)
+#>       id  year   f01   f02   f03   f04   f05   f06         x0         x
+#>    <int> <int> <int> <int> <int> <int> <int> <int>      <num>     <num>
+#> 1:     1  2001     1     0     0     0     0     0 1.16091275 0.8999839
+#> 2:     1  2002     0     1     0     0     0     0 0.58702457 0.8999839
+#> 3:     1  2003     0     0     1     0     0     0 0.06370142 0.8999839
+#> 4:     1  2004     0     0     0     1     0     0 0.30608761 0.8999839
+#> 5:     1  2005     0     0     0     0     1     0 1.64813948 0.8999839
+#> 6:     1  2006     0     0     0     0     0     1 1.63403773 0.8999839
+#>            c          u  dinf    d4    d5    d6     yinf       y4       y5
+#>        <num>      <num> <int> <int> <int> <int>    <num>    <num>    <num>
+#> 1: -1.306199 -0.7842262     1     0     0     0 18.35957 18.35957 18.35957
+#> 2: -1.306199 -1.2422227     1     0     0     0 18.10157 18.10157 18.10157
+#> 3: -1.306199 -0.8482413     1     0     0     0 18.59555 18.59555 18.59555
+#> 4: -1.306199 -3.0435097     1     0     0     0 16.50028 17.93251 16.50028
+#> 5: -1.306199  0.3134679     1     0     0     0 19.95726 22.53045 22.20449
+#> 6: -1.306199  0.1220980     1     0     0     0 19.86589 24.93341 24.09905
+#>          y6        y     w      te4      te5       te6
+#>       <num>    <num> <int>    <num>    <num>     <num>
+#> 1: 18.35957 18.35957     0 0.000000 0.000000 0.0000000
+#> 2: 18.10157 18.10157     0 0.000000 0.000000 0.0000000
+#> 3: 18.59555 18.59555     0 0.000000 0.000000 0.0000000
+#> 4: 16.50028 16.50028     0 1.432226 0.000000 0.0000000
+#> 5: 19.95726 19.95726     0 2.573191 2.247232 0.0000000
+#> 6: 20.65178 19.86589     0 5.067520 4.233164 0.7858925
+```
+
+We have outcomes, `y`, for individuals, `id`, in year, `year`. The dummy variables that start with `f` are year dummy variables, the dummy variables starting with `d` represent what period an individual enters treatment (e.g. `d4` units start treatment in 2004).  Last, `w` is a 0/1 dummy variable for when units are under treatment, i.e. when $t \geq g$. 
+
+First, we will look at the imputation estimator and estimate a $\tau(g,t)$ for each $(g,t)$. If you look at the estimates, one uses group-dummies and the other uses unit-dummies and they produce the same estimates!
+
+```r
+# Imputation Estimator
+
+# Group and year
+did2s(
+  data = df,
+  yname = "y", 
+  first_stage = ~ 0 | d4 + d5 + d6 + year,
+  second_stage = ~ i(d4, f04, ref = 0, ref2 = 0) + i(d4, f05, ref = 0, ref2 = 0)
+  + i(d4, f06, ref = 0, ref2 = 0) + i(d5, f05, ref = 0, ref2 = 0)
+  + i(d5, f06, ref = 0, ref2 = 0) + i(d6, f06, ref = 0, ref2 = 0),
+  treatment = "w",
+  cluster = "id",
+  verbose = FALSE
+)
+#> OLS estimation, Dep. Var.: y
+#> Observations: 3,000 
+#> Standard-errors: Custom 
+#>           Estimate Std. Error  t value  Pr(>|t|)    
+#> d4::1:f04  3.52295   0.301118 11.69958 < 2.2e-16 ***
+#> d4::1:f05  4.25854   0.326706 13.03477 < 2.2e-16 ***
+#> d4::1:f06  4.21687   0.338619 12.45314 < 2.2e-16 ***
+#> d5::1:f05  2.98959   0.341628  8.75099 < 2.2e-16 ***
+#> d5::1:f06  3.69382   0.387853  9.52376 < 2.2e-16 ***
+#> d6::1:f06  2.00659   0.657207  3.05321  0.002284 ** 
+#> ---
+#> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+#> RMSE: 2.95479   Adj. R2: 0.193838
+
+# Id and year
+did2s(
+  data = df, 
+  yname = "y", 
+  first_stage = ~ 0 | id + year,
+  second_stage = ~ i(d4, f04, ref = 0, ref2 = 0) + i(d4, f05, ref = 0, ref2 = 0)
+  + i(d4, f06, ref = 0, ref2 = 0) + i(d5, f05, ref = 0, ref2 = 0)
+  + i(d5, f06, ref = 0, ref2 = 0) + i(d6, f06, ref = 0, ref2 = 0),
+  treatment = "w",
+  cluster = "id",
+  verbose = FALSE
+)
+#> OLS estimation, Dep. Var.: y
+#> Observations: 3,000 
+#> Standard-errors: Custom 
+#>           Estimate Std. Error  t value   Pr(>|t|)    
+#> d4::1:f04  3.52295   0.300629 11.71859  < 2.2e-16 ***
+#> d4::1:f05  4.25854   0.325046 13.10132  < 2.2e-16 ***
+#> d4::1:f06  4.21687   0.337483 12.49506  < 2.2e-16 ***
+#> d5::1:f05  2.98959   0.340674  8.77550  < 2.2e-16 ***
+#> d5::1:f06  3.69382   0.363599 10.15903  < 2.2e-16 ***
+#> d6::1:f06  2.00659   0.556806  3.60375 0.00031877 ***
+#> ---
+#> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+#> RMSE: 2.08751   Adj. R2: 0.326032
+```
+
+Second, if we implement the pooled OLS estimator using either group- or id- fixed effects as recommened by Wooldridge (2021), we get the same answer as well! 
+
+```r 
+# Pooled OLS
+
+# Group and year
+feols(
+  y ~ i(d4, f04, ref = 0, ref2 = 0) + i(d4, f05, ref = 0, ref2 = 0)
+  + i(d4, f06, ref = 0, ref2 = 0) + i(d5, f05, ref = 0, ref2 = 0)
+  + i(d5, f06, ref = 0, ref2 = 0) + i(d6, f06, ref = 0, ref2 = 0)
+  | d4 + d5 + d6 + year,
+  df, cluster = ~ id
+)
+#> OLS estimation, Dep. Var.: y
+#> Observations: 3,000 
+#> Fixed-effects: d4: 2,  d5: 2,  d6: 2,  year: 6
+#> Standard-errors: Clustered (id) 
+#>           Estimate Std. Error  t value   Pr(>|t|)    
+#> d4::1:f04  3.52295   0.301635 11.67951  < 2.2e-16 ***
+#> d4::1:f05  4.25854   0.326134 13.05763  < 2.2e-16 ***
+#> d4::1:f06  4.21687   0.338612 12.45339  < 2.2e-16 ***
+#> d5::1:f05  2.98959   0.341814  8.74624  < 2.2e-16 ***
+#> d5::1:f06  3.69382   0.364816 10.12515  < 2.2e-16 ***
+#> d6::1:f06  2.00659   0.558670  3.59173 0.00036102 ***
+#> ---
+#> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+#> RMSE: 2.95479     Adj. R2: 0.18179 
+#>                 Within R2: 0.091504
+
+# Id and year
+feols(
+  y ~ i(d4, f04, ref = 0, ref2 = 0) + i(d4, f05, ref = 0, ref2 = 0)
+  + i(d4, f06, ref = 0, ref2 = 0) + i(d5, f05, ref = 0, ref2 = 0)
+  + i(d5, f06, ref = 0, ref2 = 0) + i(d6, f06, ref = 0, ref2 = 0)
+  | id + year,
+  df, cluster = ~ id
+)
+#> OLS estimation, Dep. Var.: y
+#> Observations: 3,000 
+#> Fixed-effects: id: 500,  year: 6
+#> Standard-errors: Clustered (id) 
+#>           Estimate Std. Error  t value   Pr(>|t|)    
+#> d4::1:f04  3.52295   0.301484 11.68538  < 2.2e-16 ***
+#> d4::1:f05  4.25854   0.325970 13.06419  < 2.2e-16 ***
+#> d4::1:f06  4.21687   0.338442 12.45965  < 2.2e-16 ***
+#> d5::1:f05  2.98959   0.341643  8.75063  < 2.2e-16 ***
+#> d5::1:f06  3.69382   0.364633 10.13024  < 2.2e-16 ***
+#> d6::1:f06  2.00659   0.558389  3.59354 0.00035859 ***
+#> ---
+#> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+#> RMSE: 1.99544     Adj. R2: 0.552487
+#>                 Within R2: 0.180898
+```
+
+This numerical equivalence is really cool! However, this pooled OLS matches the imputation estimator only when we allow for full heterogeneity by $(g,t)$. Of course, the $\tau(g,t)$ from the pooled OLS estimates can be aggregated using post-estimation commands for event-study or overall ATTs. However, I want to highlight for `did2s`, you can estimate anything ATT in the second stage and the group- and unit- FE estimates will be the same. For example, here's the overall ATT: 
+
+``` r
+# Overall ATT
+
+# Group and year
+did2s(
+  data = df,
+  yname = "y", 
+  first_stage = ~ 0 | d4 + d5 + d6 + year,
+  second_stage = ~ i(w, ref = 0),
+  treatment = "w",
+  cluster = "id",
+  verbose = FALSE
+)
+#> OLS estimation, Dep. Var.: y
+#> Observations: 3,000 
+#> Standard-errors: Custom 
+#>      Estimate Std. Error t value  Pr(>|t|)    
+#> w::1  3.67579   0.175153 20.9861 < 2.2e-16 ***
+#> ---
+#> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+#> RMSE: 2.96703   Adj. R2: 0.188501
+
+# Id and year
+did2s(
+  data = df, 
+  yname = "y", 
+  first_stage = ~ 0 | id + year,
+  second_stage = ~ i(w, ref = 0),
+  treatment = "w",
+  cluster = "id",
+  verbose = FALSE
+)
+#> OLS estimation, Dep. Var.: y
+#> Observations: 3,000 
+#> Standard-errors: Custom 
+#>      Estimate Std. Error t value  Pr(>|t|)    
+#> w::1  3.67579   0.173837  21.145 < 2.2e-16 ***
+#> ---
+#> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+#> RMSE: 2.1048   Adj. R2: 0.315964
+```
+
+
+
+
+
+
