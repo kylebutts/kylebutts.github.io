@@ -2,34 +2,19 @@
 import Content from "../components/Content.astro";
 import BaseLayout from "./BaseLayout.astro";
 import LinkBlock from "../components/mdx/LinkBlock.astro";
+import PaperTitle from "../components/PaperTitle.astro";
 
-const { content } = Astro.props;
+const { frontmatter } = Astro.props;
+let slug = Astro.url.pathname.replace("/papers/", "")
 ---
 
-<BaseLayout>
+<BaseLayout slug={slug}>
   <Content>
-    <h1
-      class="cursor-pointer tracking-tighter font-white dark:font-mine-shaft-900 text-size-1 font-bold"
-      set:html={content.title} />
+    <PaperTitle frontmatter={frontmatter} slug={""}/>
 
-    <p class="mt-size-3xs text-size-0 text-alice-400"
-      set:html={content.status} />
-
+    {frontmatter.links === undefined ? <></> :
     <div class="text-md mt-size-md flex flex-row flex-wrap gap-size-xs">
-      {content.author.map((author) => (
-      <div>
-        <p class="text-size-0">
-          <a href={author.url} class="underline decoration-alice-500">
-            {author.name}
-          </a>
-        </p>
-      </div>
-      ))}
-    </div>
-
-    {content.links === undefined ? <></> :
-    <div class="text-md mt-size-md flex flex-row flex-wrap gap-size-xs">
-      {content.links?.map((link) => (
+      {frontmatter.links?.map((link) => (
         <LinkBlock url={link.url} name={link.name}></LinkBlock>
       ))}
     </div>

@@ -1,0 +1,52 @@
+---
+const { frontmatter, slug = "" } = Astro.props
+---
+
+<div>
+	{
+		frontmatter.display === true ? (
+			<a
+				href={frontmatter.display === true ? `/papers/${slug}` : null}
+				class="block"
+			>
+				<h2
+					class="font-white dark:font-mine-shaft-900 cursor-pointer pt-size-md text-size-2 font-bold tracking-tighter"
+					set:html={frontmatter.title}
+				/>
+			</a>
+		) : (
+			<h2
+				class="font-white dark:font-mine-shaft-900 cursor-pointer pt-size-md text-size-2 font-bold tracking-tighter"
+				set:html={frontmatter.title}
+			/>
+		)
+	}
+
+	<div class="mt-size-2xs flex flex-row flex-wrap gap-size-xs text-size-1">
+		{
+			frontmatter.author.map((author) => (
+				<a href={author.url} class="underline decoration-alice-500">
+					{author.name}
+				</a>
+			))
+		}
+	</div>
+</div>
+
+<div>
+	<h3
+		class="mt-size-lg text-size-0 text-alice-400 font-extralight"
+		set:html={frontmatter.status}
+	>
+	</h3>
+
+	{
+		frontmatter.summary ? (
+			<div class="mt-size-2xs">
+				<p set:html={frontmatter.summary} class="text-size-1" />
+			</div>
+		) : (
+			<Fragment />
+		)
+	}
+</div>

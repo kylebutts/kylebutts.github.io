@@ -8,11 +8,17 @@ import { GoogleAnalytics } from 'astro-analytics';
 import "../styles/global.css"
 
 // JetBrains Mono
-import '@fontsource/jetbrains-mono/100.css';
+import '@fontsource/jetbrains-mono/200.css';
+import '@fontsource/jetbrains-mono/200-italic.css';
 import '@fontsource/jetbrains-mono/300.css';
 import '@fontsource/jetbrains-mono/300-italic.css';
 import '@fontsource/jetbrains-mono/700.css';
 import '@fontsource/jetbrains-mono/800.css';
+
+// og-image by slug
+const { slug = "default" } = Astro.props
+
+let ogImage = `https://kylebutts.com/og-images/${slug}.png`
 ---
 
 <!DOCTYPE html>
@@ -24,6 +30,8 @@ import '@fontsource/jetbrains-mono/800.css';
   <link rel="icon" type="image/x-icon" href="/favicon.ico" />
   <title>Kyle Butts</title>
   <meta name="description" content="Academic site for Kyle Butts.">
+  <meta property="og:image" content={ogImage} />
+  <meta property="twitter:image" content={ogImage} />
   <GoogleAnalytics id={326374528} />
 </head>
 
