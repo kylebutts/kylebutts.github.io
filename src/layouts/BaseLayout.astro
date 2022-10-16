@@ -16,7 +16,10 @@ import '@fontsource/jetbrains-mono/700.css';
 import '@fontsource/jetbrains-mono/800.css';
 
 // og-image by slug
-const { slug = "default" } = Astro.props
+const { 
+  slug = "default",
+  description = "Kyle Butts -- Urban Economics and Applied Econometrics"
+} = Astro.props
 
 let ogImage = `https://kylebutts.com/og-images/${slug}.png`
 ---
@@ -29,7 +32,7 @@ let ogImage = `https://kylebutts.com/og-images/${slug}.png`
   <meta name="viewport" content="width=device-width">
   <link rel="icon" type="image/x-icon" href="/favicon.ico" />
   <title>Kyle Butts</title>
-  <meta name="description" content="Academic site for Kyle Butts.">
+  <meta name="description" content={description} />
   <meta property="og:image" content={ogImage} />
   <meta property="twitter:image" content={ogImage} />
   <GoogleAnalytics id={326374528} />
