@@ -1,16 +1,16 @@
 ---
-import Content from "../components/Content.astro";
-import PaperTitle from "../components/PaperTitle.astro";
-import BaseLayout from "./BaseLayout.astro";
+import Content from "../components/Content.astro"
+import PaperTitle from "../components/PaperTitle.astro"
+import BaseLayout from "./BaseLayout.astro"
 
-const { frontmatter } = Astro.props;
-let slug = Astro.url.pathname.replace("/papers/", "").replace("/\/$/", "")
+const { frontmatter } = Astro.props
+let slug = Astro.url.pathname.replace("/papers/", "").replace(/\/$/, "")
 ---
 
 <BaseLayout slug={slug}>
-  <Content>
-    <PaperTitle frontmatter={frontmatter} />
-  </Content>
-  <div class="mt-size-2xl"></div>
-  <Content prose flow><slot></slot></Content>
+	<Content>
+		<PaperTitle frontmatter={frontmatter} />
+	</Content>
+	<div class="mt-size-2xl"></div>
+	<Content prose flow><slot /></Content>
 </BaseLayout>
