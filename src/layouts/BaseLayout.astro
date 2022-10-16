@@ -30,9 +30,12 @@ let ogImage = `https://kylebutts.com/og-images/${slug}.png`
   <meta name="viewport" content="width=device-width">
   <link rel="icon" type="image/x-icon" href="/favicon.ico" />
   <title>Kyle Butts</title>
-  <meta name="description" content={description} >
+  <meta name="description" content={description} />
   <meta property="og:image" content={ogImage} />
   <meta property="twitter:image" content={ogImage} />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Kyle Butts" />
+  <meta name="twitter:description" content={description} />
 </head>
 
 <body>
