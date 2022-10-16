@@ -1,8 +1,7 @@
 ---
 import Content from "../components/Content.astro";
-import BaseLayout from "./BaseLayout.astro";
-import LinkBlock from "../components/mdx/LinkBlock.astro";
 import PaperTitle from "../components/PaperTitle.astro";
+import BaseLayout from "./BaseLayout.astro";
 
 const { frontmatter } = Astro.props;
 let slug = Astro.url.pathname.replace("/papers/", "")
@@ -10,18 +9,8 @@ let slug = Astro.url.pathname.replace("/papers/", "")
 
 <BaseLayout slug={slug}>
   <Content>
-    <PaperTitle frontmatter={frontmatter} slug={""}/>
-
-    {frontmatter.links === undefined ? <></> :
-    <div class="text-md mt-size-md flex flex-row flex-wrap gap-size-xs">
-      {frontmatter.links?.map((link) => (
-        <LinkBlock url={link.url} name={link.name}></LinkBlock>
-      ))}
-    </div>
-    }
+    <PaperTitle frontmatter={frontmatter} />
   </Content>
   <div class="mt-size-2xl"></div>
-  <Content flow prose>
-    <slot />
-  </Content>
+  <Content prose flow><slot></slot></Content>
 </BaseLayout>
