@@ -4,7 +4,7 @@ import PaperTitle from "../components/PaperTitle.astro";
 import BaseLayout from "./BaseLayout.astro";
 
 const { frontmatter } = Astro.props;
-let slug = Astro.url.pathname.replace("/papers/", "")
+let slug = Astro.url.pathname.replace("/papers/", "").replace("/\/$/", "")
 ---
 
 <BaseLayout slug={slug}>
