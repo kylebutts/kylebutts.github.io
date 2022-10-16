@@ -3,8 +3,6 @@ import Content from "../components/Content.astro";
 import MenuBar from "../components/MenuBar/MenuBar.astro";
 import SetupDarkMode from "../components/MenuBar/SetupDarkMode.astro";
 
-import { GoogleAnalytics } from 'astro-analytics';
-
 import "../styles/global.css"
 
 // JetBrains Mono
@@ -35,7 +33,6 @@ let ogImage = `https://kylebutts.com/og-images/${slug}.png`
   <meta name="description" content={description} />
   <meta property="og:image" content={ogImage} />
   <meta property="twitter:image" content={ogImage} />
-  <GoogleAnalytics id={326374528} />
 </head>
 
 <body>
