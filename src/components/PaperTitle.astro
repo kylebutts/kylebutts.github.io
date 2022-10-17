@@ -35,14 +35,14 @@ const { frontmatter, slug = "" } = Astro.props
 
 <div>
 	<h3
-		class="mt-size-lg text-size-0 text-alice-400 font-extralight"
+		class="mt-size-2xs text-size-0 text-alice-400 font-extralight"
 		set:html={frontmatter.status}
 	>
 	</h3>
 
 	{
 		frontmatter.summary ? (
-			<div class="mt-size-2xs">
+			<div class="mt-size-lg">
 				<p set:html={frontmatter.summary} class="text-size-1" />
 			</div>
 		) : (
