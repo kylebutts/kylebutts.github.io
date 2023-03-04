@@ -2,25 +2,19 @@
 import Content from "../components/Content.astro";
 import MenuBar from "../components/MenuBar/MenuBar.astro";
 import SetupDarkMode from "../components/MenuBar/SetupDarkMode.astro";
+import Katex from "../components/Katex.astro";
 
 import "../styles/global.css"
-
-// JetBrains Mono
-import '@fontsource/jetbrains-mono/200.css';
-import '@fontsource/jetbrains-mono/200-italic.css';
-import '@fontsource/jetbrains-mono/300.css';
-import '@fontsource/jetbrains-mono/300-italic.css';
-import '@fontsource/jetbrains-mono/700.css';
-import '@fontsource/jetbrains-mono/800.css';
 
 // og-image by slug
 const { 
   slug = "default",
-  description = "Kyle Butts -- Urban Economics and Applied Econometrics"
+  description = "Kyle Butts -- Urban Economics and Applied Econometrics",
+  katex = false,
 } = Astro.props
 
 let ogImage = `https://kylebutts.com/og-images/${slug}.png`
-console.log(ogImage)
+// console.log(ogImage)
 ---
 
 <!DOCTYPE html>
@@ -37,12 +31,17 @@ console.log(ogImage)
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Kyle Butts" />
   <meta name="twitter:description" content={description} />
+  
+  <!-- Preload Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,200;0,300;0,700;0,800;1,200;1,300&display=swap" rel="stylesheet">
 </head>
 
 <body>
   <!-- Set theme on body -->
   <SetupDarkMode />
-
+  
   <div
     class="min-h-screen w-full bg-mine-shaft-100 font-jetbrains text-mine-shaft-900 dark:bg-mine-shaft-900 dark:text-mine-shaft-50">
     <div class="pt-size-xs prose:pt-size-sm-md pb-size-2xl">
@@ -54,21 +53,7 @@ console.log(ogImage)
     </div>
   </div>
 
-  <!-- Katex for equations -->
-  <script>
-    // Load after the main thread is finished
-    var cb = function() {
-      var l = document.createElement('link');
-      l.rel = 'stylesheet';
-      l.crossOrigin = "anonymous";
-      l.href = 'https://cdn.jsdelivr.net/npm/katex@0.15.0/dist/katex.min.css';
-      var h = document.getElementsByTagName('head')[0]; h.parentNode.insertBefore(l, h);
-    };
-    var raf = requestAnimationFrame || mozRequestAnimationFrame ||
-        webkitRequestAnimationFrame || msRequestAnimationFrame;
-    if (raf) raf(cb);
-    else window.addEventListener('load', cb);
-</script>
+  { katex && <Katex /> }
 </body>
 
 </html>

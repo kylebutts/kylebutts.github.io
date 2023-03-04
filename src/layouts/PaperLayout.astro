@@ -1,5 +1,6 @@
 ---
 import Content from "../components/Content.astro"
+import Katex from "../components/Katex.astro"
 import PaperTitle from "../components/PaperTitle.astro"
 import BaseLayout from "./BaseLayout.astro"
 
@@ -7,7 +8,7 @@ const { frontmatter } = Astro.props
 let slug = Astro.url.pathname.replace("/papers/", "").replace(/\/$/, "")
 ---
 
-<BaseLayout slug={slug}>
+<BaseLayout slug={slug} katex>
 	<Content>
 		<PaperTitle frontmatter={frontmatter} />
 	</Content>
