@@ -1,5 +1,5 @@
 ---
-const { frontmatter, slug = "" } = Astro.props
+const { frontmatter, slug = "", includeSummary = true, i = 0 } = Astro.props
 ---
 
 <div>
@@ -10,19 +10,19 @@ const { frontmatter, slug = "" } = Astro.props
 				class="block"
 			>
 				<h2
-					class="font-white dark:font-mine-shaft-900 cursor-pointer pt-size-md text-size-2 font-bold tracking-tighter"
+					class="font-white dark:font-mine-shaft-900 cursor-pointer pt-size-md text-size-1 font-bold tracking-tighter"
 					set:html={frontmatter.title}
 				/>
 			</a>
 		) : (
 			<h2
-				class="font-white dark:font-mine-shaft-900 cursor-pointer pt-size-md text-size-2 font-bold tracking-tighter"
+				class="font-white dark:font-mine-shaft-900 cursor-pointer pt-size-md text-size-1 font-bold tracking-tighter"
 				set:html={frontmatter.title}
 			/>
 		)
 	}
 
-	<div class="mt-size-2xs flex flex-row flex-wrap gap-size-xs text-size-1">
+	<div class="mt-size-xs flex flex-row flex-wrap gap-size-xs text-size-0">
 		{
 			frontmatter.author.map((author) => (
 				<a href={author.url} class="underline decoration-alice-500">
@@ -35,18 +35,22 @@ const { frontmatter, slug = "" } = Astro.props
 
 <div>
 	<h3
-		class="mt-size-2xs text-size-0 text-alice-400 font-extralight"
+		class="mt-size-2xs text-size-0 text-alice-500 font-light"
 		set:html={frontmatter.status}
 	>
 	</h3>
 
 	{
-		frontmatter.summary ? (
-			<div class="mt-size-lg">
-				<p set:html={frontmatter.summary} class="text-size-1" />
+		includeSummary && frontmatter.summary ? (
+			<div class="mt-size-md">
+				<p set:html={frontmatter.summary} class="text-size-0" />
 			</div>
 		) : (
 			<Fragment />
 		)
 	}
+</div>
+
+<div>
+
 </div>

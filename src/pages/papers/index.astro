@@ -4,72 +4,173 @@ import PaperTitle from "../../components/PaperTitle.astro"
 let papers = await Astro.glob("./*.mdx")
 
 papers = papers
-	.map((paper) => {
-		if (paper.frontmatter.category?.includes("Published")) {
-			paper.frontmatter.order = 5
-		} else if (paper.frontmatter.category?.includes("R&R")) {
-			paper.frontmatter.order = 4
-		} else if (paper.frontmatter.category?.includes("Submitted")) {
-			paper.frontmatter.order = 3
-		} else if (paper.frontmatter.category?.includes("Working Paper")) {
-			paper.frontmatter.order = 2
-		} else if (paper.frontmatter.category?.includes("Work in Progress")) {
-			paper.frontmatter.order = 1
-		} else {
-			paper.frontmatter.order = 0
-		}
+  .map((paper) => {
+    if (paper.frontmatter.category?.includes("Published")) {
+      paper.frontmatter.order = 5
+    } else if (paper.frontmatter.category?.includes("R&R")) {
+      paper.frontmatter.order = 4
+    } else if (paper.frontmatter.category?.includes("Submitted")) {
+      paper.frontmatter.order = 3
+    } else if (paper.frontmatter.category?.includes("Working Paper")) {
+      paper.frontmatter.order = 2
+    } else if (paper.frontmatter.category?.includes("Work in Progress")) {
+      paper.frontmatter.order = 1
+    } else {
+      paper.frontmatter.order = 0
+    }
 
-		return paper
-	})
-	.sort((a, b) => {
-		if (a.frontmatter.order == b.frontmatter.order) {
-			let aDate = new Date(a.frontmatter.date)
-			let bDate = new Date(b.frontmatter.date)
+    return paper
+  })
+  .sort((a, b) => {
+    if (a.frontmatter.order == b.frontmatter.order) {
+      let aDate = new Date(a.frontmatter.date)
+      let bDate = new Date(b.frontmatter.date)
 
-			// getTime is milliseconds since Jan 1, 1970, 00:00:00.000 GMT
-			return -1 * (aDate.getTime() - bDate.getTime())
-		} else {
-			return -1 * (a.frontmatter.order - b.frontmatter.order)
-		}
-	})
+      // getTime is milliseconds since Jan 1, 1970, 00:00:00.000 GMT
+      return -1 * (aDate.getTime() - bDate.getTime())
+    } else {
+      return -1 * (a.frontmatter.order - b.frontmatter.order)
+    }
+  })
+
+let publishedPapers = papers.filter((paper) => paper.frontmatter.order == 5)
+let workingPapers = papers.filter(
+  (paper) => paper.frontmatter.order < 5 && paper.frontmatter.order >= 2
+)
+let workInProgress = papers.filter((paper) => paper.frontmatter.order < 2)
 ---
 
 <Layout>
-	<ul class="flex flex-col gap-y-size-lg">
-		{
-			papers.map((paper, i) => {
-				// get slug of file name
-				let slug = paper.file.match(/([\w-_]*).mdx$/)[1]
+  <h2 class="text-size-2 font-extrabold mb-size-sm">Publications</h2>
+  <ul class="flex flex-col gap-y-size-sm">
+    {
+      publishedPapers.map((paper, i) => {
+        // get slug of file name
+        let slug = paper.file.match(/([\w-_]*).mdx$/)[1]
 
-				return (
-					<li class="block relative pb-size-md">
-						<PaperTitle frontmatter={paper.frontmatter} slug={slug}/>
+        return (
+          <li class="block relative pb-size-md text-size--1">
+            <PaperTitle
+              frontmatter={paper.frontmatter}
+              slug={slug}
+              includeSummary={true}
+            />
 
-						{paper.frontmatter.display === true ? (
-							<a
-								class="mt-size-md pt-size-3xs border-b-2 border-mine-shaft-900 text-mine-shaft-900  dark:border-mine-shaft-100 dark:text-mine-shaft-100 text-size--1 font-bold tracking-tight flex justify-between hover:-mx-size-2xs hover:px-size-2xs transition-all duration-[250ms]"
-								href={`/papers/${slug}`}
-							>
-								<div>Details</div>
-								<svg
-									xmlns="http://www.w3.org/2000/svg"
-									viewBox="0 0 24 24"
-									fill="currentColor"
-									class="w-5"
-								>
-									<path
-										fill-rule="evenodd"
-										d="M12.97 3.97a.75.75 0 011.06 0l7.5 7.5a.75.75 0 010 1.06l-7.5 7.5a.75.75 0 11-1.06-1.06l6.22-6.22H3a.75.75 0 010-1.5h16.19l-6.22-6.22a.75.75 0 010-1.06z"
-										clip-rule="evenodd"
-									/>
-								</svg>
-							</a>
-						) : (
-							<Fragment />
-						)}
-					</li>
-				)
-			})
-		}
-	</ul>
+            {paper.frontmatter.display === true ? (
+              <a
+                class="mt-size-md pt-size-3xs border-b-2 border-mine-shaft-900 text-mine-shaft-900  dark:border-mine-shaft-100 dark:text-mine-shaft-100 text-size--1 font-bold tracking-tight flex justify-between"
+                href={`/papers/${slug}`}
+              >
+                <div>Details</div>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  class="w-5"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M12.97 3.97a.75.75 0 011.06 0l7.5 7.5a.75.75 0 010 1.06l-7.5 7.5a.75.75 0 11-1.06-1.06l6.22-6.22H3a.75.75 0 010-1.5h16.19l-6.22-6.22a.75.75 0 010-1.06z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+              </a>
+            ) : (
+              <Fragment />
+            )}
+          </li>
+        )
+      })
+    }
+  </ul>
+
+  <h2 class="text-size-2 font-extrabold mt-size-2xl mb-size-sm">Working Papers</h2>
+  <ul class="flex flex-col gap-y-size-sm">
+    {
+      workingPapers.map((paper, i) => {
+        // get slug of file name
+        let slug = paper.file.match(/([\w-_]*).mdx$/)[1]
+
+        return (
+          <li class="block relative pb-size-md text-size--1">
+            <PaperTitle
+              frontmatter={paper.frontmatter}
+              slug={slug}
+              includeSummary={true}
+            />
+
+            {paper.frontmatter.display === true ? (
+              <a
+                class="mt-size-md pt-size-3xs border-b-2 border-mine-shaft-900 text-mine-shaft-900  dark:border-mine-shaft-100 dark:text-mine-shaft-100 text-size--1 font-bold tracking-tight flex justify-between"
+                href={`/papers/${slug}`}
+              >
+                <div>Details</div>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  class="w-5"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M12.97 3.97a.75.75 0 011.06 0l7.5 7.5a.75.75 0 010 1.06l-7.5 7.5a.75.75 0 11-1.06-1.06l6.22-6.22H3a.75.75 0 010-1.5h16.19l-6.22-6.22a.75.75 0 010-1.06z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+              </a>
+            ) : (
+              <Fragment />
+            )}
+          </li>
+        )
+      })
+    }
+  </ul>
+
+  {
+    workInProgress.length > 0 && (
+      <>
+        <h2 class="text-size-2 font-extrabold mt-size-2xl mb-size-sm">Work in Progress</h2>
+        <ul class="flex flex-col gap-y-size-sm">
+          {workInProgress.map((paper, i) => {
+            // get slug of file name
+            let slug = paper.file.match(/([\w-_]*).mdx$/)[1]
+
+            return (
+              <li class="block relative pb-size-md text-size--1">
+                <PaperTitle
+                  frontmatter={paper.frontmatter}
+                  slug={slug}
+                  includeSummary={true}
+                />
+
+                {paper.frontmatter.display === true ? (
+                  <a
+                    class="mt-size-md pt-size-3xs pb-size-3xs border-b-2 border-mine-shaft-900 text-mine-shaft-900  dark:border-mine-shaft-100 dark:text-mine-shaft-100 text-size--1 font-bold tracking-tight flex justify-between"
+                    href={`/papers/${slug}`}
+                  >
+                    <div>Details</div>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                      class="w-5"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M12.97 3.97a.75.75 0 011.06 0l7.5 7.5a.75.75 0 010 1.06l-7.5 7.5a.75.75 0 11-1.06-1.06l6.22-6.22H3a.75.75 0 010-1.5h16.19l-6.22-6.22a.75.75 0 010-1.06z"
+                        clip-rule="evenodd"
+                      />
+                    </svg>
+                  </a>
+                ) : (
+                  <Fragment />
+                )}
+              </li>
+            )
+          })}
+        </ul>
+      </>
+    )
+  }
 </Layout>
