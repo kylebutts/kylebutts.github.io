@@ -21,7 +21,7 @@ When I first saw the synthetic control method, I had a really hard time understa
 
 I sort of [stumbled onto factor models](https://twitter.com/kylefbutts/status/1412798514451546115?s=20) in a completely different context. But, after I learnt this model, I began seeing it pop up again and again in papers about synthetic control. They made such a large difference in my understanding that I wanted to share what I've learned.
 
-First, I'll share what a factor model is and then I'll circle back to how it connects to synthetic controls.
+First, I'll share what a factor model is and then I'll circle back to how it connects to synthetic controls. As an important disclaimer: the synthetic control estimator is consistent under a wide variety of data-generating processes. However, the factor model is a leading case and it is pedagogically useful.
 
 ## Factor Models
 
@@ -48,35 +48,38 @@ Since the factor model nests the standard TWFE model, why not just use them in d
 
 The basic idea of synthetic control is to identify a set of control units that "well-approximate" the outcome for the treated unit in the pre-treatment periods. The synthetic control estimator is then the weighted average of the control units. The [original synthetic control paper](https://www.tandfonline.com/doi/abs/10.1198/jasa.2009.ap08746) shows that when the outcome model is a factor-model, the synthetic control estimator's bias goes to 0 when the number of pre-periods are large (to be clear, the synthetic control estimator is consistent under other data-generating processes). 
 
-Under a factor model, the synthetic control unit is formed as the weighted average of the control unit's outcomes $\hat{y}_{it}^{sc} = \sum_j w_j y_{jt}$, where $w_j$ are found via the synthetic control procedure. Ignoring the error term, we can write this as
+Under a factor model, the synthetic control estimate for the treated unit's untreated potential outcome is formed as the weighted average of the control unit's outcomes $\hat{y}_{it}^{sc} = \sum_j w_j y_{jt}$, where $w_j$ are found via the synthetic control procedure. We label the treated unit as $i = 0$. Ignoring the error term, we can write this as
 $$
 \hat{y}_{it}^{sc} = \sum_j w_j y_{jt} = \sum_j w_j \bm{f}_t' \bm{\gamma}_j = \bm{f}_t' \sum_j w_j \bm{\gamma}_j = \bm{f}_t' \sum_j \bm{\gamma}^{sc}.
 $$
 The last term shows the insight, the synthetic control unit's outcome is generated affected by the same factors and with factor-loadings given as the weighted average of the control units' factor-loadings. 
 
-When does the synthetic control do a good job? Well, when the synthetic control units' factor-loadings $\bm{\gamma}^{sc}$ look similar to the treated units factor-loadings! If we satisfy this condition, then we are confident in our ability to predict the counterfactual outcome in the post-periods (since the synthetic control and the treated unit are subject to the same factor shocks and they have the same "exposure" to those shocks.)
+When does the synthetic control do a good job? Well, when the synthetic control units' factor-loadings look similar to the treated units factor-loadings, $\bm{\gamma}^{sc} = \bm{\gamma}_0$! If we satisfy this condition, then our predicted counterfactual outcome in the post-periods is good. Intuitively, the synthetic control and the treated unit are subject to the same factor shocks and they have the same "exposure" to those shocks.
 
-I find this interpretation really useful. As a researcher, I can start thinking of these conditions a-priori. First, I think of factors that are important in my setting (e.g. in the GDP setting, important factors include a counties' industrial mix.). Second, I think of whether my treated units' factor-loadings (e.g. their industrial mix) can be well approximated by the donor pool. This would fail in our ongoing example if my treated county is an outlier in terms of industrial mix. 
+I find this interpretation really useful. As a researcher, I can start thinking of these conditions *a-priori*. First, I think of factors that are important in my setting (e.g. in the GDP example, I think an important confounding shock may be shocks to industries over time.). Second, I think of whether my treated units' factor-loadings (e.g. their industrial mix) can be well approximated by the donor pool. This would fail in our ongoing example if my treated county is an outlier in terms of their industrial mix. 
 
-The last connection I'll make is about the importance of long panels for estimating synthetic control. The importance of long panels is to ensure that the weights selected, $w_j$, do a good job at approximating the treated units' factor-loadings. In short-panels, the synthetic control weights can be affected by noise and do a bad job at identifying the underlying factor structure in the data. 
+I'm not sure I've seen this recommended anywhere, but it strikes me as a good check to compute weighted averages of important characteristics that you think might be confounders with treatment selection (proxied by baseline covariates $X$) and see if the synthetic control weights approximate the treated units weights, $\sum w_j X_j \approx X_0$. 
+
+The last connection I'll make is about the importance of long panels for estimating synthetic control. In the above work, notice I ignored the error term. That is because, *in long panels*, the error term becomes zero. But this isn't true in short panels because the synthetic control procedure ends up matching on noise instead of matching on factor-loadings. That makes the $\bm{\gamma}^{sc} \neq \bm{\gamma}_0$. 
+
 
 ## Examples of factor-models in synthetic control papers
 
-I'll end with a few examples of factor models in synthetic control papers.
+To see how prevelant the use of factor models are, I'll end with some examples of their appearance throughout the econometric literature.
 
 1. [Ferman and Pinto - Synthetic Control with Imperfect Pre-Treatment Fit](https://arxiv.org/pdf/1911.08521.pdf)
 
-Considers what happens under a factor model when the pre-treatment fit is imperfect.
+The authors consider what happens when the pre-treatment fit is imperfect deriving results and a new estimator under a factor model.
 
 > "We consider the properties of the SC and related estimators, in a linear factor model setting, when the pre-treatment fit is imperfect. We show that, in this framework, the SC estimator is generally biased if treatment assignment is correlated with the unobserved heterogeneity, and that such bias does not converge to zero even when the number of pre-treatment periods is large."
 
-2. [Ben-Michael, Feller, and Rothstein - The Augmented Synthetic Control Method](https://arxiv.org/pdf/1811.04170.pdf)
-
-Considers how to use regularization on the weights to prevent over-fitting of the weights in shorter panels. This helps better approximate the true treated unit's factor-loadings in a factor-model.
-
-3. [Gobillon and Magnac - Regional Policy Evaluation: Interactive Fixed Effects and Synthetic Controls](https://direct.mit.edu/rest/article-abstract/98/3/535/58348/Regional-Policy-Evaluation-Interactive-Fixed) and [Xu - Generalized Synthetic Control Method](https://yiqingxu.org/papers/english/2016_Xu_gsynth/Xu_PA_2017.pdf)
+2. [Gobillon and Magnac - Regional Policy Evaluation: Interactive Fixed Effects and Synthetic Controls](https://direct.mit.edu/rest/article-abstract/98/3/535/58348/Regional-Policy-Evaluation-Interactive-Fixed) and [Xu - Generalized Synthetic Control Method](https://yiqingxu.org/papers/english/2016_Xu_gsynth/Xu_PA_2017.pdf)
 
 Propose an imputation treatment effect estimator that directly estimates the factor-loadings and the factors themselves. This is very similar to the imputation estimator from Borusyak et. al. (2021) and Gardner (2021).
+
+3. [Ben-Michael, Feller, and Rothstein - The Augmented Synthetic Control Method](https://arxiv.org/pdf/1811.04170.pdf)
+
+Considers how to use regularization on the weights to prevent over-fitting in shorter panels. This helps better approximate the true treated unit's factor-loadings in a factor-model.
 
 4. [Athey, Bayati,  Doudchenko, Imbens and Khosravi - Matrix completion methods for causal panel data models](https://arxiv.org/abs/1710.10251)
 
@@ -91,5 +94,6 @@ The key insight my coauthors and I have found is that treatment effect estimator
 
 For example, consistently estimates of $\bm{f}_t$ can be estimated by instrumental variables (quasi-long differencing) or by using covariates that are affected by the same factor structure (common correlated effects). Both of these can then be plugged into an estimator that pops out a nice event-study graph. Here's an example from [our paper](https://github.com/kylebutts/Generalized-Imputation-Estimator):
 
-<Figure  src="../images/blog/blog-factor-many_estimators.png" alt="Example of plug-in estimator for the effect of Walmart on local employment" />
+<Figure  src="images/blog/blog-factor-many_estimators.png" alt="Example of plug-in estimator for the effect of Walmart on local employment" />
+
 
