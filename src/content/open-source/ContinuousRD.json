@@ -1,0 +1,5 @@
+{
+  "title": "ContinuousRD",
+  "url": "https://github.com/kylebutts/ContinuousRD",
+  "description": "R package that implements regression discontinuity designs when the treatment variable is continuous following Dong, Lee, and Gou (2022)."
+}

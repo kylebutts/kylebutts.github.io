@@ -1,0 +1,41 @@
+---
+const { frontmatter } = Astro.props
+---
+
+<div class="mt-size-sm">
+  <h2
+    class="font-white dark:font-mine-shaft-900 text-size-1 font-bold tracking-tighter"
+    set:html={frontmatter.title}
+  >
+  </h2>
+
+  <p class="mt-size-xs flex flex-row flex-wrap gap-size-xs text-size-0">
+    {frontmatter.author.map((author) => (
+      <a href={author.url} class="underline">{author.name}</span>
+    ))}
+  </p>
+
+  <h3
+    class="mt-size-2xs text-size-0 text-alice-500 font-light"
+    set:html={frontmatter.status}
+  >
+  </h3>
+
+  {
+    frontmatter.summary ? (
+      <div class="mt-size-md">
+        <p set:html={frontmatter.summary} class="text-size-0" />
+      </div>
+    ) : (
+      <Fragment />
+    )
+  }
+
+  <ul role="list" class="pt-size-sm flex flex-row flex-wrap gap-size-2xs">
+    {frontmatter.links.map((link, i) => (
+      <li class="text-size-0 font-light">
+        <a href={link.url} class="text-alice-500 underline">{link.name}</a>
+      </li>
+    ))}
+  </ul>
+</div>

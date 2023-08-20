@@ -1,36 +1,46 @@
 ---
-import Layout from "../../layouts/Layout.astro";
-const courses = [
-  {
-    title: "Natural Resource Economics",
-    course_num: "Econ 3535",
-    github: "https://github.com/kylebutts/ECON3535_S2022/",
-    when: "S2021 and S2022 at CU Boulder",
-  },
-  {
-    title: "Introduction to Probability and Statistics",
-    course_num: "Econ 3818",
-    github: "https://github.com/kylebutts/ECON3818_F2021/",
-    when: "F2020 and F2021 at CU Boulder",
-  },
-];
+import Layout from "../../layouts/Layout.astro"
+import { getCollection } from "astro:content"
+import { Icon } from "astro-icon"
+const courses = await getCollection("courses")
 ---
 
 <Layout content prose>
-  <ul class="flex flex-col gap-y-size-lg">
-    {courses.map((course) => (
-    <li
-      class="block px-size-3xs prose:px-size-xs py-size-sm hover:bg-mine-shaft-200/30 hover:shadow-md border-y-2 border-transparent hover:border-mine-shaft-600 dark:hover:bg-mine-shaft-700 dark:hover:shadow-none relative ">
-      <a href={course.github} class="block">
-        <h2
-          class="cursor-pointer tracking-tightest font-white dark:font-mine-shaft-900 text-size-1 font-bold">
-          {course.course_num}: {course.title}</h2>
-      </a>
+	<ul
+		role="list"
+		class="gap-size-sm columns-1 md:columns-2 lg:columns-3 space-y-size-sm"
+	>
+		{
+			courses.map((course, i) => {
+				return (
+					<a href={course.data.url} class="block cursor-pointer break-inside-avoid">
+						<li
+							class=""
+							class:list={[
+								"group relative flex flex-col items-start rounded-lg border-2 border-mine-shaft-200 transition-all duration-100 bg-mine-shaft-50 dark:bg-mine-shaft-800 dark:border-mine-shaft-700 shadow-sm p-size-xs md:p-size-sm hover:border-alice-300 dark:hover:border-alice-600 hover:cursor-pointer py-size-sm",
+							]}
+						>
+							<h2
+								class="text-size-0 font-semibold text-zinc-800 dark:text-zinc-100"
+								set:html={course.data.title}
+							/>
 
-      <div class="prose mt-size-sm text-size-0">
-        <p set:html={course.when}></p>
-      </div>
-    </li>
-    ))}
-  </ul>
+							<p
+								class="prose mt-size-sm text-size--1 text-mine-shaft-600 dark:text-mine-shaft-400"
+								set:html={course.data.description}
+							/>
+
+							<p class="align-self-end relative z-10 mt-size-sm flex text-sm font-medium text-zinc-400 transition">
+								<Icon
+									name="heroicons-outline:link"
+									class="block h-3 w-3 flex-none text-kelly-500 dark:text-kelly-400 lg:h-5 lg:w-5"
+								/>
+								<span class="ml-2">github.com</span>
+							</p>
+						</li>
+					</a>
+				)
+			})
+		}
+	</ul>
 </Layout>

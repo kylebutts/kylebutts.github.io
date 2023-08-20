@@ -10,12 +10,14 @@ author:
     affiliation: "University of Mississippi"
 date: "2022-12-19"
 links:
-  - name: ArXiv
-    url: https://arxiv.org/abs/2110.10192
-  - name: Slides
-    url: "../files/did2s_slides.pdf"
   - name: Published
     url: "../files/did2s.pdf"
+  - name: Slides
+    url: "../files/did2s_slides.pdf"
+  - name: R Package
+    url: https://github.com/kylebutts/did2s
+  - name: Stata Package
+    url: https://github.com/kylebutts/did2s_stata
 category: 
   - "Published"
   - "Applied Econometrics"
@@ -23,7 +25,6 @@ category:
 status: "<i>R Journal</i>, 2022"
 summary: "We present statistical software to implement imputation estimator for difference-in-differences."
 display: true
-layout: "../../layouts/PaperLayout.astro"
 ---
 import { Bg, Color, Figure, LinkBlock, LargeBlock } from "../../components/mdx/";
 
@@ -40,7 +41,7 @@ $$
 y_{it} = \mu_i + \eta_t + \tau D_{it} + \varepsilon_{it},
 $$
 
-where $D_{it}$ is an idicator variable that equals one when unit $i$ is currently experiencing treatment at time $t$. Researchers aim to estimate the effects of treatmnet and summarize it as the <Bg ruby>Average Treatment Effect on the Treatment</Bg>, $\tau$.
+where $D_{it}$ is an idicator variable that equals one when unit $i$ is currently experiencing treatment at time $t$. Researchers aim to estimate the effects of treatment and summarize it as the **Average Treatment Effect on the Treatment**, $\tau$.
 
 *If the two-way fixed effects model is correctly specified and the parallel trends assumption is satisfied, then OLS is fine and even BLUE! (woohoo 🎉🎉)* So what's with all these new Diff-in-Diff doesn't work well problems? 
 
@@ -56,7 +57,7 @@ Our TWFE model clearly needs to be enriched:
 $$
 y_{it} = \mu_i + \eta_t + \tau_{gt} D_{it} + \varepsilon_{it},
 $$
-where now we have what the literature calls the <Bg ruby>Group-Time Average Treatment Effect</Bg>, $\tau_{gt}$. This captures the two forms of treatment effect heterogeneity described above. The treatment effect size to depend on when you are treated, group $g$, and how many periods it has been since treatment determined by $t − g$. It will prove really hard to accurately estimate any particular $\tau_{gt}$, so researchers will try to estimate the <Bg coral>Overall Average Treatment Effect</Bg>:
+where now we have what the literature calls the **Group-Time Average Treatment Effect**, $\tau_{gt}$. This captures the two forms of treatment effect heterogeneity described above. The treatment effect size to depend on when you are treated, group $g$, and how many periods it has been since treatment determined by $t − g$. It will prove really hard to accurately estimate any particular $\tau_{gt}$, so researchers will try to estimate the **Overall Average Treatment Effect**:
 $$
 \tau \equiv \frac{1}{N_{gt}}\sum \tau_{gt},
 $$

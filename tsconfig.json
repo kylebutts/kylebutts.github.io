@@ -13,6 +13,8 @@
     // Add type definitions for our Astro runtime.
     "types": ["astro/client"],
     // Tell TypeScript where your build output is
-    "outDir": "./dist"
+    "outDir": "./dist",
+    "strictNullChecks": true,
+    "allowJs": true
   }
 }

@@ -1,0 +1,5 @@
+{
+  "title": "<code>vcovSUR</code>",
+  "description": "R package enabling estimation of the variance-covariance matrix and perform hypotheses tests of <i>multiple related regression equations</i>.",
+  "url": "https://github.com/kylebutts/vcovSUR"
+}

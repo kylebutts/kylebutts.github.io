@@ -1,0 +1,5 @@
+{
+  "title": "rademacher",
+  "url": "https://github.com/kylebutts/rademacher",
+  "description": "R package with the sole purpose of generating rademacher random weights (-1, 1 with probability 1/2) as fast as possible using bit tricks."
+}

@@ -74,8 +74,8 @@ FLOW
 	--flow-space: var(--size-xl);
 }
 .flow :is(p, li) {
-	font-size: var(--size-0);
-	max-width: 75ch;
+	font-size: var(--size--1);
+	max-width: 80ch;
 }
 .flow :is(ol, ul) > li + li {
 	margin-top: var(--size-xs);
@@ -92,7 +92,7 @@ PROSE
 
 /* Text */
 .prose :where(p):not(:where([class~="not-prose"] *)) {
-	font-size: var(--size-0);
+	font-size: var(--size--1);
 	max-width: 80ch;
 	line-height: 1.5;
 }
@@ -103,19 +103,19 @@ PROSE
 
 /* Headings */
 .prose :where(h1):not(:where([class~="not-prose"] *)) {
-	@apply text-size-3 font-bold tracking-tighter;
+	@apply text-size-2 font-bold tracking-tighter;
   --flow-space: var(--size-xl-2xl);
 	letter-spacing: var(--tracking-s);
 	line-height: 1.1;
 }
 .prose :where(h2):not(:where([class~="not-prose"] *)) {
-	@apply font-bold tracking-tight text-size-2 border-t-[4px] border-mine-shaft-700 dark:border-mine-shaft-200 pt-size-2xs;
+	@apply font-bold tracking-tight text-size-1 border-t-[4px] border-mine-shaft-700 dark:border-mine-shaft-200 pt-size-2xs;
   --flow-space: var(--size-xl-2xl);
 	letter-spacing: var(--tracking-s);
 	line-height: 1.1;
 }
 .prose :where(h3):not(:where([class~="not-prose"] *)) {
-	@apply text-size-1 italic border-t-[2px] border-mine-shaft-700 dark:border-mine-shaft-200 pt-size-2xs;
+	@apply text-size-1 italic border-t-[3px] border-mine-shaft-700 dark:border-mine-shaft-200 pt-size-2xs pb-size-2xs;
   --flow-space: var(--size-xl-2xl);
 	letter-spacing: var(--tracking-s);
 	line-height: 1.1;

@@ -1,5 +1,5 @@
 ---
-import PaperTitle from "../../../components/PaperTitle.astro"
+import PaperListCard from "../../../components/PaperListCard.astro"
 import BaseLayout from "../../../layouts/BaseLayout.astro"
 
 const { slug } = Astro.params;
@@ -29,6 +29,6 @@ export async function getStaticPaths() {
 		class="mx-auto px-size-lg pt-size-2xl"
 		style="width: 900px; height: 600px;"
 	>
-    <PaperTitle frontmatter={paper.frontmatter} />
+    <PaperListCard frontmatter={paper.frontmatter} />
 	</div>
 </BaseLayout>

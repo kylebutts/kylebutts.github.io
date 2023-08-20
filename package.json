@@ -1,6 +1,6 @@
 {
   "name": "kylebutts-astro",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "astro dev",
@@ -10,15 +10,16 @@
   },
   "devDependencies": {
     "@astrojs/image": "^0.3.1",
-    "@astrojs/mdx": "^0.6.0",
+    "@astrojs/mdx": "^0.19.7",
     "@astrojs/react": "^0.2.0",
-    "@astrojs/tailwind": "^0.2.2",
+    "@astrojs/solid-js": "^2.2.1",
+    "@astrojs/tailwind": "^4.0.0",
     "@fontsource/jetbrains-mono": "^4.5.9",
     "@headlessui/react": "^1.6.5",
     "@heroicons/react": "^1.0.6",
-    "astro": "^1.5.0",
+    "astro": "^2.10.12",
+    "autoprefixer": "^10.4.15",
     "framer-motion": "^6.3.16",
-    "postcss": "^8.4.14",
     "prettier": "^2.7.1",
     "prettier-plugin-tailwindcss": "^0.1.13",
     "puppeteer": "^19.0.0",
@@ -27,11 +28,13 @@
     "rehype-code-titles": "^1.1.0",
     "rehype-katex": "^6.0.2",
     "rehype-pretty-code": "^0.3.2",
-    "remark-math": "^5.1.1"
+    "remark-math": "^5.1.1",
+    "solid-js": "^1.7.11",
+    "tailwindcss": "^3.3.3"
   },
   "dependencies": {
     "astro-analytics": "^2.2.0",
     "astro-icon": "^0.7.3",
-    "satori": "^0.0.42"
+    "postcss": "^8.4.28"
   }
 }

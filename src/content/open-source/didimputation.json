@@ -1,0 +1,5 @@
+{
+  "title": "didimputation (R package)",
+  "url": "https://github.com/kylebutts/didimputation",
+  "description": "R package that implements the difference-in-differences imputation estimator proposed by Borusyak, Jaravel, and Spiess (2021)."
+}
