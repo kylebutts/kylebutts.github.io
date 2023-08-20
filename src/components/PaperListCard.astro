@@ -11,23 +11,23 @@ function combineNames(names) {
 		return `${names.slice(0, -1).join(", ")}, and ${names.slice(-1)}`
 	}
 }
-const author_names = combineNames(
-	data.author.map((author) => author.name)
-)
+const author_names = combineNames(data.author.map((author) => author.name))
 ---
 
 <li
 	class:list={[
 		"rounded-lg border-2 border-mine-shaft-200 transition-all duration-100 bg-mine-shaft-50 dark:bg-mine-shaft-800 dark:border-mine-shaft-700 shadow-sm p-size-xs md:p-size-sm",
-		{ "hover:border-alice-300 dark:hover:border-alice-600 hover:cursor-pointer": data.display },
+		{
+			"hover:border-alice-300 dark:hover:border-alice-600 hover:cursor-pointer":
+				data.display,
+		},
 	]}
 >
 	<a href={data.display === true ? `/papers/${slug}` : null}>
 		<h2
 			class="font-white dark:font-mine-shaft-900 cursor-pointer text-size-2 font-bold tracking-tighter"
 			set:html={data.title}
-		>
-		</h2>
+		></h2>
 
 		<p class="mt-size-xs text-size-0">
 			{author_names}
@@ -36,13 +36,17 @@ const author_names = combineNames(
 		<h3
 			class="mt-size-3xs text-size-0 text-alice-500 font-light"
 			set:html={data.status}
-		>
-		</h3>
+		/>
 
 		{
-			includeSummary && data.summary ? (
-        <p set:html={data.summary} class="mt-size-sm md:mt-size-md text-size-0" />
-      ) : <Fragment></Fragment>
+			includeSummary ? (
+				<p
+					set:html={data.summary}
+					class="mt-size-sm text-size-0 md:mt-size-md"
+				/>
+			) : (
+				<Fragment />
+			)
 		}
 	</a>
 </li>

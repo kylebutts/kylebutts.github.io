@@ -1,0 +1,27 @@
+---
+import PaperListCard from "../../../components/PaperListCard.astro"
+import BaseLayout from "../../../layouts/BaseLayout.astro"
+import { getCollection } from "astro:content"
+
+export async function getStaticPaths() {
+	const papers = await getCollection("papers")
+	return papers.map((paper) => {
+    return {
+      params: { slug: paper.slug },
+      props: { paper: paper },
+    }
+  })
+}
+
+const { paper } = Astro.props
+---
+
+<BaseLayout>
+	<div
+		id="og-image"
+		class="mx-auto px-size-lg pt-size-2xl"
+		style="width: 900px; height: 600px;"
+	>
+		<PaperListCard data={paper.data} includeSummary={false} />
+	</div>
+</BaseLayout>
