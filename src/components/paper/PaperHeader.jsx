@@ -1,20 +1,18 @@
 import { For } from "solid-js"
 
+const AuthorLink = function({ author }) {
+  return (
+    <a href={author.url} class="underline">{author.name}</a>
+  )
+}
+
 export default function PaperHeader({ data }) {
-
-  const AuthorLink = function({ author }) {
-    return (
-      <a href={author.url} class="underline">
-        {author.name}
-      </a>
-    )
-  }
-
 	return (
 		<div class="mt-size-sm">
 			<h2
 				class="font-white dark:font-mine-shaft-900 text-size-2 font-bold tracking-tighter"
 				innerHTML={data.title}
+        transition:name={data.slug}
 			></h2>
 
 			<p class="mt-size-xs text-size-1 tracking-tight">

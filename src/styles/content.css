@@ -153,6 +153,7 @@ PROSE
 }
 .prose :where(li):not(:where([class~="not-prose"] *)) {
 	font-size: var(--size-0);
+  font-style: norma;
 	max-width: 80ch;
 }
 .prose :where(:is(ol, ul) > li + li):not(:where([class~="not-prose"] *)) {

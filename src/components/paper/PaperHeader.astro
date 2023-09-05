@@ -1,39 +1,47 @@
 ---
-const { frontmatter } = Astro.props
+const { data } = Astro.props
+console.log(data)
 ---
 
 <div class="mt-size-sm">
   <h2
-    class="font-white dark:font-mine-shaft-900 text-size-1 font-bold tracking-tighter"
-    set:html={frontmatter.title}
+    class="font-white dark:font-mine-shaft-900 text-size-2 font-bold tracking-tighter"
+    set:html={data.title}
   >
   </h2>
 
-  <p class="mt-size-xs flex flex-row flex-wrap gap-size-xs text-size-0">
-    {frontmatter.author.map((author) => (
-      <a href={author.url} class="underline">{author.name}</span>
-    ))}
+  <p class="mt-size-xs text-size-1 tracking-tight" transition:name=`{data.slug}-authors`>
+    {data.author.map((author, i) => {
+      if (data.author.length == 1) {
+        return (<a href={author.url} class="underline">{author.name}</a>)
+      } else if (data.author.length == 2 && i == 0) {
+        return (<Fragment><a href={author.url} class="underline">{author.name}</a>&nbsp;</Fragment>)
+      } else if ((data.author.length - 1) == i) {
+        return (<Fragment><span>and </span><a href={author.url} class="underline">{author.name}</a></Fragment>)
+      } else {
+        return (<Fragment><a href={author.url} class="underline">{author.name}</a>, </Fragment>)
+      }
+    })}
   </p>
 
   <h3
-    class="mt-size-2xs text-size-0 text-alice-500 font-light"
-    set:html={frontmatter.status}
-  >
-  </h3>
+    class="mt-size-3xs text-size-1 text-alice-500 font-light"
+    set:html={data.status}
+  ></h3>
 
   {
-    frontmatter.summary ? (
+    data.summary ? (
       <div class="mt-size-md">
-        <p set:html={frontmatter.summary} class="text-size-0" />
+        <p set:html={data.summary} class="text-size-0" />
       </div>
     ) : (
-      <Fragment />
+      <Fragment></Fragment>
     )
   }
 
-  <ul role="list" class="pt-size-sm flex flex-row flex-wrap gap-size-2xs">
-    {frontmatter.links.map((link, i) => (
-      <li class="text-size-0 font-light">
+  <ul role="list" class="mt-size-md flex flex-row flex-wrap gap-size-2xs">
+    {data.links.map((link) => (
+      <li class="text-size--1 italic inline-flex items-center rounded-md border-2 border-mine-shaft-200 hover:border-alice-400 px-2.5 py-0.5 transition-colors bg-mine-shaft-100 text-mine-shaft-700 ">
         <a href={link.url} class="text-alice-500 underline">{link.name}</a>
       </li>
     ))}

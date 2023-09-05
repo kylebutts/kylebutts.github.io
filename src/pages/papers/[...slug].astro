@@ -2,7 +2,7 @@
 import { getCollection } from "astro:content"
 import Block from "../../components/Block.astro"
 import BaseLayout from "../../layouts/BaseLayout.astro"
-import PaperHeader from "../../components/paper/PaperHeader.jsx"
+import PaperHeader from "../../components/paper/PaperHeader.astro"
 
 export async function getStaticPaths() {
 	const papers = await getCollection("papers")

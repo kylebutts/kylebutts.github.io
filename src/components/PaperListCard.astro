@@ -27,6 +27,7 @@ const author_names = combineNames(data.author.map((author) => author.name))
 		<h2
 			class="font-white dark:font-mine-shaft-900 cursor-pointer text-size-2 font-bold tracking-tighter"
 			set:html={data.title}
+      transition:name={data.slug}
 		></h2>
 
 		<p class="mt-size-xs text-size-0">

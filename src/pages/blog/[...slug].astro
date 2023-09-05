@@ -2,7 +2,6 @@
 import { getCollection } from "astro:content"
 import Block from "../../components/Block.astro"
 import BaseLayout from "../../layouts/BaseLayout.astro"
-import PaperHeader from "../../components/paper/PaperHeader.jsx"
 
 export async function getStaticPaths() {
 	const posts = await getCollection("blog")
