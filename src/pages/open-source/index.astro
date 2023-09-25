@@ -12,6 +12,10 @@ const repos = await getCollection("open-source")
 	>
 		{
 			repos.map((repo, i) => {
+        // get base URL
+        const url = new URL(repo.data.url)
+        const baseUrl = url.origin.replace(/^https?:\/\//, "")
+
 				return (
 					<a href={repo.data.url} class="block cursor-pointer break-inside-avoid">
 						<li
@@ -35,7 +39,7 @@ const repos = await getCollection("open-source")
 									name="heroicons-outline:link"
 									class="block h-3 w-3 flex-none text-kelly-500 dark:text-kelly-400 lg:h-5 lg:w-5"
 								/>
-								<span class="ml-2">github.com</span>
+								<span class="ml-2">{baseUrl}</span>
 							</p>
 						</li>
 					</a>

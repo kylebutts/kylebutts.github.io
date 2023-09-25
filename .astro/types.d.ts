@@ -288,11 +288,6 @@ declare module 'astro:content' {
 };
 };
 "open-source": {
-"ContinuousRD": {
-	id: "ContinuousRD";
-  collection: "open-source";
-  data: InferEntrySchema<"open-source">
-};
 "did2s-R": {
 	id: "did2s-R";
   collection: "open-source";
@@ -308,6 +303,11 @@ declare module 'astro:content' {
   collection: "open-source";
   data: InferEntrySchema<"open-source">
 };
+"fwlplot": {
+	id: "fwlplot";
+  collection: "open-source";
+  data: InferEntrySchema<"open-source">
+};
 "jive": {
 	id: "jive";
   collection: "open-source";
@@ -320,6 +320,11 @@ declare module 'astro:content' {
 };
 "ssaggregate": {
 	id: "ssaggregate";
+  collection: "open-source";
+  data: InferEntrySchema<"open-source">
+};
+"stata2r": {
+	id: "stata2r";
   collection: "open-source";
   data: InferEntrySchema<"open-source">
 };

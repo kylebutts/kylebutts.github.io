@@ -1,0 +1,5 @@
+{
+  "title": "fwlplot",
+  "url": "https://github.com/kylebutts/fwlplot",
+  "description": "Scatter plots of y on x after residualizing by covariates using the fixest package"
+}
