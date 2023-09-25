@@ -1,7 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   darkMode: "class",
-	content: ['./src/**/*.{astro,html,js,jsx,md,svelte,ts,tsx,vue}'],
+	content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
 	theme: {
     screens: {
       'prose': '80ch', // max-w-prose
@@ -9,13 +9,13 @@ module.exports = {
       'lg': '1024px', // computer
       'xl': '1280px', // large computer
     },
-    maxWidth: {
-      'md': '640px',
-      'lg': '1024px',
-      'xl': '1280px',
-      'prose': '80ch', // max-w-prose
-    },
 		extend: {
+      maxWidth: {
+        'md': '640px',
+        'lg': '1024px',
+        'xl': '1280px',
+        'prose': '80ch', // max-w-prose
+      },
 			fontFamily: {
 				jetbrains: ["JetBrains Mono", "monospace"],
         space: ["Space Mono", "monospace"],
@@ -142,9 +142,5 @@ module.exports = {
 				},
 			},
 		},
-	},
-	plugins: [
-    // require("@tailwindcss/typography"),
-    // require("@tailwindcss/forms")
-  ],
+	}
 }
