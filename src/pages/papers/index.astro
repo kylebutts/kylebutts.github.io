@@ -7,7 +7,9 @@ let papers_unsorted = await getCollection("papers")
 
 let papers = papers_unsorted
 	.map((paper) => {
-		if (paper.data.category?.includes("Published")) {
+    if (paper.data.category?.includes("Job Market Paper")) {
+			paper.data.order = 6
+		} else if (paper.data.category?.includes("Published")) {
 			paper.data.order = 5
 		} else if (paper.data.category?.includes("R&R")) {
 			paper.data.order = 4
@@ -35,6 +37,7 @@ let papers = papers_unsorted
 		}
 	})
 
+let JMP = papers.filter((paper) => paper.data.order == 6)
 let publishedPapers = papers.filter((paper) => paper.data.order == 5)
 let workingPapers = papers.filter(
 	(paper) => paper.data.order < 5 && paper.data.order >= 2
@@ -43,8 +46,27 @@ let workInProgress = papers.filter((paper) => paper.data.order < 2)
 ---
 
 <Layout>
-	<h2
+  <h2
 		class="border-t-[0px] border-mine-shaft-700 dark:border-mine-shaft-200 pt-size-2xs mt-size-sm mb-size-md text-size-2 text-mine-shaft-700 dark:text-mine-shaft-50 font-extrabold"
+	>
+		Job Market Paper
+	</h2>
+  <ul class="flex flex-col gap-y-size-sm">
+		{
+			JMP.map((paper, i) => {
+				return (
+					<PaperListCard
+						data={paper.data}
+						slug={paper.slug}
+						includeSummary={true}
+					/>
+				)
+			})
+		}
+	</ul>
+
+	<h2
+		class="border-t-[0px] border-mine-shaft-700 dark:border-mine-shaft-200 pt-size-2xs mt-size-sm mt-size-lg mb-size-md text-size-2 text-mine-shaft-700 dark:text-mine-shaft-50 font-extrabold"
 	>
 		Publications
 	</h2>
