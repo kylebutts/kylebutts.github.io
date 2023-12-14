@@ -10,18 +10,24 @@ const { data } = Astro.props
   </h2>
 
   <p class="mt-size-xs text-size-1 tracking-tight" transition:name=`{data.slug}-authors`>
-    {data.author.map((author, i) => {
-      if (data.author.length == 1) {
-        return (<a href={author.url} class="underline">{author.name}</a>)
-      } else if (data.author.length == 2 && i == 0) {
-        return (<Fragment><a href={author.url} class="underline">{author.name}</a>&nbsp;</Fragment>)
-      } else if ((data.author.length - 1) == i) {
-        return (<Fragment><span>and </span><a href={author.url} class="underline">{author.name}</a></Fragment>)
-      } else {
-        return (<Fragment><a href={author.url} class="underline">{author.name}</a>, </Fragment>)
-      }
-    })}
+    {data.author ? "with " : ""}
+    { 
+      data.author ? 
+      data.author.map((author, i) => {
+        if (data.author.length == 1) {
+          return (<Fragment><a href={author.url} class="underline">{author.name}</a></Fragment>)
+        } else if (data.author.length == 2 && i == 0) {
+          return (<Fragment><a href={author.url} class="underline">{author.name}</a>&nbsp;</Fragment>)
+        } else if ((data.author.length - 1) == i) {
+          return (<Fragment><span>and </span><a href={author.url} class="underline">{author.name}</a></Fragment>)
+        } else {
+          return (<Fragment><a href={author.url} class="underline">{author.name}</a>, </Fragment>)
+        }
+      }) : 
+      <Fragment></Fragment>
+    }
   </p>
+
 
   <h3
     class="mt-size-3xs text-size-1 text-alice-500 font-light"

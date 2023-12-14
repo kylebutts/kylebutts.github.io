@@ -3,15 +3,17 @@ const { data, slug = "", includeSummary = true } = Astro.props
 
 // Write function to combine names with commas (including oxford comma and the word and)
 function combineNames(names) {
-	if (names.length === 1) {
-		return names[0]
+	if (names.length === 0) {
+		return ""
+	} else if (names.length === 1) {
+		return `with ${names[0]}`
 	} else if (names.length === 2) {
-		return `${names[0]} and ${names[1]}`
+		return `with ${names[0]} and ${names[1]}`
 	} else {
-		return `${names.slice(0, -1).join(", ")}, and ${names.slice(-1)}`
+		return `with ${names.slice(0, -1).join(", ")}, and ${names.slice(-1)}`
 	}
 }
-const author_names = combineNames(data.author.map((author) => author.name))
+const author_names = data.author ? combineNames(data.author.map((author) => author.name)) : ""
 ---
 
 <li
