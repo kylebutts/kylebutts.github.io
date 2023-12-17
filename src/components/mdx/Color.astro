@@ -1,15 +1,11 @@
 ---
 const { kelly = false, coral = false, daisy = false, alice = false } = Astro.props
-
-const textColor = kelly
-  ? "dark:text-kelly-600 text-kelly-500"
-  : coral
-    ? "dark:text-coral-600 text-coral-500"
-    : daisy
-      ? "dark:text-daisy-600 text-daisy-500"
-      : alice
-        ? "dark:text-alice-600 text-alice-500"
-        : "dark:text-ruby-600 text-ruby-500";
 --- 
 
-<span class={`${textColor}`}><slot /></span>
+<span class:list={[
+  {"text-kelly-500": kelly},
+  {"text-coral-500": coral},
+  {"text-daisy-500": daisy},
+  {"text-alice-500": alice},
+  {"text-ruby-500": !kelly && !coral && !daisy && !alice}
+]}><slot /></span>

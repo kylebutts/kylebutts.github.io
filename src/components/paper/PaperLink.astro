@@ -1,0 +1,9 @@
+---
+const { name, url, includeRightBar = true } = Astro.props
+---
+
+<Fragment>
+	<a href={url} class="underline">{name}</a>{
+		includeRightBar && <span class="text-size--1 px-[4px]">|</span>
+	}
+</Fragment>

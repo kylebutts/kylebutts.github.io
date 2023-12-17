@@ -1,24 +1,19 @@
 ---
-import LargeBlock from "./LargeBlock.astro";
-
+interface Props {
+  src: string;
+  alt: string;
+}
 const { src, alt } = Astro.props
 const isSvg = src.endsWith(".svg");
 ---
 
-<LargeBlock dotted>
-<figure>
+<figure class="not-prose figure border-mine-shaft-200 border-2">
   {isSvg ? (
-    <div class='relative'>
-      <object data={src} type="image/svg+xml" alt={alt} class="mb-2 w-full">
-      </object>
-    </div>
+    <object data={src} type="image/svg+xml" class="w-full"></object>
   ) : (
-    <div class='relative'>
-      <img src={src} alt={alt} class="mb-2 w-full" />
-    </div>
+    <img src={src} alt={alt} class="w-full" />
   )}
-  <figcaption class="text-xl mt-8">
+  <figcaption class="text-xl mt-size-2xs">
     <b>Figure:</b> {alt}
   </figcaption>
 </figure>
-</LargeBlock>

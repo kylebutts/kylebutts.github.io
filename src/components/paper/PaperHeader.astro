@@ -1,54 +1,51 @@
 ---
+import PaperLink from "./PaperLink.astro";
 const { data } = Astro.props
 ---
 
 <div class="mt-size-sm">
   <h2
-    class="font-white dark:font-mine-shaft-900 text-size-2 font-bold tracking-tighter"
+    class="font-white text-size-2 font-bold tracking-tighter"
     set:html={data.title}
   >
   </h2>
 
-  <p class="mt-size-xs text-size-1 tracking-tight" transition:name=`{data.slug}-authors`>
-    {data.author ? "with " : ""}
-    { 
-      data.author ? 
-      data.author.map((author, i) => {
-        if (data.author.length == 1) {
-          return (<Fragment><a href={author.url} class="underline">{author.name}</a></Fragment>)
-        } else if (data.author.length == 2 && i == 0) {
-          return (<Fragment><a href={author.url} class="underline">{author.name}</a>&nbsp;</Fragment>)
-        } else if ((data.author.length - 1) == i) {
-          return (<Fragment><span>and </span><a href={author.url} class="underline">{author.name}</a></Fragment>)
-        } else {
-          return (<Fragment><a href={author.url} class="underline">{author.name}</a>, </Fragment>)
-        }
-      }) : 
-      <Fragment></Fragment>
-    }
-  </p>
+  {
+    data.author &&
+    <p class="mt-size-2xs text-size-0 tracking-tight">
+      with 
+      { 
+        data.author.map((author, i) => {
+          if (data.author.length == 1) {
+            return (<Fragment><a href={author.url} class="underline">{author.name}</a></Fragment>)
+          } else if (data.author.length == 2 && i == 0) {
+            return (<Fragment><a href={author.url} class="underline">{author.name}</a>&nbsp;</Fragment>)
+          } else if ((data.author.length - 1) == i) {
+            return (<Fragment><span>and </span><a href={author.url} class="underline">{author.name}</a></Fragment>)
+          } else {
+            return (<Fragment><a href={author.url} class="underline">{author.name}</a>, </Fragment>)
+          }
+        })
+      }
+    </p>
+  }
 
-
-  <h3
-    class="mt-size-3xs text-size-1 text-alice-500 font-light"
+  <p
+    class="mt-size-2xs text-size-0 text-alice-500 font-light italic"
     set:html={data.status}
-  ></h3>
+  />
+
+  <div class="mt-size-sm text-size-0">
+    {data.links.map((link, i) => (
+						<PaperLink name={link.name} url={link.url} includeRightBar={i < data.links.length - 1} />
+					))}
+  </div>
 
   {
     data.summary ? (
-      <div class="mt-size-md">
-        <p set:html={data.summary} class="text-size-0" />
-      </div>
+      <p set:html={data.summary} class="mt-size-lg text-size-0" />
     ) : (
       <Fragment></Fragment>
     )
   }
-
-  <ul role="list" class="mt-size-md flex flex-row flex-wrap gap-size-2xs">
-    {data.links.map((link) => (
-      <li class="text-size--1 italic inline-flex items-center rounded-md border-2 border-mine-shaft-200 hover:border-alice-400 px-2.5 py-0.5 transition-colors bg-mine-shaft-100 text-mine-shaft-700 ">
-        <a href={link.url} class="text-alice-500 underline">{link.name}</a>
-      </li>
-    ))}
-  </ul>
 </div>

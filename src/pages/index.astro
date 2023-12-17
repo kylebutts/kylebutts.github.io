@@ -1,0 +1,32 @@
+---
+import Layout from "../layouts/Layout.astro";
+import {Content as About} from '../components/md/about.md'
+---
+
+<Layout>
+  <main>
+		<!-- Job Market Banner -->
+		<p class="mb-8 bg-kelly-200 border-2 border-kelly-400 py-4 px-4 text-size-0">
+			<strong>
+				I am on the economics job market during the 2023-24 academic year. 
+			</strong>
+		</p>
+
+		<!-- Photo and About -->
+		<article
+			class="flex flex-col gap-y-size-md md:gap-y-0 md:flex-row md:gap-x-size-md"
+		>
+			<div class="max-w-[14rem] lg:max-w-[18rem] mx-auto">
+				<img
+					src="/images/headshot_small.webp"
+					alt="Headshot of Kyle Butts"
+				/>
+			</div>
+
+      <div class="prose flow">
+        <About></About>
+      </div>
+		</article>
+  </main>
+</Layout>
+

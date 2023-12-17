@@ -22,9 +22,7 @@ First, I'll share what a factor model is and then I'll circle back to how it con
 
 The simplest factor model is given by
 $$
-\begin{equation}
   y_{it} = \bm{f}_t' \bm{\gamma}_i + u_{it},
-\end{equation}
 $$
 where $\bm f_t$ is a $p \times 1$ vector of *unobservable* "factors" and $\bm \gamma_i$ is a $p \times 1$ vector of *unobservable* "factor loadings". Notice that this kind of looks like a time fixed-effect and a unit fixed-effect, but they're multiplied together. 
 
@@ -89,6 +87,6 @@ The key insight my coauthors and I have found is that treatment effect estimator
 
 For example, consistently estimates of $\bm{f}_t$ can be estimated by instrumental variables (quasi-long differencing) or by using covariates that are affected by the same factor structure (common correlated effects). Both of these can then be plugged into an estimator that pops out a nice event-study graph. Here's an example from [our paper](https://github.com/kylebutts/Generalized-Imputation-Estimator):
 
-<Figure  src="/images/blog/blog-factor-many_estimators.png" alt="Example of plug-in estimator for the effect of Walmart on local employment" />
+<Figure src="/images/blog/blog-factor-many_estimators.png" alt="Example of plug-in estimators for the effect of Walmart on local retail employment" />
 
 

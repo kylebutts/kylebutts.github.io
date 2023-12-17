@@ -1,0 +1,85 @@
+---
+import PaperLink from "./PaperLink.astro"
+const { data, slug = "", includeSummary = false } = Astro.props
+
+// Write function to combine names with commas (including oxford comma and the word and)
+function combineNames(names) {
+	if (names.length === 0) {
+		return ""
+	} else if (names.length === 1) {
+		return `with ${names[0]}`
+	} else if (names.length === 2) {
+		return `with ${names[0]} and ${names[1]}`
+	} else {
+		return `with ${names.slice(0, -1).join(", ")}, and ${names.slice(-1)}`
+	}
+}
+const author_names = data.author
+	? combineNames(data.author.map((author) => author.name))
+	: ""
+
+const includeLinks = true
+---
+
+<div
+	class="border-l-[2px] border-mine-shaft-200 hover:border-mine-shaft-800 transition-all duration-200 px-4 py-2"
+>
+	<h2
+		class:list={[
+			"font-mine-shaft-800 hover:font-mine-shaft-50 cursor-pointer font-bold tracking-tighter",
+			{ "text-size-1": true },
+		]}
+	>
+		{
+			data.display === true ? (
+				<a href={`/papers/${slug}`} set:html={data.title} />
+			) : (
+				<Fragment set:html={data.title} />
+			)
+		}
+	</h2>
+
+	{
+		author_names != "" && (
+			<p class:list={["mt-size-2xs", { "text-size--1": true }]}>
+				{author_names}
+			</p>
+		)
+	}
+
+	<p
+		class:list={[
+			"mt-size-2xs text-alice-500 font-light italic",
+			{ "text-size--1": true },
+		]}
+		set:html={data.status}
+	/>
+
+	{
+		includeLinks && (
+			<p class:list={["mt-size-sm", { "text-size--1": true }]}>
+				<PaperLink
+					name="Details"
+					url={`/papers/${slug}`}
+					includeRightBar={true}
+				/>
+				{data.links.map((link, i) => (
+					<PaperLink
+						name={link.name}
+						url={link.url}
+						includeRightBar={i < data.links.length - 1}
+					/>
+				))}
+			</p>
+		)
+	}
+
+	{
+		includeSummary && (
+			<p
+				class:list={["mt-size-sm", { "text-size-0": true }]}
+				set:html={data.summary}
+			/>
+		)
+	}
+</div>

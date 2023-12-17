@@ -40,21 +40,18 @@ let ogImage = `https://kylebutts.com/og-images/${slug}.png`
   <!-- <ViewTransitions /> -->
 </head>
 
-<body>
+<body class="min-h-screen w-full bg-white font-jetbrains text-mine-shaft-900 pb-size-lg">
   <!-- Set theme on body -->
-  <SetupDarkMode />
+  <!-- <SetupDarkMode /> -->
   
-  <div
-    class="min-h-screen w-full bg-white font-jetbrains text-mine-shaft-900 dark:bg-mine-shaft-900 dark:text-white">
-    <div class="pt-size-xs prose:pt-size-sm-md pb-size-2xl">
-      <Block >
-        <MenuBar />
-      </Block>
-        
-      <slot transition:animate="slide" />
-    </div>
-  </div>
-
+  <Block >
+    <MenuBar />
+  </Block>
+  
+  <!-- Main  -->
+  <slot />
+    
+  <!-- Include katex -->
   { katex && <IncludeKatex /> }
 </body>
 

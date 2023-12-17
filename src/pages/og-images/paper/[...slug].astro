@@ -1,5 +1,5 @@
 ---
-import PaperListCard from "../../../components/PaperListCard.astro"
+import PaperListCard from "../../../components/paper/PaperListCard.astro"
 import BaseLayout from "../../../layouts/BaseLayout.astro"
 import { getCollection } from "astro:content"
 
@@ -22,6 +22,6 @@ const { paper } = Astro.props
 		class="mx-auto px-size-lg pt-size-2xl"
 		style="width: 900px; height: 600px;"
 	>
-		<PaperListCard data={paper.data} includeSummary={false} />
+		<PaperListCard data={paper.data} />
 	</div>
 </BaseLayout>

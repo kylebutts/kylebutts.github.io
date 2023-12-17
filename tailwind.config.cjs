@@ -1,60 +1,57 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  darkMode: "class",
+	darkMode: "class",
 	content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
 	theme: {
-    screens: {
-      'prose': '80ch', // max-w-prose
-      'md': '640px', // tablet
-      'lg': '1024px', // computer
-      'xl': '1280px', // large computer
-    },
+		screens: {
+			'prose': '80ch', // prose
+			'md': '640px',   // tablet
+			'lg': '1024px',  // computer
+			'xl': '1280px',  // large computer
+		},
 		extend: {
-      maxWidth: {
-        'md': '640px',
-        'lg': '1024px',
-        'xl': '1280px',
-        'prose': '80ch', // max-w-prose
-      },
+			maxWidth: {
+				'md': '640px',  
+				'lg': '1024px', 
+				'xl': '1280px', 
+				'prose': '80ch', // max-w-prose
+			},
 			fontFamily: {
 				jetbrains: ["JetBrains Mono", "monospace"],
-        space: ["Space Mono", "monospace"],
 			},
-      gridTemplateColumns: {
-        'article': '1fr min(65ch, 100%) 1fr',
-      },
-      // https://utopia.fyi/type/calculator?c=320,16,1.2,1240,18,1.25,5,2,&s=0.75%7C0.5%7C0.25,1.5%7C2%7C3%7C4%7C6,s-l&g=s,l,xl,12
-      fontSize: {
-        'base': '1rem',
-        'size--2': 'clamp(0.69rem, calc(0.69rem + 0.04vw), 0.72rem)',
-        'size--1': 'clamp(0.83rem, calc(0.81rem + 0.12vw), 0.90rem)',
-        'size-0':  'clamp(1.00rem, calc(0.96rem + 0.22vw), 1.13rem)',
-        'size-1':  'clamp(1.20rem, calc(1.13rem + 0.36vw), 1.41rem)',
-        'size-2':  'clamp(1.44rem, calc(1.33rem + 0.55vw), 1.76rem)',
-        'size-3':  'clamp(1.73rem, calc(1.56rem + 0.82vw), 2.20rem)',
-        'size-4':  'clamp(2.07rem, calc(1.84rem + 1.17vw), 2.75rem)',
-        'size-5':  'clamp(2.49rem, calc(2.16rem + 1.64vw), 3.43rem)',
-      },
-      spacing: {
-        'size-3xs':     'clamp(0.25rem, calc(0.23rem + 0.11vw), 0.31rem)',
-        'size-2xs':     'clamp(0.50rem, calc(0.48rem + 0.11vw), 0.56rem)',
-        'size-xs':      'clamp(0.75rem, calc(0.71rem + 0.22vw), 0.88rem)',
-        'size-sm':      'clamp(1.00rem, calc(0.96rem + 0.22vw), 1.13rem)',
-        'size-md':      'clamp(1.50rem, calc(1.43rem + 0.33vw), 1.69rem)',
-        'size-lg':      'clamp(2.00rem, calc(1.91rem + 0.43vw), 2.25rem)',
-        'size-xl':      'clamp(3.00rem, calc(2.87rem + 0.65vw), 3.38rem)',
-        'size-2xl':     'clamp(4.00rem, calc(3.83rem + 0.87vw), 4.50rem)',
-        'size-3xl':     'clamp(6.00rem, calc(5.74rem + 1.30vw), 6.75rem)',
-        'size-3xs-2xs': 'clamp(0.25rem, calc(0.14rem + 0.54vw), 0.56rem)',
-        'size-2xs-xs':  'clamp(0.50rem, calc(0.37rem + 0.65vw), 0.88rem)',
-        'size-xs-sm':   'clamp(0.75rem, calc(0.62rem + 0.65vw), 1.13rem)',
-        'size-sm-md':   'clamp(1.00rem, calc(0.76rem + 1.20vw), 1.69rem)',
-        'size-md-lg':   'clamp(1.50rem, calc(1.24rem + 1.30vw), 2.25rem)',
-        'size-lg-xl':   'clamp(2.00rem, calc(1.52rem + 2.39vw), 3.38rem)',
-        'size-xl-2xl':  'clamp(3.00rem, calc(2.48rem + 2.61vw), 4.50rem)',
-        'size-2xl-3xl': 'clamp(4.00rem, calc(3.04rem + 4.78vw), 6.75rem)',
-      },
-
+			// Fluid type sizes
+			fontSize: {
+				'base': '1rem',
+				'size--2': 'var(--size--2)',
+				'size--1': 'var(--size--1)',
+				'size-0':  'var(--size-0)',
+				'size-1':  'var(--size-1)',
+				'size-2':  'var(--size-2)',
+				'size-3':  'var(--size-3)',
+				'size-4':  'var(--size-4)',
+				'size-5':  'var(--size-5)',
+			},
+			// Fluid spacing sizes
+			spacing: {
+				'size-3xs':     'var(--size-3xs)',
+				'size-2xs':     'var(--size-2xs)',
+				'size-xs':      'var(--size-xs)',
+				'size-sm':      'var(--size-sm)',
+				'size-md':      'var(--size-md)',
+				'size-lg':      'var(--size-lg)',
+				'size-xl':      'var(--size-xl)',
+				'size-2xl':     'var(--size-2xl)',
+				'size-3xl':     'var(--size-3xl)',
+				'size-3xs-2xs': 'var(--size-3xs-2xs)',
+				'size-2xs-xs':  'var(--size-2xs-xs)',
+				'size-xs-sm':   'var(--size-xs-sm)',
+				'size-sm-md':   'var(--size-sm-md)',
+				'size-md-lg':   'var(--size-md-lg)',
+				'size-lg-xl':   'var(--size-lg-xl)',
+				'size-xl-2xl':  'var(--size-xl-2xl)',
+				'size-2xl-3xl': 'var(--size-2xl-3xl)',
+			},
+			// colors
 			colors: {
 				"mine-shaft": {
 					50: "#f5f5f5",

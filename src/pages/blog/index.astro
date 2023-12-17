@@ -1,6 +1,6 @@
 ---
 import Layout from "../../layouts/Layout.astro"
-import BlogCard from "../../components/BlogCard.jsx"
+import BlogListCard from "../../components/blog/BlogListCard.jsx"
 import { getCollection } from "astro:content"
 let posts_unsorted = await getCollection("blog")
 
@@ -14,7 +14,7 @@ let posts = posts_unsorted.sort((a, b) => {
 ---
 
 <Layout content prose>
-  <div class="flex flex-col gap-y-size-sm">
-    {posts.map((post, i) => <BlogCard post={post} />)}
-  </div>
+  <ul class="flex flex-col gap-y-size-sm">
+    {posts.map((post, i) => <BlogListCard post={post} />)}
+  </ul>
 </Layout>

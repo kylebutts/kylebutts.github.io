@@ -15,9 +15,9 @@ links:
     url: "/files/JMP.pdf"
   - name: Slides
     url: "/files/JMP_slides.pdf"
-  - name: Replication files
+  - name: Github
     url: https://github.com/kylebutts/Generalized-Imputation-Estimator
-status: 'R&R at Journal of Econometrics'
+status: 'Revise & Resubmit at the Journal of Econometrics'
 summary: "We propose an imputation-style estimator for a factor model allowing for selection into treatment based on non-parallel trends that is valid in short panels."
 display: true
 ---
@@ -43,14 +43,11 @@ where $\bm f_t$ is a $p \times 1$ vector of unobservable *factors* and $\bm \gam
 
 This factor model is a really commonly used device in the synthetic control literature and the [matrix completion](https://arxiv.org/abs/1710.10251) method. However, it is difficult to use these methods in all cases, since it requires a large number of pre-periods, which a lot of people don't have! The cool thing about this paper is we show how to estimate the factor model in short panels using instruments for the factor model. We think of these instruments as "proxies" for the factor model. For example, if you think units are selecting into treatment based on economic shocks, you could use a counties' baseline manufacturing share as an instrument. 
 
-
 We take from [Callaway and Sant'Anna](https://www.sciencedirect.com/science/article/abs/pii/S0304407620303948?via%3Dihub) and think about estimates of the group-time average treatment effect:
 $$
 ATT(g,t) = E(y_{it}(g) - y_{it}(\infty) \vert G_i = g),
 $$
 i.e. the average effect of treatment for units treated in period $g$ at time period $t$. These group-time ATTs can then be aggregated to an overall effect, event-study estimates, etc. However, we estimate these under the more general factor model. I'm currently working on a package that estimates these $ATT(g,t)$ and then "plugs-into" the `did` package and lets uses aggregate and plot their treatment effect estimates using Pedro and Brantly's really great suite of tools.
-
-
 
 
 ### Econometric details
@@ -72,12 +69,5 @@ where $\tilde{y}_{i, pre}$ and $\tilde{\bm f}_{pre}$ is the pre-treatment rows o
 The final step is averaging over the observed outcome $y_{it}$ and the estimated untreated potential outcome $\hat{\tilde{y}}_{it}(\infty)$. Averaging over units yields a consistent estimate for the corresponding treatment effect. 
 
 I think this imputation method is *really* elegant and I'm so excited at figuring this out. I hope you find it cool too :-)
-
-
-
-
-
-
-
 
 

@@ -3,7 +3,6 @@ import "../styles/content.css"
 const { flow = false, prose = false } = Astro.props
 ---
 
-<div class={`content ${flow ? "flow" : "" } ${prose ? "prose" : ""} 
-  `}>
+<main class:list={[ 'content', {'flow': flow}, {'prose': prose} ]}>
   <slot />
-</div>
+</main>
