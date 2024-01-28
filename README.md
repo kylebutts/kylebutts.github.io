@@ -1,1 +1,1 @@
-This is the source code for my website built with [AstroJS](https://astro.build), [TailwindCSS](https://tailwindcss.com/), and [HeadlessUI](https://headlessui.dev/).
+This is the source code for my website built with [Astro](https://astro.build) and [Tailwind CSS](https://tailwindcss.com/).
