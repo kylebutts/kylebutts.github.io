@@ -62,8 +62,7 @@ const includeLinks = true
 					name="Details"
 					url={`/papers/${slug}`}
 					includeRightBar={true}
-				/>
-				{data.links.map((link, i) => (
+				/>{data.links.map((link, i) => (
 					<PaperLink
 						name={link.name}
 						url={link.url}
