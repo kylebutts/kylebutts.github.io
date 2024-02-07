@@ -9,11 +9,11 @@
     "preview": "astro preview"
   },
   "devDependencies": {
+    "@fontsource/jetbrains-mono": "^4.5.9",
+    "astro": "^4.3.5",
+    "@astrojs/tailwind": "^5.1.0",
     "@astrojs/mdx": "2.0.1",
     "@astrojs/solid-js": "3.0.2",
-    "@astrojs/tailwind": "5.0.3",
-    "@fontsource/jetbrains-mono": "^4.5.9",
-    "astro": "4.0.6",
     "autoprefixer": "^10.4.15",
     "prettier": "^3.1.1",
     "prettier-plugin-astro": "^0.12.2",
@@ -21,7 +21,7 @@
     "rehype-katex": "^7.0.0",
     "remark-math": "^6.0.0",
     "solid-js": "^1.7.11",
-    "tailwindcss": "^3.3.3"
+    "tailwindcss": "^3.4.1"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.0.3",
