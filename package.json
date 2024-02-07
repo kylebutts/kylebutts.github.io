@@ -26,5 +26,8 @@
   "dependencies": {
     "@astrojs/sitemap": "^3.0.3",
     "postcss": "^8.4.28"
+  },
+  "optionalDependencies": {
+    "@rollup/rollup-linux-x64-gnu": "^4.9.6"
   }
 }
