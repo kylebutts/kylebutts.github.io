@@ -1,4 +1,4 @@
-I am a PhD candidate in Economics at the [University of Colorado: Boulder](https://www.colorado.edu/economics/) focusing in the fields of Urban Economics and Applied Econometrics. Here is my [CV](/files/KyleButts-CV.pdf).
+I am an assistant professor of economics at the [University of Arkansas](https://walton.uark.edu/departments/economics/) focusing in the fields of Applied Econometrics and Urban Economics. Here is my [CV](/files/KyleButts-CV.pdf).
 
 My work has been published in *Journal of Urban Economics*, *Journal of Urban Economics: Insights*, and other journals. My [job market paper](/papers/Generalized-Imputation-Estimator) is R&R at the *Journal of Econometrics*.
 
