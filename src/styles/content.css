@@ -156,13 +156,25 @@ FLOW
 }
 
 /* Katex */
-.prose > :is(.katex) {
-	font-size: var(--size-0);
-}
-.prose > :is(.katex-display) {
-	font-size: var(--size-0);
+.katex-display {
   overflow-x: scroll;
+  height: 100%;
+  margin-bottom: 0;
 }
+.katex {
+	font-size: 1em !important;
+  line-height: unset;
+}
+.katex-display > .katex {
+  font-size: 1.21em !important;
+}
+.prose :is(.katex-display) {
+	--flow-space: 0;
+}
+.prose > .katex-display + p {
+	--flow-space: var(--size-xs);
+}
+
 
 /* Blockquote */
 .prose > :is(blockquote) {
