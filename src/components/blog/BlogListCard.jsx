@@ -4,7 +4,7 @@ export default function BlogCard({ post }) {
 
   return (
 
-    <li class="border-l-2 border-mine-shaft-200 hover:border-mine-shaft-800 transition-all duration-200 px-4 py-2">
+    <li class="border-l-2 border-mine-shaft-200 hover:border-mine-shaft-800 duration-200 px-4 py-2">
     
       <p class="text-size--1 text-mine-shaft-400" ><time datetime={post.data.date}>
         {dateText}
