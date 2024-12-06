@@ -1,0 +1,68 @@
+---
+import { AstroFont } from "astro-font"
+import { join } from "node:path"
+---
+
+<AstroFont
+	config={[
+		{
+			name: "Libertine",
+			src: [
+				{
+					style: "normal",
+					weight: "400",
+					path: join(
+						process.cwd(),
+						"public",
+						"fonts",
+						"LinuxLibertine_Regular.woff"
+					),
+				},
+				{
+					style: "italic",
+					weight: "400",
+					path: join(
+						process.cwd(),
+						"public",
+						"fonts",
+						"LinuxLibertine_Italic.woff"
+					),
+				},
+				{
+					style: "normal",
+					weight: "700",
+					path: join(
+						process.cwd(),
+						"public",
+						"fonts",
+						"LinuxLibertine_Bold.woff"
+					),
+				},
+				{
+					style: "italic",
+					weight: "700",
+					path: join(
+						process.cwd(),
+						"public",
+						"fonts",
+						"LinuxLibertine_BoldItalic.woff"
+					),
+				},
+			],
+			preload: true,
+			display: "block",
+			selector: "body",
+			fallback: "serif",
+		},
+		{
+			name: "IBM Plex Mono",
+			src: [],
+			googleFontsURL:
+				"https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,200;0,300;0,700;0,800;1,200;1,300&display=swap",
+			preload: true,
+			display: "swap",
+			selector: "body",
+			fallback: "monospace",
+		},
+	]}
+/>

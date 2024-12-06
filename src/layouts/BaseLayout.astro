@@ -1,54 +1,48 @@
 ---
-import { ViewTransitions } from "astro:transitions";
-import Block from "../components/Block.astro";
-import MenuBar from "../components/MenuBar/MenuBar.astro";
-import IncludeKatex from "../components/IncludeKatex.astro";
+import Block from "../components/Block.astro"
+import MenuBar from "../components/MenuBar/MenuBar.astro"
+import IncludeKatex from "../components/IncludeKatex.astro"
+import LoadFonts from '../components/font/LoadFonts.astro'
 
-import "../styles/global.css";
+import "../styles/global.css"
 
 // og-image by slug
-const { 
-  slug = "default",
-  description = "Kyle Butts -- Urban Economics and Applied Econometrics",
-  katex = false,
+const {
+	slug = "default",
+	description = "Kyle Butts -- Urban Economics and Applied Econometrics",
+	katex = false,
 } = Astro.props
-
-let ogImage = `https://kylebutts.com/og-images/default.png`
+const ogImage = `https://kylebutts.com/og-images/default.png`
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+		<title>Kyle Butts</title>
+		<meta name="description" content={description} />
+		<meta property="og:image" content={ogImage} />
+		<meta property="twitter:image" content={ogImage} />
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content="Kyle Butts" />
+		<meta name="twitter:description" content={description} />
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width">
-  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-  <title>Kyle Butts</title>
-  <meta name="description" content={description} />
-  <meta property="og:image" content={ogImage} />
-  <meta property="twitter:image" content={ogImage} />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Kyle Butts" />
-  <meta name="twitter:description" content={description} />
-  
-  <!-- Preload Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,200;0,300;0,700;0,800;1,200;1,300&display=swap" rel="stylesheet">
+    <LoadFonts />
+	</head>
 
-  <!-- <ViewTransitions /> -->
-</head>
+	<body
+		class="min-h-screen w-full bg-white font-serif text-mine-shaft-900 pb-size-lg"
+	>
+		<Block>
+			<MenuBar />
+		</Block>
 
-<body class="min-h-screen w-full bg-white font-serif text-mine-shaft-900 pb-size-lg">
-  <Block >
-    <MenuBar />
-  </Block>
-  
-  <!-- Main  -->
-  <slot />
-    
-  <!-- Include katex -->
-  { katex && <IncludeKatex /> }
-</body>
+		<!-- Main  -->
+		<slot />
 
+		<!-- Include katex -->
+		{katex && <IncludeKatex />}
+	</body>
 </html>
