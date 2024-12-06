@@ -1,15 +1,18 @@
 <!-- Katex for equations -->
 <script is:inline>
-  // Load after the main thread is finished
-  var cb = function() {
-    var l = document.createElement('link');
-    l.rel = 'stylesheet';
-    l.crossOrigin = "anonymous";
-    l.href = 'https://cdn.jsdelivr.net/npm/katex@0.15.0/dist/katex.min.css';
-    var h = document.getElementsByTagName('head')[0]; h.parentNode.insertBefore(l, h);
-  };
-  var raf = requestAnimationFrame || mozRequestAnimationFrame ||
-      webkitRequestAnimationFrame || msRequestAnimationFrame;
-  if (raf) raf(cb);
-  else window.addEventListener('load', cb);
+	// Load after the main thread is finished
+	var load_katex_css = function () {
+		var l = document.createElement("link")
+		l.rel = "stylesheet"
+		l.crossOrigin = "anonymous"
+		l.href = "https://cdn.jsdelivr.net/npm/katex@0.15.0/dist/katex.min.css"
+		document.head.appendChild(l)
+	}
+	var raf =
+		requestAnimationFrame ||
+		mozRequestAnimationFrame ||
+		webkitRequestAnimationFrame ||
+		msRequestAnimationFrame
+	if (raf) raf(load_katex_css)
+	else window.addEventListener("load", cb)
 </script>
