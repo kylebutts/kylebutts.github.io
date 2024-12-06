@@ -1,5 +1,5 @@
 {
-  "title": "did2s (R package)",
+  "title": "did2s (R)",
   "url": "https://github.com/kylebutts/did2s",
   "description": "R package for estimating two-stage difference-in-differences imputation estimator."
 }

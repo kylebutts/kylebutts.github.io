@@ -18,7 +18,7 @@ const { Content } = await post.render()
 <BaseLayout slug={post.slug} katex>
 	<Block prose flow>
 		<h1
-			class="mt-size-lg font-white cursor-pointer text-size-3 font-bold tracking-tighter"
+			class="mt-size-lg font-white cursor-pointer text-size-3 font-bold"
 			set:html={post.data.title}
 		/>
 		<Content />

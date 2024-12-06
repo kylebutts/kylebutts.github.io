@@ -1,3 +1,5 @@
+import defaultTheme from 'tailwindcss/defaultTheme'
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
 	darkMode: "class",
@@ -17,7 +19,8 @@ module.exports = {
 				'prose': '80ch', // max-w-prose
 			},
 			fontFamily: {
-				jetbrains: ["JetBrains Mono", "monospace"],
+        serif: ['Libertine', ...defaultTheme.fontFamily.serif], 
+				jetbrains: ["IBM Plex Mono", ...defaultTheme.fontFamily.mono],
 			},
 			// Fluid type sizes
 			fontSize: {

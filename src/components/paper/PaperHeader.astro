@@ -5,14 +5,14 @@ const { data } = Astro.props
 
 <div class="mt-size-sm">
   <h2
-    class="font-white text-size-2 font-bold tracking-tighter"
+    class="font-white text-size-2 font-bold"
     set:html={data.title}
   >
   </h2>
 
   {
     data.author &&
-    <p class="mt-size-2xs text-size-0 tracking-tight">
+    <p class="mt-size-2xs text-size-0 ">
       with 
       { 
         data.author.map((author, i) => {
@@ -31,7 +31,7 @@ const { data } = Astro.props
   }
 
   <p
-    class="mt-size-2xs text-size-0 text-alice-500 font-light italic"
+    class="mt-size-2xs text-size-0 text-alice-500 italic"
     set:html={data.status}
   />
 

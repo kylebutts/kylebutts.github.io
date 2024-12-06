@@ -2,7 +2,6 @@
 import { ViewTransitions } from "astro:transitions";
 import Block from "../components/Block.astro";
 import MenuBar from "../components/MenuBar/MenuBar.astro";
-import SetupDarkMode from "../components/MenuBar/SetupDarkMode.astro";
 import IncludeKatex from "../components/IncludeKatex.astro";
 
 import "../styles/global.css";
@@ -35,15 +34,12 @@ let ogImage = `https://kylebutts.com/og-images/${slug}.png`
   <!-- Preload Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,200;0,300;0,700;0,800;1,200;1,300&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,200;0,300;0,700;0,800;1,200;1,300&display=swap" rel="stylesheet">
 
   <!-- <ViewTransitions /> -->
 </head>
 
-<body class="min-h-screen w-full bg-white font-jetbrains text-mine-shaft-900 pb-size-lg">
-  <!-- Set theme on body -->
-  <!-- <SetupDarkMode /> -->
-  
+<body class="min-h-screen w-full bg-white font-serif text-mine-shaft-900 pb-size-lg">
   <Block >
     <MenuBar />
   </Block>

@@ -11,7 +11,7 @@ export default function BlogCard({ post }) {
       </time></p>
       
       <h2
-        class="mt-2 font-white cursor-pointer text-size-1 font-bold tracking-tighter"
+        class="mt-2 font-white cursor-pointer text-size-1 font-bold"
       >
         <a href={`/blog/${post.slug}`} innerHTML={post.data.title}></a>
       </h2>

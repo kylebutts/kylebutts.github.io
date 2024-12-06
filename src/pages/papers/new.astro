@@ -7,7 +7,7 @@ let papers_unsorted = await getCollection("papers")
 
 let papers = papers_unsorted
 	.map((paper) => {
-    if (paper.data.category?.includes("Published")) {
+		if (paper.data.category?.includes("Published")) {
 			paper.data.order = 5
 		} else if (paper.data.category?.includes("R&R")) {
 			paper.data.order = 4
@@ -43,37 +43,39 @@ let workInProgress = papers.filter((paper) => paper.data.order < 2)
 ---
 
 <Layout>
-	<h2 class="text-mine-shaft-700 text-size-1 border-b-2 border-dashed border-mine-shaft-200 py-size-2xs">
+	<h2
+		class="text-mine-shaft-700 text-size-1 border-b-2 border-dashed border-mine-shaft-200 py-size-2xs"
+	>
 		Publications
 	</h2>
-	<ul class="flex flex-col gap-y-size-sm my-size-md">
+	<ol class="list-decimal list-inside gap-y-size-sm my-size-md">
 		{
 			publishedPapers.map((paper, i) => {
 				return (
-					<PaperListCard
-						data={paper.data}
-						slug={paper.slug}
-					/>
+					<li>
+						<a set:html={paper.data.title} href={paper.slug} />
+					</li>
 				)
 			})
 		}
-	</ul>
+	</ol>
 
-  <h2 class="text-mine-shaft-700 text-size-1 border-b-2 border-dashed border-mine-shaft-200 py-size-2xs">
+	<h2
+		class="text-mine-shaft-700 text-size-1 border-b-2 border-dashed border-mine-shaft-200 py-size-2xs"
+	>
 		Working Papers
 	</h2>
-	<ul class="flex flex-col gap-y-size-sm my-size-md">
+	<ol class="list-decimal list-inside gap-y-size-sm my-size-md">
 		{
 			workingPapers.map((paper, i) => {
 				return (
-					<PaperListCard
-						data={paper.data}
-						slug={paper.slug}
-					/>
+					<li>
+						<a set:html={paper.data.title} href={paper.slug} />
+					</li>
 				)
 			})
 		}
-	</ul>
+	</ol>
 
 	{
 		workInProgress.length > 0 && (
@@ -81,16 +83,15 @@ let workInProgress = papers.filter((paper) => paper.data.order < 2)
 				<h2 class="text-mine-shaft-700 text-size-1 border-b-2 border-dashed border-mine-shaft-200 py-size-2xs">
 					Work in Progress
 				</h2>
-				<ul class="flex flex-col gap-y-size-sm my-size-md">
+				<ol class="list-decimal list-inside gap-y-size-sm my-size-md">
 					{workInProgress.map((paper, i) => {
 						return (
-							<PaperListCard
-								data={paper.data}
-								slug={paper.slug}
-							/>
+							<li>
+								<a set:html={paper.data.title} href={paper.slug} />
+							</li>
 						)
 					})}
-				</ul>
+				</ol>
 			</>
 		)
 	}

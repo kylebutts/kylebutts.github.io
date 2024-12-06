@@ -1,5 +1,5 @@
 {
-  "title": "did2s (Stata package)",
+  "title": "did2s (Stata)",
   "url": "https://github.com/kylebutts/did2s_stata",
   "description": "Stata package for estimating two-stage difference-in-differences imputation estimator."
 }
