@@ -1,20 +1,20 @@
 export default function BlogCard({ post }) {
   // 2023-02-17 -> February 17th, 2023
-  let dateText = new Date(post.data.date).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
+  let dateText = new Date(post.data.date).toLocaleDateString("en-US", { year: "numeric", month: "long" });
 
   return (
 
-    <li class="border-l-2 border-mine-shaft-200 hover:border-mine-shaft-800 duration-200 px-4 py-2">
-    
-      <p class="text-size--1 text-mine-shaft-400" ><time datetime={post.data.date}>
-        {dateText}
-      </time></p>
+    <li class="border-l-2 border-zinc-200 hover:border-zinc-800 duration-200 px-4 py-2">
       
       <h2
-        class="mt-2 font-white cursor-pointer text-size-1 font-bold"
+        class="font-white cursor-pointer text-size-1 font-bold"
       >
         <a href={`/blog/${post.slug}`} innerHTML={post.data.title}></a>
       </h2>
+      
+      <p class="mt-size-3xs text-size--1 text-zinc-400" ><time datetime={post.data.date}>
+        {dateText}
+      </time></p>
 
       <p 
         innerHTML={post.data.description} 

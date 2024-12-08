@@ -7,7 +7,7 @@ const { src, alt } = Astro.props
 const isSvg = src.endsWith(".svg");
 ---
 
-<figure class="not-prose figure border-mine-shaft-200 border-2">
+<figure class="not-prose figure border-zinc-200 border-2">
   {isSvg ? (
     <object data={src} type="image/svg+xml" class="w-full"></object>
   ) : (

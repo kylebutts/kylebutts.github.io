@@ -1,5 +1,5 @@
 {
   "title": "stata2R",
   "url": "https://stata2r.github.io/stata2R/",
-  "description": "Stata -> R guide"
+  "description": "Stata -> R guide that shows common tasks in economics and how to 'translate' your Stata code to R code."
 }

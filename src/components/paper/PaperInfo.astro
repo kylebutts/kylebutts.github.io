@@ -21,14 +21,10 @@ const author_names = data.author
 const includeLinks = true
 ---
 
-<div
-	class="border-l-[2px] border-mine-shaft-200 hover:border-mine-shaft-800 duration-200 px-4 py-2"
->
+<Fragment>
+	<!-- TODO: color the decoration? -->
 	<h2
-		class:list={[
-			"font-mine-shaft-800 hover:font-mine-shaft-50 cursor-pointer font-bold",
-			{ "text-size-1": true },
-		]}
+		class="underline decoration-2 decoration-zinc-200 font-zinc-800 hover:font-zinc-50 cursor-pointer font-bold text-size-0"
 	>
 		{
 			data.display === true ? (
@@ -39,30 +35,22 @@ const includeLinks = true
 		}
 	</h2>
 
-	{
-		author_names != "" && (
-			<p class:list={["mt-size-2xs", { "text-size--1": true }]}>
-				{author_names}
-			</p>
-		)
-	}
+	{author_names != "" && <p class="mt-size-3xs text-size--1">{author_names}</p>}
 
 	<p
-		class:list={[
-			"mt-size-2xs text-alice-500 italic",
-			{ "text-size--1": true },
-		]}
+		class="mt-size-2xs text-alice-500 italic text-size--1"
 		set:html={data.status}
 	/>
 
 	{
 		includeLinks && (
-			<p class:list={["mt-size-sm", { "text-size--1": true }]}>
+			<p class="mt-size-xs text-size--1">
 				<PaperLink
 					name="Details"
 					url={`/papers/${slug}`}
 					includeRightBar={true}
-				/>{data.links.map((link, i) => (
+				/>
+				{data.links.map((link, i) => (
 					<PaperLink
 						name={link.name}
 						url={link.url}
@@ -75,10 +63,7 @@ const includeLinks = true
 
 	{
 		includeSummary && (
-			<p
-				class:list={["mt-size-sm", { "text-size-0": true }]}
-				set:html={data.summary}
-			/>
+			<p class="mt-size-sm text-size-0" set:html={data.summary} />
 		)
 	}
-</div>
+</Fragment>

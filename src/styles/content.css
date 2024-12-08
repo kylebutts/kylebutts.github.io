@@ -1,9 +1,9 @@
-main {
+main, header, article {
 	--content-width: 1024px;
 }
 
 .content {
-	@apply text-mine-shaft-800 my-size-md;
+	@apply text-zinc-800 my-size-md;
 	--flow-space: var(--size-sm);
 	display: grid;
 	grid-template-columns: var(--size-2xs-xs) var(--size-2xs-xs) min(
@@ -129,7 +129,7 @@ FLOW
 
 /* Link */
 .prose :where(a):not(:where([class~="not-prose"] *)) {
-	@apply underline decoration-2 decoration-mine-shaft-400 hover:decoration-mine-shaft-500;
+	@apply underline decoration-2 decoration-zinc-400 hover:decoration-zinc-500;
 }
 
 /* Headings */
@@ -140,13 +140,13 @@ FLOW
 	line-height: 1.1;
 }
 .prose :where(h2):not(:where([class~="not-prose"] *)) {
-	@apply font-bold  text-size-1 border-b-[2px] border-dashed border-mine-shaft-200 py-size-2xs;
+	@apply font-bold  text-size-1 border-b-[2px] border-dashed border-zinc-200 py-size-2xs;
 
 	--flow-space: var(--size-xl-2xl);
 	line-height: 1.1;
 }
 .prose :where(h3):not(:where([class~="not-prose"] *)) {
-	@apply text-size-0 italic border-b-[1px] border-dashed border-mine-shaft-200 py-size-2xs;
+	@apply text-size-0 italic border-b-[1px] border-dashed border-zinc-200 py-size-2xs;
 
 	--flow-space: var(--size-xl-2xl);
 	line-height: 1.1;
@@ -178,7 +178,7 @@ FLOW
 
 /* Blockquote */
 .prose > :is(blockquote) {
-	@apply border-l-[2px] border-mine-shaft-200 py-size-2xs;
+	@apply border-l-[2px] border-zinc-200 py-size-2xs;
 	padding-left: calc(3ch - 2px);
 }
 .prose > :is(blockquote) > p {
@@ -193,10 +193,10 @@ FLOW
 	max-width: 72ch;
 }
 .prose :where(ul):not(:where([class~="not-prose"] *)) {
-	@apply list-inside list-disc pl-size-3xs marker:text-mine-shaft-400 lg:pl-[1.5555556em];
+	@apply list-inside list-disc pl-size-3xs marker:text-zinc-400 lg:pl-[1.5555556em];
 }
 .prose :where(ol):not(:where([class~="not-prose"] *)) {
-	@apply list-inside list-decimal marker:text-mine-shaft-400;
+	@apply list-inside list-decimal marker:text-zinc-400;
 }
 .prose :where(li):not(:where([class~="not-prose"] *)) {
 	font-size: var(--size-0);

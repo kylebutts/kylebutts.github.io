@@ -1,13 +1,13 @@
 ---
 import Layout from "../../layouts/Layout.astro"
-import PaperListCard from "../../components/paper/PaperListCard.astro"
-
+import PaperInfo from "../../components/paper/PaperInfo.astro"
 import { getCollection } from "astro:content"
+
 let papers_unsorted = await getCollection("papers")
 
 let papers = papers_unsorted
 	.map((paper) => {
-    if (paper.data.category?.includes("Published")) {
+		if (paper.data.category?.includes("Published")) {
 			paper.data.order = 5
 		} else if (paper.data.category?.includes("R&R")) {
 			paper.data.order = 4
@@ -43,54 +43,64 @@ let workInProgress = papers.filter((paper) => paper.data.order < 2)
 ---
 
 <Layout>
-	<h2 class="text-mine-shaft-700 text-size-1 border-b-2 border-dashed border-mine-shaft-200 py-size-2xs">
+	<h2
+		class="text-zinc-700 text-size-1 border-b-2 border-dashed border-zinc-200 py-size-2xs"
+	>
 		Publications
 	</h2>
-	<ul class="flex flex-col gap-y-size-sm my-size-md">
+	<ol class="flex flex-col gap-y-size-lg my-size-md">
 		{
 			publishedPapers.map((paper, i) => {
 				return (
-					<PaperListCard
-						data={paper.data}
-						slug={paper.slug}
-					/>
+					<li class="grid grid-cols-[2em_1fr]">
+						<p class="text-size-0">{i + 1}. </p>
+						<div>
+							<PaperInfo data={paper.data} slug={paper.slug} />
+						</div>
+					</li>
 				)
 			})
 		}
-	</ul>
+	</ol>
 
-  <h2 class="text-mine-shaft-700 text-size-1 border-b-2 border-dashed border-mine-shaft-200 py-size-2xs">
+	<h2
+		class="text-zinc-700 text-size-1 border-b-2 border-dashed border-zinc-200 py-size-2xs"
+	>
 		Working Papers
 	</h2>
-	<ul class="flex flex-col gap-y-size-sm my-size-md">
+	<ol class="flex flex-col gap-y-size-lg my-size-md">
 		{
 			workingPapers.map((paper, i) => {
 				return (
-					<PaperListCard
-						data={paper.data}
-						slug={paper.slug}
-					/>
+					<li class="grid grid-cols-[2em_1fr]">
+						<p class="text-size-0">{i + 1}. </p>
+						<div>
+							<PaperInfo data={paper.data} slug={paper.slug} />
+						</div>
+					</li>
 				)
 			})
 		}
-	</ul>
+	</ol>
 
 	{
 		workInProgress.length > 0 && (
 			<>
-				<h2 class="text-mine-shaft-700 text-size-1 border-b-2 border-dashed border-mine-shaft-200 py-size-2xs">
+				<h2 class="text-zinc-700 text-size-1 border-b-2 border-dashed border-zinc-200 py-size-2xs">
 					Work in Progress
 				</h2>
-				<ul class="flex flex-col gap-y-size-sm my-size-md">
+				<ol class="flex flex-col gap-y-size-lg my-size-md">
 					{workInProgress.map((paper, i) => {
 						return (
-							<PaperListCard
-								data={paper.data}
-								slug={paper.slug}
-							/>
+							<li class="grid grid-cols-[2em_1fr]">
+								<p class="text-size-0">{i + 1}. </p>
+								<div>
+									<PaperInfo data={paper.data} slug={paper.slug} />
+								</div>
+							</li>
 						)
 					})}
-				</ul>
+				</ol>
 			</>
 		)
 	}

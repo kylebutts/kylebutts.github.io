@@ -20,7 +20,7 @@ module.exports = {
 			},
 			fontFamily: {
         serif: ['Libertine', ...defaultTheme.fontFamily.serif], 
-				jetbrains: ["IBM Plex Mono", ...defaultTheme.fontFamily.mono],
+				mono: ["IBM Plex Mono", ...defaultTheme.fontFamily.mono],
 			},
 			// Fluid type sizes
 			fontSize: {
@@ -56,18 +56,18 @@ module.exports = {
 			},
 			// colors
 			colors: {
-				"mine-shaft": {
-					50: "#f5f5f5",
-					100: "#eaeaea",
-					200: "#cbcbcb",
-					300: "#acacac",
-					400: "#6d6d6e",
-					500: "#2f2f30",
-					600: "#2a2a2b",
-					700: "#232324",
-					800: "#1c1c1d",
-					900: "#171718",
-				},
+				// "mine-shaft": {
+				// 	50: "#f5f5f5",
+				// 	100: "#eaeaea",
+				// 	200: "#cbcbcb",
+				// 	300: "#acacac",
+				// 	400: "#6d6d6e",
+				// 	500: "#2f2f30",
+				// 	600: "#2a2a2b",
+				// 	700: "#232324",
+				// 	800: "#1c1c1d",
+				// 	900: "#171718",
+				// },
 				aquamarine: {
 					50: "#f4fffd",
 					100: "#e9fffb",
