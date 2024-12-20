@@ -5,14 +5,28 @@ import BaseLayout from "../../layouts/BaseLayout.astro"
 
 export async function getStaticPaths() {
 	const posts = await getCollection("blog")
-	return posts.map((post) => ({
-		params: { slug: post.slug },
-		props: { post },
-	}))
+	return posts.map((post) => {
+		return {
+			params: { slug: post.slug },
+			props: { post },
+		}
+	})
 }
 
 const { post } = Astro.props
 const { Content } = await post.render()
+
+let authors = post.data.author
+authors = authors.sort((a, b) => {
+	const aLastName = a.name.split(" ").slice(-1)[0]
+	const bLastName = b.name.split(" ").slice(-1)[0]
+	return aLastName.localeCompare(bLastName)
+})
+
+let dateText = new Date(post.data.date).toLocaleDateString("en-US", {
+	year: "numeric",
+	month: "long",
+})
 ---
 
 <BaseLayout slug={post.slug} katex>
@@ -21,6 +35,37 @@ const { Content } = await post.render()
 			class="mt-size-lg font-white cursor-pointer text-size-3 font-bold"
 			set:html={post.data.title}
 		/>
+
+		<p class="mt-size-3xs text-size--1 text-zinc-400">
+			<time datetime={post.data.date}>
+				{dateText}
+			</time>
+		</p>
+
+		<p class="mb-size-lg">
+			{
+				authors.map((author, i) => {
+					let sep = ""
+					if (authors.length > 1 && i > 0 && i < authors.length - 1) {
+						sep = ", "
+					}
+					if (authors.length > 2 && i == authors.length - 2) {
+						sep = ", and "
+					}
+					if (authors.length == 2 && i == authors.length - 2) {
+						sep = " and "
+					}
+
+					return (
+						<Fragment>
+							<a href={author.url}>{author.name}</a>
+							{sep}
+						</Fragment>
+					)
+				})
+			}
+		</p>
+
 		<Content />
 	</Block>
 </BaseLayout>

@@ -157,9 +157,11 @@ FLOW
 
 /* Katex */
 .katex-display {
-  overflow-x: scroll;
-  height: 100%;
-  margin-bottom: 0;
+  overflow-y: hidden;
+  overflow-x: auto;
+  height: max-content;
+  margin-bottom: unset !important;
+  margin-top: var(--size-xs);
 }
 .katex {
 	font-size: 1em !important;
@@ -167,12 +169,12 @@ FLOW
 }
 .katex-display > .katex {
   font-size: 1.21em !important;
+  padding-left: 1em !important;
+  text-align: left !important;
+  @apply border-l-[2px] border-zinc-200
 }
-.prose :is(.katex-display) {
-	--flow-space: 0;
-}
-.prose > .katex-display + p {
-	--flow-space: var(--size-xs);
+.prose .katex-display + p {
+  --flow-space: var(--size-sm);
 }
 
 

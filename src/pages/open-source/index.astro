@@ -9,10 +9,6 @@ const repos = await getCollection("open-source")
 	<ol class="flex flex-col gap-y-size-lg">
 		{
 			repos.map((repo, i) => {
-				// get base URL
-				const url = new URL(repo.data.url)
-				const baseUrl = url.origin.replace(/^https?:\/\//, "")
-
 				return (
 					<li class="grid grid-cols-[2em_1fr]">
 						<p class="text-size-0">{i + 1}. </p>

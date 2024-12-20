@@ -14,20 +14,22 @@
     "@astrojs/mdx": "4.0.1",
     "@astrojs/solid-js": "5.0.0",
     "autoprefixer": "^10.4.20",
-    "prettier": "^3.3.3",
+    "prettier": "^3.4.2",
     "prettier-plugin-astro": "^0.12.3",
     "prettier-plugin-tailwindcss": "^0.5.14",
     "rehype-katex": "^7.0.1",
     "remark-math": "^6.0.0",
     "solid-js": "^1.9.3",
-    "tailwindcss": "^3.4.15"
+    "tailwindcss": "^3.4.17"
   },
   "dependencies": {
+    "@astrojs/check": "^0.9.4",
     "@astrojs/sitemap": "^3.2.1",
     "astro-font": "^0.1.81",
-    "postcss": "^8.4.49"
+    "postcss": "^8.4.49",
+    "typescript": "^5.7.2"
   },
   "optionalDependencies": {
-    "@rollup/rollup-linux-x64-gnu": "^4.27.3"
+    "@rollup/rollup-linux-x64-gnu": "^4.28.1"
   }
 }

@@ -1,0 +1,384 @@
+---
+title: 'Estimating Subgroup Heterogeneity in Difference-in-differences'
+description: Notes on how to adapt Callaway and Sant'Anna to estimate sub-group ATT (with code!) 
+author: 
+  - name: Brantly Callaway
+    url: https://bcallaway11.github.io
+  - name: Kyle Butts
+    url: https://kylebutts.com/
+date: '2024-12-11'
+categories:
+  - Panel Data
+  - Difference in Differences
+  - Conditional Average Treatment Effects
+format:
+  gfm:
+    variant: +yaml_metadata_block+tex_math_dollars
+---
+
+<style>
+/* brant customizations */
+.alert {
+  color: #BA0C2F;
+  font-weight: 400;
+}
+.alert-blue {
+  color: #00A3AD;
+  font-weight: 400;
+}
+span.citation {
+  color: #007acc;
+  font-weight: bold;
+}
+span.notation {
+  color: #007acc;
+  font-weight: bold;
+}
+.csl-entry {
+  margin-bottom: 0.5em;
+}
+div.citation {
+  border: 3px solid #ccc;
+  padding: 25px;
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
+blockquote {
+  background-color: #f9f9f9; /* Light gray background */
+  border-left: 5px solid #ccc; /* Gray border on the left */
+  padding: 15px; /* Add some padding inside */
+  margin: 20px 0; /* Space around the block */
+  font-style: normal; /* Override italic if applied by default */
+}
+</style>
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+This post addresses a common question we have been asked regarding "I have used the Callaway and Sant'Anna" estimator to estimate some average treatment effect for a population, but want to see if the treatment effect varies along different dimensions. 
+This could be for units of different groups like gender, race, or college-degree (discrete $Z_i$) or for binned/discretized continuous variables like age-bins (discretized $Z_i$).
+The goal is to estimate the group-time ATT for subgroups defined by a specific $Z_i = z$ for a given value of $z$.
+
+One way you can think about the Callaway and Sant'Anna approach is that it provides a sort of rubric for how to estimate aggregate parameters: if you can devise a way to estimate an effect for a $(g, t)$, then the aggregating up the "$(g,t)$ building blocks" to say an event-study (dynamic) or an overall treatment effect is "standard". 
+
+Brantly has even invested in creating a package, [`pte`](https://github.com/bcallaway11/pte), which allows for a "plug-in-play" approach to this. 
+In this package, Brant does all the wiring and you only have to tell it how to estimate the treatment effect for a given $(g, t)$ dataset.
+
+In this post, we will disucss estimating a subgroup-specific $ATT(g,t)$ and then show how to code this in the `pte` package.
+A complete example is available in this [gist](TODO: gist.github.com/).
+
+
+## Subgroup-$ATT(g,t)$
+
+The basic set-up follows Callaway and Sant'Anna where you observe units treated at different points in time, denoted by $g$. You are willing to impose that conditional on a vector of baseline characteristics $X_i$, parallel trends hold:
+
+$$
+  \mathbb{E}\left( Y_{it}(0) - Y_{i,g-1}(0) \ | \ D_i = 1, X_i \right) = 
+  \mathbb{E}\left( Y_{it}(0) - Y_{i,g-1}(0) \ | \ D_i = 0, X_i \right),
+$$
+
+Notice this is effectively a selection-on-observables assumption, but instead of $Y_{i}$, we are looking at the differenced data $Y_{it}(0) - Y_{i,g-1}(0)$ and arguing the \mathbb{E}mph{change} in untreated $Y$ is independent of $D$ conditional on $X$.
+
+Then, what the Callaway and Sant'Anna estimator is combine inverse-probability of treatment weighting with a regression adjustment (a so called `doubly-robust' method). 
+The regression adjustment fits a model using the untreated units $(D_i = 0)$:
+
+$$
+  Y_{it}(0) - Y_{i,g-1}(0) = \alpha_0 + X_i \beta_0 + u_i
+$$
+
+which predicts changes in $Y(0)$ given $X_i$. I denote $\alpha$ and $\beta$ with $_0$ to emphasize this is a model for $Y(0)$. This model can then predict the counterfactaul change in $Y$ for the treated units by plugging in the treated unit's $X_i$:
+
+$$
+  \underbrace{ \mathbb{E}\left( Y_{it}(0) - Y_{i,g-1}(0) \ | \ D_i = 1 \right) }_{\text{Imputed  counterfactual}} \approx \frac{1}{N_1} \sum_{i \ : \ D_i = 1} \hat{\alpha}_0 + X_i \hat{\beta}_0
+$$
+
+This is then compared to the observed $\frac{1}{N_1} \sum_{i \ : \ D_i = 1} \left( Y_{it} - Y_{i,g-1} \right)$ to form the DID estimate.
+
+For estimating subgroup average effects, we can modify the procedure to take averages of 
+
+$$
+  \left( Y_{it} - Y_{i,g-1} \right) - \left( \hat{\alpha}_0 + X_i \hat{\beta}_0 \right)
+$$
+
+for different subgroups defined by $Z_i = z$.
+
+This procedure is valid if $Z_i$ is one of the covariates you use in your conditional parallel trends assumption (passed in `xformla`). 
+If you do not include $Z_i$ in $X_i$, then you are assuming that trends do not vary by $Z_i = z$ which can be a strong assumption (do trends vary by large / smaller counties).
+
+
+
+## Coding implementation using `pte`
+
+We will use a dataset from the `did` package of teen employment in 500 counties in the U.S. from 2004 to 2007. 
+The main outcome variable is `lemp` which is the log of teen employment and the we will look if minimum wage changes have larger or smaller effects in small counties (based on `lpop`).
+First, let's load packages and the dataset.
+
+```{r}
+library(did)
+library(pte) # devtools::install_github("bcallaway11/pte")
+library(BMisc) # devtools::install_github("bcallaway11/BMisc")
+library(fixest)
+
+# Load example minimum wage dataset
+data(mpdta, package = "did")
+
+# Discretize population into above and below median
+mpdta$large_county <- mpdta$lpop >= quantile(mpdta$lpop, 0.50)
+
+head(mpdta)
+```
+
+The main thing that `pte` requires of the user is a function to take a dataframe for a given $(g,t)$ and produce a treatment effect estimate.
+The dataset is effectively your original dataframe subsetted with a few additional variables. To peek under the hood, this is what the data looks like
+```{r}
+# NOTE: you do not need to do this, but it's helpful to have an example to test your estimation function on
+pte_data <- pte::setup_pte(
+  yname = "lemp", gname = "first.treat", tname = "year", idname = "countyreal", data = mpdta
+)$data
+# g = 2004, t = 2007
+gt_data <- two_by_two_subset(pte_data, g = 2, tp = 5)$gt_data
+
+head(gt_data)
+```
+
+Note we have `G`, `id`, `Y` (outcome), `.w` (weights if provided), `period` (shifted version of original time), `name` (pre/post), and `D` (treatment).
+
+Let's define our function. This accepts `gt_data`, the `xformla` passed, and a custom argument called `subgroup` which lets you pass an expression to subset the treated group (e.g. `large_county == TRUE`)
+
+```{r}
+#' Subgroup ATT(g,t) estimation function
+#'
+#' Leave `subgroup` unspecified (or `NULL` to estimate overall ATT(g,t)
+#' Otherwise pass expression to `subgroup` to subset the treated units to a subgroup
+#'
+did_attgt_subgroup <- function(gt_data, xformla, subgroup = NULL, ...) {
+  # convert two period panel into wide with `pre` and `post`
+  data_pre <- gt_data[gt_data$name == "pre", ]
+  names(data_pre)[names(data_pre) == "Y"] <- "Y_pre"
+
+  data_post <- gt_data[gt_data$name == "post", ]
+  names(data_post)[names(data_post) == "Y"] <- "Y_post"
+  data_post <- data_post[, c("id", "Y_post")]
+
+  # One row per unit
+  wide_data <- merge(data_pre, data_post, by = "id")
+
+  # \Delta Y = Y_{i,t} - Y_{i,g-1}
+  wide_data$delta_Y <- wide_data$Y_post - wide_data$Y_pre
+
+  # Fit model using D == 0
+  outcome_reg <- fixest::feols(
+    fixest::xpd(lhs = "delta_Y", fml = xformla),
+    data = wide_data[wide_data$D == 0, ] # never-treated and/or not-yet-treated
+  )
+
+  # Predict Y_{it}(0) - Y_{i,g-1}(0) for everyone
+  wide_data$delta_Y0_hat <- predict(outcome_reg, newdata = wide_data)
+
+  # Difference between observed delta_y and predicted delta_Y0_hat
+  wide_data$diff <- wide_data$delta_Y - wide_data$delta_Y0_hat
+
+  # Get treated units
+  treat <- wide_data[wide_data$D == 1, ]
+
+  # Using a little quosure magic to allow `subgroup` to be passed in as an argument
+  subgroup <- rlang::enquo(subgroup)
+  if (!rlang::quo_is_null(subgroup)) {
+    subgroup <- rlang::eval_tidy(subgroup, data = treat)
+    treat <- treat[subgroup, ]
+  }
+
+  # Estimate ATT for treated units
+  attgt <- mean(treat$diff)
+  return(list(attgt = attgt))
+}
+```
+
+
+Now, with that function defined we can use it with `pte`. 
+The function takes very similar arguments to `did` (variable names and `xformla`), but requires a few extra arguments (`setup_pte_fun` and `subset_fun`) given the extra flexibility given by the `pte` package.
+
+```{r}
+# Overall ATT
+did_res <- pte(
+  data = mpdta,
+  yname = "lemp",
+  gname = "first.treat",
+  tname = "year",
+  idname = "countyreal",
+  xformla = ~lpop,
+  setup_pte_fun = pte::setup_pte,
+  subset_fun = pte::two_by_two_subset,
+  # base_period = "universal",
+  biters = 50,
+  # No subgroup filter so it estimates an overal ATT(g,t)
+  attgt_fun = did_attgt_subgroup
+)
+summary(did_res)
+
+# Check similar results using `did` when using Outcome Regression
+did::aggte(
+  did::att_gt(
+    data = mpdta,
+    yname = "lemp",
+    gname = "first.treat",
+    tname = "year",
+    idname = "countyreal",
+    xformla = ~lpop,
+    est_method = "reg"
+  ),
+  "dynamic"
+)
+```
+
+
+Now, we can pass the `subgroup` argument to estimate effects for large counties and for small counties separately.
+
+```{r}
+did_res_Z0 <- pte(
+  data = mpdta,
+  yname = "lemp",
+  gname = "first.treat",
+  tname = "year",
+  idname = "countyreal",
+  xformla = ~lpop,
+  setup_pte_fun = pte::setup_pte,
+  subset_fun = pte::two_by_two_subset,
+  # base_period = "universal",
+  biters = 50,
+  attgt_fun = did_attgt_subgroup,
+  subgroup = (large_county == FALSE)
+)
+summary(did_res_Z0)
+
+did_res_Z1 <- pte(
+  data = mpdta,
+  yname = "lemp",
+  gname = "first.treat",
+  tname = "year",
+  idname = "countyreal",
+  xformla = ~lpop,
+  setup_pte_fun = pte::setup_pte,
+  subset_fun = pte::two_by_two_subset,
+  # base_period = "universal",
+  biters = 50,
+  attgt_fun = did_attgt_subgroup,
+  subgroup = (large_county == TRUE)
+)
+summary(did_res_Z1)
+```
+
+
+### Plotting results
+
+```{r}
+#| fig.width: 8
+#| fig.height: 6
+#| fig.dpi: 300
+library(ggplot2)
+library(patchwork)
+plot_overall <- pte:::ggpte(did_res) +
+  labs(title = "Population Effect") +
+  theme(legend.position = "bottom")
+
+plot_Z0 <- pte:::ggpte(did_res_Z0) +
+  labs(title = "Effect for Small Counties") +
+  theme(legend.position = "bottom")
+
+plot_Z1 <- pte:::ggpte(did_res_Z1) +
+  labs(title = "Effect for Large Counties") +
+  theme(legend.position = "bottom")
+
+# Combine figures into one plot
+((plot_overall / plot_Z0 / plot_Z1) &
+  scale_y_continuous(limits = c(-0.34, 0.1)) &
+  labs(y = "ATT Estimate", color = "Post") &
+  theme(legend.position = "bottom")
+) +
+  plot_layout(axes = "collect", guides = "collect")
+```
+
+
+Or, you can extract the event-study estimates directly using `summary()` and plot the estimates however you wish.
+
+```{r}
+#| fig.width: 8
+#| fig.height: 4
+#| fig.dpi: 300
+plot_df_Z0 <- summary(did_res_Z0)$event_study
+  colnames(plot_df_Z0) <- c("e", "att", "se", "cil", "ciu")
+plot_df_Z1 <- summary(did_res_Z1)$event_study
+colnames(plot_df_Z1) <- c("e", "att", "se", "cil", "ciu")
+
+ggplot() +
+  geom_hline(yintercept = 0, color = "grey70") + 
+  geom_line(
+    aes(x = e, y = att, color = "Small Counties", group = (e >= 0)),
+    data = plot_df_Z0
+  ) +
+  geom_point(
+    aes(x = e, y = att, color = "Small Counties"),
+    data = plot_df_Z0
+  ) +
+  geom_ribbon(
+    aes(x = e, ymin = cil, ymax = ciu, color = "Small Counties", group = (e >= 0)),
+    data = plot_df_Z0,
+    fill = NA, linetype = "dashed"
+  ) +
+  geom_line(
+    aes(x = e, y = att, color = "Large Counties", group = (e >= 0)),
+    data = plot_df_Z1
+  ) +
+  geom_point(
+    aes(x = e, y = att, color = "Large Counties"),
+    data = plot_df_Z1
+  ) +
+  geom_ribbon(
+    aes(x = e, ymin = cil, ymax = ciu, color = "Large Counties", group = (e >= 0)),
+    data = plot_df_Z1,
+    fill = NA, linetype = "dashed"
+  ) +
+  labs(x = "Years Relative to Minimum Wage Change", y = NULL, color = NULL) + 
+  scale_color_manual(
+    values = c(
+      "Large Counties" = "#002C55",
+      "Small Counties" = "#2DB25F"
+    ),
+    guide = guide_legend(override.aes = list(linetype = "blank"))
+  ) +
+  theme_bw(base_size = 14) +
+  theme(
+    panel.border = element_blank(), axis.line = element_line(color = "grey70"),
+    legend.position = "top", 
+    legend.margin = margin(0, 0, 0, 0),
+    legend.justification = c(0, 1), 
+    legend.location = "plot"
+  )
+
+```
+
+
+
+
+
+
+
+
+
+
+# References
+
+> [Citation:]{.citation}
+>
+> <pre>
+> @online{callaway-unconfoundedness-regressions-2024,
+>   author       = {Callaway, Brantly},
+>   title        = {Interpreting Regressions under the Assumption of Unconfoundedness},
+>   year         = {2024},
+>   month        = {11},
+>   url          = {https://bcallaway11.github.io/posts/unconfoundedness-regressions},
+>   urldate      = {\today},
+> }
+> </pre>

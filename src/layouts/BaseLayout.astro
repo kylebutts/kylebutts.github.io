@@ -1,5 +1,4 @@
 ---
-import Block from "../components/Block.astro"
 import MenuBar from "../components/MenuBar/MenuBar.astro"
 import IncludeKatex from "../components/IncludeKatex.astro"
 import LoadFonts from '../components/font/LoadFonts.astro'
@@ -8,7 +7,6 @@ import "../styles/global.css"
 
 // og-image by slug
 const {
-	slug = "default",
 	description = "Kyle Butts -- Urban Economics and Applied Econometrics",
 	katex = false,
 } = Astro.props
@@ -30,6 +28,8 @@ const ogImage = `https://kylebutts.com/og-images/default.png`
 		<meta name="twitter:description" content={description} />
 
     <LoadFonts />
+    <!-- Include katex -->
+		{katex && <IncludeKatex />}
 	</head>
 
 	<body
@@ -42,7 +42,6 @@ const ogImage = `https://kylebutts.com/og-images/default.png`
 		<!-- Main  -->
 		<slot />
 
-		<!-- Include katex -->
-		{katex && <IncludeKatex />}
+		
 	</body>
 </html>

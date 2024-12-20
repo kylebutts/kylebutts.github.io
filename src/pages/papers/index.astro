@@ -7,15 +7,15 @@ let papers_unsorted = await getCollection("papers")
 
 let papers = papers_unsorted
 	.map((paper) => {
-		if (paper.data.category?.includes("Published")) {
+		if (paper.data.categories?.includes("Published")) {
 			paper.data.order = 5
-		} else if (paper.data.category?.includes("R&R")) {
+		} else if (paper.data.categories?.includes("R&R")) {
 			paper.data.order = 4
-		} else if (paper.data.category?.includes("Submitted")) {
+		} else if (paper.data.categories?.includes("Submitted")) {
 			paper.data.order = 3
-		} else if (paper.data.category?.includes("Working Paper")) {
+		} else if (paper.data.categories?.includes("Working Paper")) {
 			paper.data.order = 2
-		} else if (paper.data.category?.includes("Work in Progress")) {
+		} else if (paper.data.categories?.includes("Work in Progress")) {
 			paper.data.order = 1
 		} else {
 			paper.data.order = 0
