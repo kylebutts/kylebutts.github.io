@@ -11,7 +11,7 @@ let posts = posts_unsorted.sort((a, b) => {
 	// getTime is milliseconds since Jan 1, 1970, 00:00:00.000 GMT
 	return bDate.getTime() - aDate.getTime()
 })
-// posts = posts.filter((post) => post.data.draft != true)
+posts = posts.filter((post) => post.data.draft != true)
 ---
 
 <Layout content prose>

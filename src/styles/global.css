@@ -56,7 +56,8 @@ body {
 
 /* Code Blocks */
 pre {
-  @apply border-[1px] border-zinc-200 p-4;
+  @apply border-[1px] border-zinc-200;
+  padding: 1rem;
   overflow-x: auto;
   display: block
 }

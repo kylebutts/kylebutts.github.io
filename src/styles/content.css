@@ -1,4 +1,4 @@
-main, header, article {
+/* main, header, article {
 	--content-width: 1024px;
 }
 
@@ -21,6 +21,33 @@ main, header, article {
 @media (min-width: 1300px) {
 	.content {
 		grid-template-columns: 2fr 138px min(var(--content-width), 100%) 138px 2fr;
+		padding: 0;
+	}
+} */
+
+main, header, article {
+	--content-width: 768px;
+}
+
+.content {
+	@apply text-zinc-800 my-size-md;
+	--flow-space: var(--size-sm);
+	display: grid;
+	grid-template-columns: var(--size-2xs-xs) var(--size-2xs-xs) min(
+			var(--content-width),
+			calc(100% - 4 * var(--size-2xs-xs))
+		) var(--size-2xs-xs) var(--size-2xs-xs);
+	padding: 0;
+}
+@media (min-width: 768px) {
+	.content {
+		grid-template-columns: 2fr 1fr min(var(--content-width), 100%) 1fr 2fr;
+		padding: 0;
+	}
+}
+@media (min-width: 1024px) {
+	.content {
+		grid-template-columns: 2fr 128px min(var(--content-width), 100%) 128px 2fr;
 		padding: 0;
 	}
 }

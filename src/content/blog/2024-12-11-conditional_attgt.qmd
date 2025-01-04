@@ -7,6 +7,7 @@ author:
   - name: Kyle Butts
     url: https://kylebutts.com/
 date: '2024-12-11'
+draft: true
 categories:
   - Panel Data
   - Difference in Differences
