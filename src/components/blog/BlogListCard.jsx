@@ -3,8 +3,7 @@ export default function BlogCard({ post }) {
   let dateText = new Date(post.data.date).toLocaleDateString("en-US", { year: "numeric", month: "long" });
 
   return (
-
-    <li class="border-l-2 border-zinc-200 hover:border-zinc-800 duration-200 px-4 py-2">
+    <li class="border-l-2 border-zinc-200 hover:border-zinc-800 px-4 py-2">
       
       <h2
         class="font-white cursor-pointer text-size-1 font-bold"
