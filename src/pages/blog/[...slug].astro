@@ -5,26 +5,24 @@ import BaseLayout from "../../layouts/BaseLayout.astro"
 
 export async function getStaticPaths() {
 	const posts = await getCollection("blog")
-	return posts.filter((post) => {
-    post.data.draft == false
-  }).map((post) => {
-		return {
-			params: { slug: post.slug },
-			props: { post },
-		}
-	})
+	return posts
+		.filter((post) => !post.data.draft)
+		.map((post) => {
+			return {
+				params: { slug: post.slug },
+				props: { post },
+			}
+		})
 }
 
 const { post } = Astro.props
 const { Content } = await post.render()
-
 let authors = post.data.author
 authors = authors.sort((a, b) => {
 	const aLastName = a.name.split(" ").slice(-1)[0]
 	const bLastName = b.name.split(" ").slice(-1)[0]
 	return aLastName.localeCompare(bLastName)
 })
-
 let dateText = new Date(post.data.date).toLocaleDateString("en-US", {
 	year: "numeric",
 	month: "long",
