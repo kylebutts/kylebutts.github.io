@@ -10,11 +10,12 @@ categories:
   - "Econometrics"
 ---
 
-import { Bg, Color, Figure, LinkBlock, LargeBlock } from "../../components/mdx/"
+import { Figure, LargeBlock } from "../../components/mdx/"
+
 
 From writing the `did2s` and `didimputation` packages, I've received a ton of emails asking me about non-standard settings. I've spent a lot of time thinking about these problems and I'm going to share my thoughts on estimating treatment effects in non-traditional difference-in-differences settings. I first describe the intuition behind the basic two-stage diff-in-diff method so that we can then use that insight to describe how to approach non-traditional settings (e.g. continuous treatment, treatment turning on and off, multiple treatments, and multiple doses during period).
 
-<Color ruby>Important disclaimer:</Color> This post is not econometric theory. It does not prove anything for any non-traditional setting. I do, however, think it's useful to try and provide advice to applied folks on how to best answer a question until the econometric tools catch up.
+<span class="text-ruby-500">Important disclaimer:</span> This post is not econometric theory. It does not prove anything for any non-traditional setting. I do, however, think it's useful to try and provide advice to applied folks on how to best answer a question until the econometric tools catch up.
 
 ## Standard two-stage diff-in-diff
 

@@ -1,42 +1,19 @@
-/* main, header, article {
-	--content-width: 1024px;
-}
-
-.content {
-	@apply text-zinc-800 my-size-md;
-	--flow-space: var(--size-sm);
-	display: grid;
-	grid-template-columns: var(--size-2xs-xs) var(--size-2xs-xs) min(
-			var(--content-width),
-			calc(100% - 4 * var(--size-2xs-xs))
-		) var(--size-2xs-xs) var(--size-2xs-xs);
-	padding: 0;
-}
-@media (min-width: 1024px) {
-	.content {
-		grid-template-columns: 2fr 1fr min(var(--content-width), 100%) 1fr 2fr;
-		padding: 0;
-	}
-}
-@media (min-width: 1300px) {
-	.content {
-		grid-template-columns: 2fr 138px min(var(--content-width), 100%) 138px 2fr;
-		padding: 0;
-	}
-} */
-
-main, header, article {
+main,
+header,
+article {
 	--content-width: 768px;
 }
 
 .content {
-	@apply text-zinc-800 my-size-md;
+	color: var(--color-zinc-800);
+	margin-top: var(--size-md);
+	margin-bottom: var(--size-md);
 	--flow-space: var(--size-sm);
 	display: grid;
-	grid-template-columns: var(--size-2xs-xs) var(--size-2xs-xs) min(
-			var(--content-width),
-			calc(100% - 4 * var(--size-2xs-xs))
-		) var(--size-2xs-xs) var(--size-2xs-xs);
+	grid-template-columns:
+		var(--size-2xs-xs) var(--size-2xs-xs)
+		min(var(--content-width), calc(100% - 4 * var(--size-2xs-xs)))
+		var(--size-2xs-xs) var(--size-2xs-xs);
 	padding: 0;
 }
 @media (min-width: 768px) {
@@ -56,7 +33,8 @@ main, header, article {
 .content > *,
 .content > astro-island > *,
 .content > astro-slot > *,
-.content > [data-rehype-pretty-code-fragment] > * {
+.content > [data-rehype-pretty-code-fragment] > *,
+.content > .astro-code {
 	grid-column: 3;
 }
 
@@ -156,24 +134,41 @@ FLOW
 
 /* Link */
 .prose :where(a):not(:where([class~="not-prose"] *)) {
-	@apply underline decoration-2 decoration-zinc-400 hover:decoration-zinc-500;
+	text-decoration: underline;
+	text-decoration-thickness: 2px;
+	text-decoration-color: var(--color-zinc-400);
+}
+.prose :where(a:hover):not(:where([class~="not-prose"] *)) {
+	text-decoration-color: var(--color-zinc-500);
 }
 
 /* Headings */
 .prose :where(h1):not(:where([class~="not-prose"] *)) {
-	@apply text-size-2 font-bold;
-
+	font-size: var(--size-2);
+	font-weight: bold;
 	--flow-space: var(--size-xl-2xl);
 	line-height: 1.1;
 }
 .prose :where(h2):not(:where([class~="not-prose"] *)) {
-	@apply font-bold  text-size-1 border-b-[2px] border-dashed border-zinc-200 py-size-2xs;
+	font-weight: bold;
+	font-size: var(--size-1);
+	border-bottom: 2px;
+	border-style: dashed;
+	border-color: var(--color-zinc-200);
+	padding-top: var(--size-2xs);
+	padding-bottom: var(--size-2xs);
 
 	--flow-space: var(--size-xl-2xl);
 	line-height: 1.1;
 }
 .prose :where(h3):not(:where([class~="not-prose"] *)) {
-	@apply text-size-0 italic border-b-[1px] border-dashed border-zinc-200 py-size-2xs;
+	font-size: var(--size-0);
+	font-style: italic;
+	border-bottom-width: 1px;
+	border-bottom-style: dashed;
+	border-bottom-color: var(--color-zinc-200);
+	padding-top: var(--size-2xs);
+	padding-bottom: var(--size-2xs);
 
 	--flow-space: var(--size-xl-2xl);
 	line-height: 1.1;
@@ -184,30 +179,33 @@ FLOW
 
 /* Katex */
 .katex-display {
-  overflow-y: hidden;
-  overflow-x: auto;
-  height: max-content;
-  margin-bottom: unset !important;
-  margin-top: var(--size-xs);
+	overflow-y: hidden;
+	overflow-x: auto;
+	height: max-content;
+	margin-bottom: unset !important;
+	margin-top: var(--size-xs);
 }
 .katex {
 	font-size: 1em !important;
-  line-height: unset;
+	line-height: unset;
 }
 .katex-display > .katex {
-  font-size: 1.21em !important;
-  padding-left: 1em !important;
-  text-align: left !important;
-  @apply border-l-[2px] border-zinc-200
+	font-size: 1.21em !important;
+	padding-left: 1em !important;
+	text-align: left !important;
+	border-left: 2px;
+	border-color: var(--color-zinc-200);
 }
 .prose .katex-display + p {
-  --flow-space: var(--size-sm);
+	--flow-space: var(--size-sm);
 }
-
 
 /* Blockquote */
 .prose > :is(blockquote) {
-	@apply border-l-[2px] border-zinc-200 py-size-2xs;
+	border-left: 2px;
+	border-color: var(--color-zinc-200);
+	padding-top: var(--spacing-size-2xs);
+	padding-bottom: var(--spacing-size-2xs);
 	padding-left: calc(3ch - 2px);
 }
 .prose > :is(blockquote) > p {
@@ -222,10 +220,29 @@ FLOW
 	max-width: 72ch;
 }
 .prose :where(ul):not(:where([class~="not-prose"] *)) {
-	@apply list-inside list-disc pl-size-3xs marker:text-zinc-400 lg:pl-[1.5555556em];
+	padding-left: var(--spacing-size-3xs);
+	list-style-position: inside;
+	list-style-type: decimal;
+
+	@media (width >= 1024px) {
+		padding-left: 1.5555556em;
+	}
+	& *::marker {
+		color: var(--color-zinc-400) /* oklch(0.705 0.015 286.067) = #9f9fa9 */;
+	}
+	&::marker {
+		color: var(--color-zinc-400) /* oklch(0.705 0.015 286.067) = #9f9fa9 */;
+	}
 }
 .prose :where(ol):not(:where([class~="not-prose"] *)) {
-	@apply list-inside list-decimal marker:text-zinc-400;
+	list-style-position: inside;
+	list-style-type: decimal;
+	& *::marker {
+		color: var(--color-zinc-400) /* oklch(0.705 0.015 286.067) = #9f9fa9 */;
+	}
+	&::marker {
+		color: var(--color-zinc-400) /* oklch(0.705 0.015 286.067) = #9f9fa9 */;
+	}
 }
 .prose :where(li):not(:where([class~="not-prose"] *)) {
 	font-size: var(--size-0);
@@ -237,4 +254,28 @@ FLOW
 }
 .prose :where(:is(ol, ul) > li > p):not(:where([class~="not-prose"] *)) {
 	display: inline;
+}
+
+/* Code Blocks */
+pre {
+	border-width: 2px;
+	border-color: var(--color-zinc-200);
+	padding: 1rem;
+	overflow-x: auto;
+	display: block;
+}
+pre > code {
+	display: grid;
+}
+pre > code > .line {
+	min-height: 1.5em;
+}
+pre > code > .line:not(:empty) {
+	background-color: transparent;
+}
+code {
+	font-size: 0.88em;
+}
+.language-id {
+	display: none;
 }

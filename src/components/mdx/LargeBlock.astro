@@ -1,17 +1,26 @@
 ---
-import "../../styles/large-block.css"
-const { title, flex = false, dotted = false } = Astro.props
+const { title, dotted = false, flex = false } = Astro.props
 ---
 
-<div class:list={[
-  "large-block not-prose wide-bleed max-w-[1480px] mx-auto relative group border-zinc-200", 
-  { "dotted": dotted }, 
-  { "flex flex-col items-center gap-y-12": flex }
-]}>
-  {
-    title != null ?
-    <h2 class="text-center text-xl font-bold my-size-sm">{title}</h2> :
-    null
-  }
-  <slot />
+<style>
+	.large-block.dotted {
+		background-image: radial-gradient(var(--color-zinc-200) 1px, transparent 0);
+		background-position: 50% center;
+		background-size: 14px 14px;
+	}
+</style>
+
+<div
+	class:list={[
+		"large-block not-prose wide-bleed max-w-[1480px] mx-auto relative group border-zinc-200",
+		{ dotted: dotted },
+		{ "flex flex-col items-center gap-y-12": flex },
+	]}
+>
+	{
+		title != null ? (
+			<h2 class="text-center text-xl font-bold my-size-sm">{title}</h2>
+		) : null
+	}
+	<slot />
 </div>

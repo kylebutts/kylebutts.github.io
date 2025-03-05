@@ -1,73 +1,169 @@
-@import url(fluid.css); /* Defines fluid type and spacing variables */
-@import url(content.css);
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import url(font.css) layer(base);
+@import url(content.css) layer(base);
+@import "tailwindcss";
+@custom-variant dark (&:is(.dark *));
+:root {
+  /* https://utopia.fyi/type/calculator?c=320,18,1.125,1240,20,1.2,5,2,&s=0.75%7C0.5%7C0.25,1.5%7C2%7C3%7C4%7C6,s-l&g=s,l,xl,12 */
+	--size-base: 1rem;
+	--size--2: clamp(0.8681rem, 0.8959rem + -0.0359vw, 0.8888rem);
+	--size--1: clamp(1rem, 0.9854rem + 0.0728vw, 1.0419rem);
+	--size-0: clamp(1.125rem, 1.0815rem + 0.2174vw, 1.25rem);
+	--size-1: clamp(1.2656rem, 1.1841rem + 0.4076vw, 1.5rem);
+	--size-2: clamp(1.4238rem, 1.2929rem + 0.6543vw, 1.8rem);
+	--size-3: clamp(1.6019rem, 1.4077rem + 0.9707vw, 2.16rem);
+	--size-4: clamp(1.8019rem, 1.5271rem + 1.3739vw, 2.5919rem);
+	--size-5: clamp(2.0275rem, 1.6508rem + 1.8837vw, 3.1106rem);
+  /* https://utopia.fyi/space/calculator?c=320,24,1.125,1240,28,1.125,5,2,&s=0.75%7C0.5%7C0.25,1.5%7C2%7C3%7C4%7C6,s-l&g=s,l,xl,12 */
+	--size-3xs: clamp(0.3125rem, 0.3125rem + 0vw, 0.3125rem);
+	--size-2xs: clamp(0.5625rem, 0.5408rem + 0.1087vw, 0.625rem);
+	--size-xs: clamp(0.875rem, 0.8533rem + 0.1087vw, 0.9375rem);
+	--size-sm: clamp(1.125rem, 1.0815rem + 0.2174vw, 1.25rem);
+	--size-md: clamp(1.6875rem, 1.6223rem + 0.3261vw, 1.875rem);
+	--size-lg: clamp(2.25rem, 2.163rem + 0.4348vw, 2.5rem);
+	--size-xl: clamp(3.375rem, 3.2446rem + 0.6522vw, 3.75rem);
+	--size-2xl: clamp(4.5rem, 4.3261rem + 0.8696vw, 5rem);
+	--size-3xl: clamp(6.75rem, 6.4891rem + 1.3043vw, 7.5rem);
+	--size-3xs-2xs: clamp(0.3125rem, 0.2038rem + 0.5435vw, 0.625rem);
+	--size-2xs-xs: clamp(0.5625rem, 0.4321rem + 0.6522vw, 0.9375rem);
+	--size-xs-sm: clamp(0.875rem, 0.7446rem + 0.6522vw, 1.25rem);
+	--size-sm-md: clamp(1.125rem, 0.8641rem + 1.3043vw, 1.875rem);
+	--size-md-lg: clamp(1.6875rem, 1.4049rem + 1.413vw, 2.5rem);
+	--size-lg-xl: clamp(2.25rem, 1.7283rem + 2.6087vw, 3.75rem);
+	--size-xl-2xl: clamp(3.375rem, 2.8098rem + 2.8261vw, 5rem);
+	--size-2xl-3xl: clamp(4.5rem, 3.4565rem + 5.2174vw, 7.5rem);
+}
+@theme {
+  --spacing: 4px;
+  
+	--breakpoint-*: initial;
+	--breakpoint-prose: 80ch;
+	--breakpoint-md: 640px;
+	--breakpoint-lg: 1024px;
+	--breakpoint-xl: 1280px;
 
-body {
-  line-height: 1.5;
+	--container-md: 640px;
+	--container-lg: 1024px;
+	--container-xl: 1280px;
+	--container-prose: 80ch;
+
+	--font-serif:
+		Libertine, ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+	--font-mono:
+		IBM Plex Mono, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+		"Liberation Mono", "Courier New", monospace;
+
+	--text-base: 1rem;
+	--text-size--2: var(--size--2);
+	--text-size--1: var(--size--1);
+	--text-size-0: var(--size-0);
+	--text-size-1: var(--size-1);
+	--text-size-2: var(--size-2);
+	--text-size-3: var(--size-3);
+	--text-size-4: var(--size-4);
+	--text-size-5: var(--size-5);
+
+	--spacing-size-3xs: var(--size-3xs);
+	--spacing-size-2xs: var(--size-2xs);
+	--spacing-size-xs: var(--size-xs);
+	--spacing-size-sm: var(--size-sm);
+	--spacing-size-md: var(--size-md);
+	--spacing-size-lg: var(--size-lg);
+	--spacing-size-xl: var(--size-xl);
+	--spacing-size-2xl: var(--size-2xl);
+	--spacing-size-3xl: var(--size-3xl);
+	--spacing-size-3xs-2xs: var(--size-3xs-2xs);
+	--spacing-size-2xs-xs: var(--size-2xs-xs);
+	--spacing-size-xs-sm: var(--size-xs-sm);
+	--spacing-size-sm-md: var(--size-sm-md);
+	--spacing-size-md-lg: var(--size-md-lg);
+	--spacing-size-lg-xl: var(--size-lg-xl);
+	--spacing-size-xl-2xl: var(--size-xl-2xl);
+	--spacing-size-2xl-3xl: var(--size-2xl-3xl);
+
+	--color-aquamarine-50: #f4fffd;
+	--color-aquamarine-100: #e9fffb;
+	--color-aquamarine-200: #c7fff4;
+	--color-aquamarine-300: #a5ffee;
+	--color-aquamarine-400: #62ffe1;
+	--color-aquamarine-500: #1effd4;
+	--color-aquamarine-600: #1be6bf;
+	--color-aquamarine-700: #17bf9f;
+	--color-aquamarine-800: #12997f;
+	--color-aquamarine-900: #0f7d68;
+
+	--color-daisy-50: #fefcf6;
+	--color-daisy-100: #fdfaec;
+	--color-daisy-200: #faf2d0;
+	--color-daisy-300: #f7e9b4;
+	--color-daisy-400: #f1d97c;
+	--color-daisy-500: #ebc944;
+	--color-daisy-600: #d4b53d;
+	--color-daisy-700: #b09733;
+	--color-daisy-800: #8d7929;
+	--color-daisy-900: #736221;
+
+	--color-ruby-50: #faf4f3;
+	--color-ruby-100: #f5e9e8;
+	--color-ruby-200: #e6c9c5;
+	--color-ruby-300: #d7a8a1;
+	--color-ruby-400: #b8665b;
+	--color-ruby-500: #9a2515;
+	--color-ruby-600: #8b2113;
+	--color-ruby-700: #741c10;
+	--color-ruby-800: #5c160d;
+	--color-ruby-900: #4b120a;
+
+	--color-alice-50: #f3f8fa;
+	--color-alice-100: #e7f2f4;
+	--color-alice-200: #c3dde5;
+	--color-alice-300: #9fc9d5;
+	--color-alice-400: #58a1b5;
+	--color-alice-500: #107895;
+	--color-alice-600: #0e6c86;
+	--color-alice-700: #0c5a70;
+	--color-alice-800: #0a4859;
+	--color-alice-900: #083b49;
+
+	--color-coral-50: #fef8f4;
+	--color-coral-100: #fef0e9;
+	--color-coral-200: #fcdbc8;
+	--color-coral-300: #fac5a6;
+	--color-coral-400: #f69964;
+	--color-coral-500: #f26d21;
+	--color-coral-600: #da621e;
+	--color-coral-700: #b65219;
+	--color-coral-800: #914114;
+	--color-coral-900: #773510;
+
+	--color-kelly-50: #f9faf7;
+	--color-kelly-100: #f3f4ee;
+	--color-kelly-200: #e0e4d5;
+	--color-kelly-300: #cdd4bb;
+	--color-kelly-400: #a8b389;
+	--color-kelly-500: #829356;
+	--color-kelly-600: #75844d;
+	--color-kelly-700: #626e41;
+	--color-kelly-800: #4e5834;
+	--color-kelly-900: #40482a;
 }
 
-/* Load Fonts */
-@font-face {
-	font-family: "Libertine";
-	src: url("/fonts/LinuxLibertine_Regular.woff") format("woff");
-	font-weight: normal;
-	font-style: normal;
-	font-display: swap;
-}
-@font-face {
-	font-family: "Libertine";
-	src: url("/fonts/LinuxLibertine_Italic.woff") format("woff");
-	font-weight: normal;
-	font-style: italic;
-	font-display: swap;
-}
-@font-face {
-	font-family: "Libertine";
-	src: url("/fonts/LinuxLibertine_Bold.woff") format("woff");
-	font-weight: 700;
-	font-style: normal;
-	font-display: swap;
-}
-@font-face {
-	font-family: "Libertine";
-	src: url("/fonts/LinuxLibertine_BoldItalic.woff") format("woff");
-	font-weight: 700;
-	font-style: italic;
-	font-display: swap;
-}
-/* @font-face {
-  font-family: 'Libertine';
-  src: url('/fonts/LinuxLibertine_SemiBold.woff') format('woff');
-  font-weight: 600;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Libertine';
-  src: url('/fonts/LinuxLibertine_SemiBoldItalic.woff') format('woff');
-  font-weight: 600;
-  font-style: italic;
-  font-display: swap;
-} */
 
 
+/*
+  The default border color has changed to `currentColor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
 
-/* Code Blocks */
-pre {
-  @apply border-[1px] border-zinc-200;
-  padding: 1rem;
-  overflow-x: auto;
-  display: block
-}
-pre > code {
-	display: grid;
-}
-code {
-  font-size: 0.88em;
-}
-.language-id {
-  display: none;
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+	*,
+	::after,
+	::before,
+	::backdrop,
+	::file-selector-button {
+		border-color: var(--color-gray-200, currentColor);
+	}
 }
 

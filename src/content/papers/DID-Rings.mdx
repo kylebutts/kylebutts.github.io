@@ -15,10 +15,10 @@ categories:
   - "Difference-in-Differences"
   - "Applied Econometrics"
 status: "<i>Journal of Urban Economics: Insights</i>, 2022"
-summary: "I propose a non-parametric estimator for 'Rings' style estimators where an inner ring is treated and and outer ring serves as the control group."
+summary: "I propose a non-parametric estimator for 'Rings' style estimators where an inner ring-3 is treated and and outer ring-3 serves as the control group."
 ---
 
-import { Bg, Color, Figure, LinkBlock, LargeBlock } from "../../components/mdx/";
+import { Figure, LargeBlock } from "../../components/mdx/";
 
 ## Abstract
 
@@ -26,17 +26,17 @@ This paper formalizes a common approach for estimating effects of treatment at a
 
 ## 5-Minute Summary
 
-The rise of geocoded microdata has allowed researchers to begin answering questions about the effects of spatially-targeted treatments at a very granular level. How do local pollutants affect child health? Does living within walking distance to a new bus stop improve labor market outcomes? How far do neighborhood shocks, such as foreclosures or new construction spread? A standard method of evaluating the effects of the treatment is to compare changes in outcomes for units that are close to treatment to those slightly further away – what I label the <Color kelly>ring method</Color>.
+The rise of geocoded microdata has allowed researchers to begin answering questions about the effects of spatially-targeted treatments at a very granular level. How do local pollutants affect child health? Does living within walking distance to a new bus stop improve labor market outcomes? How far do neighborhood shocks, such as foreclosures or new construction spread? A standard method of evaluating the effects of the treatment is to compare changes in outcomes for units that are close to treatment to those slightly further away – what I label the <span class="text-kelly-500">ring method</span>.
 
-The motivation for such a design is that since both the 'treated' and the 'control' units are within. the same local neighborhood, they should be subject to <Color coral>common shocks</Color>. For example, [Asquith et al. (2021)](https://dx.doi.org/10.1162/rest_a_01055) write _"The idea is that within a small area, developers have few sites that are available and properly zoned, leading to hyper-local variation in the location of new construction that is not related to future price changes."_ I show in this paper that the currently proposed method does not _fully_ use this <Color coral>common shocks</Color> assumption and in turn (i) estimate results that are biased except under a very strong assumption and (ii) estimate an 'average effect' instead of the full treatment effect curve.
+The motivation for such a design is that since both the 'treated' and the 'control' units are within. the same local neighborhood, they should be subject to <span class="text-coral-500">common shocks</span>. For example, [Asquith et al. (2021)](https://dx.doi.org/10.1162/rest_a_01055) write _"The idea is that within a small area, developers have few sites that are available and properly zoned, leading to hyper-local variation in the location of new construction that is not related to future price changes."_ I show in this paper that the currently proposed method does not _fully_ use this <span class="text-coral-500">common shocks</span> assumption and in turn (i) estimate results that are biased except under a very strong assumption and (ii) estimate an 'average effect' instead of the full treatment effect curve.
 
 ### Problems with the standard ring method
 
-First, the problems with the standard ring method. In the below figure, I show 4 different "estimates" using the ring method for the same data-generating process. The black line highlights the treatment effect curve which declines over distance and becomes zero after `0.75 miles`. The gray line shows the counterfactual shock, which under the <Color coral>common shocks</Color> is constant across distance and normalized to zero. For each estimate, the researcher compares the average change in outcomes in the `treated` section to the average change in outcomes in the `control` section, a difference-in-differences estimator.
+First, the problems with the standard ring method. In the below figure, I show 4 different "estimates" using the ring-3 method for the same data-generating process. The black line highlights the treatment effect curve which declines over distance and becomes zero after `0.75 miles`. The gray line shows the counterfactual shock, which under the <span class="text-coral-500">common shocks</span> is constant across distance and normalized to zero. For each estimate, the researcher compares the average change in outcomes in the `treated` section to the average change in outcomes in the `control` section, a difference-in-differences estimator.
 
 <Figure src="/images/rings_ex.png" alt="Example of Problems with 'Standard' Rings method" />
 
-The top left panel, shows the 'oracle' estimator where the researcher knows how far treatment effects travel (_this is a very hard thing to justify and is usually an ad-hoc choice_). In this case, the researcher is able to correctly identify the <Color alice>average treatment effect among the affected</Color>. Note, however, that this estimate masks over interesting heterogeneity in treatment effects over distance, with the closest units experiencing twice as large of a treatment effect as the average. Later on, I propose an estimator that estimates the average treatment effect as a function of distance.
+The top left panel, shows the 'oracle' estimator where the researcher knows how far treatment effects travel (_this is a very hard thing to justify and is usually an ad-hoc choice_). In this case, the researcher is able to correctly identify the <span class="text-alice-500">average treatment effect among the affected</span>. Note, however, that this estimate masks over interesting heterogeneity in treatment effects over distance, with the closest units experiencing twice as large of a treatment effect as the average. Later on, I propose an estimator that estimates the average treatment effect as a function of distance.
 
 It is not common, though, to know how far treatment effects travel. Hence, researchers typically will select the wrong distance. The problems arise are shown in the top-right and bottom-left panels. The top-right panel shows when the treatment ring is too wide. Since units experiencing no treatment effects are included in this sample, the average treatment effect is attenuated towards zero. The bottom-left panel shows when the the treatment ring is too narrow. In this case, the counterfactual trend estimated by the control unit is biased and hence the average effect is biased as well.
 
@@ -44,7 +44,7 @@ Researchers have recognized this problem and have proposed selecting alternate r
 
 ### Non-parametric Rings Estimator
 
-The central idea behind my proposed estimator is instead of having a single treatment ring and a single control ring to have many rings. The furthest away ring will estimate the <Color coral>common shock</Color> while the other rings will each estimate the treatment effect for that distance from treatment. For example, see the below figure which recreates the results of [Linden and Rockoff (2008)](https://dx.doi.org/10.1257/aer.98.3.1103) who study the effects of a sexual offender arriving to your neighborhood on home prices. The top panel is the standard rings estimator. Notice they choose a cutoff and then assume the treatment effect is constant within the treated ring and that after their cutoff the effects are zero.
+The central idea behind my proposed estimator is instead of having a single treatment ring and a single control ring to have many rings. The furthest away ring will estimate the <span class="text-coral-500">common shock</span> while the other rings will each estimate the treatment effect for that distance from treatment. For example, see the below figure which recreates the results of [Linden and Rockoff (2008)](https://dx.doi.org/10.1257/aer.98.3.1103) who study the effects of a sexual offender arriving to your neighborhood on home prices. The top panel is the standard rings estimator. Notice they choose a cutoff and then assume the treatment effect is constant within the treated ring and that after their cutoff the effects are zero.
 
 <Figure src="/images/linden_rockoff.png" alt="Linden and Rockoff (2008) Analysis of Sexual Offender Arrival on Home Prices" />
 
