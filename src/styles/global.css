@@ -3,7 +3,7 @@
 @import "tailwindcss";
 @custom-variant dark (&:is(.dark *));
 :root {
-  /* https://utopia.fyi/type/calculator?c=320,18,1.125,1240,20,1.2,5,2,&s=0.75%7C0.5%7C0.25,1.5%7C2%7C3%7C4%7C6,s-l&g=s,l,xl,12 */
+	/* https://utopia.fyi/type/calculator?c=320,18,1.125,1240,20,1.2,5,2,&s=0.75%7C0.5%7C0.25,1.5%7C2%7C3%7C4%7C6,s-l&g=s,l,xl,12 */
 	--size-base: 1rem;
 	--size--2: clamp(0.8681rem, 0.8959rem + -0.0359vw, 0.8888rem);
 	--size--1: clamp(1rem, 0.9854rem + 0.0728vw, 1.0419rem);
@@ -13,7 +13,7 @@
 	--size-3: clamp(1.6019rem, 1.4077rem + 0.9707vw, 2.16rem);
 	--size-4: clamp(1.8019rem, 1.5271rem + 1.3739vw, 2.5919rem);
 	--size-5: clamp(2.0275rem, 1.6508rem + 1.8837vw, 3.1106rem);
-  /* https://utopia.fyi/space/calculator?c=320,24,1.125,1240,28,1.125,5,2,&s=0.75%7C0.5%7C0.25,1.5%7C2%7C3%7C4%7C6,s-l&g=s,l,xl,12 */
+	/* https://utopia.fyi/space/calculator?c=320,24,1.125,1240,28,1.125,5,2,&s=0.75%7C0.5%7C0.25,1.5%7C2%7C3%7C4%7C6,s-l&g=s,l,xl,12 */
 	--size-3xs: clamp(0.3125rem, 0.3125rem + 0vw, 0.3125rem);
 	--size-2xs: clamp(0.5625rem, 0.5408rem + 0.1087vw, 0.625rem);
 	--size-xs: clamp(0.875rem, 0.8533rem + 0.1087vw, 0.9375rem);
@@ -32,11 +32,21 @@
 	--size-xl-2xl: clamp(3.375rem, 2.8098rem + 2.8261vw, 5rem);
 	--size-2xl-3xl: clamp(4.5rem, 3.4565rem + 5.2174vw, 7.5rem);
 
-  --kyle-selected: var(--color-kyle-blue);
+	--color-kyle-teal: #1a505a;
+	--color-kyle-navy: #002c55;
+	--color-kyle-magenta: #b3114b;
+	--color-kyle-cranberry: #e64173;
+	--color-kyle-purple: #5c4cbf;
+	--color-kyle-blue: #0188ac;
+	--color-kyle-green: #2db25f;
+	--color-kyle-orange: #d65616;
+	--color-kyle-rose: #fb7185;
+	--color-kyle-yellow: #ffc517;
+	--kyle-selected: var(--color-kyle-blue);
 }
 @theme {
-  --spacing: 4px;
-  
+	--spacing: 4px;
+
 	--breakpoint-*: initial;
 	--breakpoint-prose: 80ch;
 	--breakpoint-md: 640px;
@@ -82,20 +92,17 @@
 	--spacing-size-xl-2xl: var(--size-xl-2xl);
 	--spacing-size-2xl-3xl: var(--size-2xl-3xl);
 
-  --color-kyle-teal: #1A505A;
-  --color-kyle-navy: #002C55;
-  --color-kyle-magenta: #B3114B;
-  --color-kyle-cranberry: #E64173;
-  --color-kyle-purple: #5C4CBF;
-  --color-kyle-blue: #0188AC;
-  --color-kyle-green: oklch(67.4% 0.165 151deg);
-  --color-kyle-orange: #D65616;
-  --color-kyle-rose: #FB7185;
-  --color-kyle-yellow: #ffc517;
-  --color-kyle-highlight: var(--kyle-selected);
-
-
-
+	--color-kyle-teal: #1a505a;
+	--color-kyle-navy: #002c55;
+	--color-kyle-magenta: #b3114b;
+	--color-kyle-cranberry: #e64173;
+	--color-kyle-purple: #5c4cbf;
+	--color-kyle-blue: #0188ac;
+	--color-kyle-green: #2db25f;
+	--color-kyle-orange: #d65616;
+	--color-kyle-rose: #fb7185;
+	--color-kyle-yellow: #ffc517;
+	--color-kyle-highlight: var(--kyle-selected);
 
 	--color-aquamarine-50: #f4fffd;
 	--color-aquamarine-100: #e9fffb;
@@ -164,8 +171,6 @@
 	--color-kelly-900: #40482a;
 }
 
-
-
 /*
   The default border color has changed to `currentColor` in Tailwind CSS v4,
   so we've added these compatibility styles to make sure everything still
@@ -183,4 +188,3 @@
 		border-color: var(--color-gray-200, currentColor);
 	}
 }
-

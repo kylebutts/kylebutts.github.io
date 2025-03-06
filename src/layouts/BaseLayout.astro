@@ -19,7 +19,7 @@ const ogImage = `https://kylebutts.com/og-images/default.png`
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+		<link id="dynamic-favicon" rel="icon" type="image/x-icon" href="/favicon.png" />
 		<title>Kyle Butts</title>
 		<meta name="description" content={description} />
 		<meta property="og:image" content={ogImage} />
@@ -27,12 +27,12 @@ const ogImage = `https://kylebutts.com/og-images/default.png`
 		<meta name="twitter:card" content="summary_large_image" />
 		<meta name="twitter:title" content="Kyle Butts" />
 		<meta name="twitter:description" content={description} />
-    
-    <ClientRouter />
+
+		<!-- <ClientRouter /> -->
 		<LoadFonts />
 		<!-- Include katex -->
 		{katex && <IncludeKatex />}
-		<!-- Default color -->
+		<!-- Default color needs to be set up here inline to avoid any flashes of the wrong color -->
 		<script is:inline>
 			const colors = [
 				"kyle-magenta",
@@ -47,9 +47,22 @@ const ogImage = `https://kylebutts.com/og-images/default.png`
 			const root = document.documentElement
 			const storedColor = localStorage.getItem("color")
 			let color = storedColor || colors[0]
+      function changeFavicon(src) {
+				let link = document.createElement("link")
+        let oldLink = document.getElementById("dynamic-favicon")
+				link.id = "dynamic-favicon"
+				link.rel = "shortcut icon"
+        link.type="image/x-icon"
+				link.href = src
+				if (oldLink) {
+					document.head.removeChild(oldLink)
+				}
+				document.head.appendChild(link)
+			}
+
 			root.style.setProperty("--kyle-selected", "var(--color-" + color + ")")
+      changeFavicon("/favicon/favicon_" + color + ".png")
 		</script>
-		
 	</head>
 
 	<body
@@ -61,5 +74,48 @@ const ogImage = `https://kylebutts.com/og-images/default.png`
 
 		<!-- Main  -->
 		<slot />
+
+		<!-- Instantiate Color Picker -->
+		<script>
+			const colors = [
+				"kyle-magenta",
+				"kyle-purple",
+				"kyle-blue",
+				"kyle-yellow",
+				"kyle-cranberry",
+				"kyle-orange",
+				"kyle-rose",
+				"kyle-green",
+			]
+			let color = localStorage.getItem("color") || colors[0]
+			const themeChooser = document.getElementById("themeChooser")
+			const root = document.documentElement
+			if (themeChooser) {
+				themeChooser.addEventListener("click", () => {
+					// indexOf could be -1 but that would be fine in this case
+					color = colors[(colors.indexOf(color) + 1) % colors.length]
+					console.log(color)
+					localStorage.setItem("color", color)
+					root.style.setProperty(
+						"--kyle-selected",
+						"var(--color-" + color + ")"
+					)
+
+          function changeFavicon(src) {
+            let link = document.createElement("link")
+            let oldLink = document.getElementById("dynamic-favicon")
+            link.id = "dynamic-favicon"
+            link.rel = "shortcut icon"
+            link.type="image/x-icon"
+            link.href = src
+            if (oldLink) {
+              document.head.removeChild(oldLink)
+            }
+            document.head.appendChild(link)
+          }
+          changeFavicon("/favicon/favicon_" + color + ".png")
+				})
+			}
+		</script>
 	</body>
 </html>

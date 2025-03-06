@@ -288,3 +288,12 @@ code {
 .language-id {
 	display: none;
 }
+
+/* Useful classes */
+.offset-border-left {
+  margin-left: -16px;
+  border-left-width: 3px;
+  border-left-color: var(--color-kyle-highlight);
+  padding-left: 16px;
+  text-indent: -2px;
+}

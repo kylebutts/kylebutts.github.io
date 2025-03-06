@@ -7,32 +7,6 @@ const items = [
 ]
 ---
 
-<script>
-	const colors = [
-		"kyle-magenta",
-		"kyle-purple",
-		"kyle-blue",
-		"kyle-yellow",
-		"kyle-cranberry",
-		"kyle-orange",
-		"kyle-rose",
-		"kyle-green",
-	]
-	let color = localStorage.getItem("color") || colors[0]
-	const themeChooser = document.getElementById("themeChooser")
-	if (themeChooser) {
-		themeChooser.addEventListener("click", () => {
-			// indexOf could be -1 but that would be fine in this case
-			color = colors[(colors.indexOf(color) + 1) % colors.length]
-      localStorage.setItem("color", color)
-			document.documentElement.style.setProperty(
-				"--kyle-selected",
-				"var(--color-" + color + ")"
-			)
-		})
-	}
-</script>
-
 <div class="flex flex-row place-content-between text-size-0 font-light">
 	<ul class="flex gap-size-xs-sm">
 		{
