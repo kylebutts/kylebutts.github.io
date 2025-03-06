@@ -53,7 +53,7 @@ let workInProgress = papers.filter((paper) => paper.data.order < 2)
 			publishedPapers.map((paper, i) => {
 				return (
 					<li class="grid grid-cols-[2em_1fr]">
-						<p class="text-size-0">{i + 1}. </p>
+						<p class="mt-[3px] text-size-0">{i + 1}. </p>
 						<div>
 							<PaperInfo data={paper.data} slug={paper.slug} />
 						</div>
@@ -73,7 +73,7 @@ let workInProgress = papers.filter((paper) => paper.data.order < 2)
 			workingPapers.map((paper, i) => {
 				return (
 					<li class="grid grid-cols-[2em_1fr]">
-						<p class="text-size-0">{i + 1}. </p>
+						<p class="mt-[3px] text-size-0">{i + 1}. </p>
 						<div>
 							<PaperInfo data={paper.data} slug={paper.slug} />
 						</div>
@@ -93,7 +93,7 @@ let workInProgress = papers.filter((paper) => paper.data.order < 2)
 					{workInProgress.map((paper, i) => {
 						return (
 							<li class="grid grid-cols-[2em_1fr]">
-								<p class="text-size-0">{i + 1}. </p>
+								<p class="mt-[3px] text-size-0">{i + 1}. </p>
 								<div>
 									<PaperInfo data={paper.data} slug={paper.slug} />
 								</div>

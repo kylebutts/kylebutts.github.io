@@ -1,7 +1,8 @@
 ---
 import MenuBar from "../components/MenuBar/MenuBar.astro"
 import IncludeKatex from "../components/IncludeKatex.astro"
-import LoadFonts from '../components/font/LoadFonts.astro'
+import LoadFonts from "../components/font/LoadFonts.astro"
+import { ClientRouter } from "astro:transitions"
 
 import "../styles/global.css"
 
@@ -26,22 +27,39 @@ const ogImage = `https://kylebutts.com/og-images/default.png`
 		<meta name="twitter:card" content="summary_large_image" />
 		<meta name="twitter:title" content="Kyle Butts" />
 		<meta name="twitter:description" content={description} />
-
-    <LoadFonts />
-    <!-- Include katex -->
+    
+    <ClientRouter />
+		<LoadFonts />
+		<!-- Include katex -->
 		{katex && <IncludeKatex />}
+		<!-- Default color -->
+		<script is:inline>
+			const colors = [
+				"kyle-magenta",
+				"kyle-yellow",
+				"kyle-blue",
+				"kyle-rose",
+				"kyle-green",
+				"kyle-purple",
+				"kyle-orange",
+			]
+			// Load theme from local storage or default to 0
+			const root = document.documentElement
+			const storedColor = localStorage.getItem("color")
+			let color = storedColor || colors[0]
+			root.style.setProperty("--kyle-selected", "var(--color-" + color + ")")
+		</script>
+		
 	</head>
 
 	<body
 		class="leading-[1.5] min-h-screen w-full bg-white font-serif text-zinc-900 pb-size-lg"
 	>
-		<header class="content">
+		<header transition:persist class="content">
 			<MenuBar />
 		</header>
 
 		<!-- Main  -->
 		<slot />
-
-		
 	</body>
 </html>

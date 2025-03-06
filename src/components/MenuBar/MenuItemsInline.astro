@@ -1,16 +1,72 @@
 ---
 const items = [
-  { name: "Papers", link: "/papers/" },
-  { name: "Open Source", link: "/open-source/" },
-  { name: "Teaching", link: "/teaching/" },
-  { name: "Blog", link: "/blog/" },
-];
+	{ name: "Papers", link: "/papers/" },
+	{ name: "Open Source", link: "/open-source/" },
+	{ name: "Teaching", link: "/teaching/" },
+	{ name: "Blog", link: "/blog/" },
+]
 ---
 
-<ul class="gap-size-xs-sm flex flex-wrap text-size-0 font-light">
-  {items.map((item) => (
-    <li class="relative hover:underline decoration-zinc-400">
-      <a href={item.link}>{item.name}</a>
-    </li>
-  ))}
-</ul>
+<script>
+	const colors = [
+		"kyle-magenta",
+		"kyle-purple",
+		"kyle-blue",
+		"kyle-yellow",
+		"kyle-cranberry",
+		"kyle-orange",
+		"kyle-rose",
+		"kyle-green",
+	]
+	let color = localStorage.getItem("color") || colors[0]
+	const themeChooser = document.getElementById("themeChooser")
+	if (themeChooser) {
+		themeChooser.addEventListener("click", () => {
+			// indexOf could be -1 but that would be fine in this case
+			color = colors[(colors.indexOf(color) + 1) % colors.length]
+      localStorage.setItem("color", color)
+			document.documentElement.style.setProperty(
+				"--kyle-selected",
+				"var(--color-" + color + ")"
+			)
+		})
+	}
+</script>
+
+<div class="flex flex-row place-content-between text-size-0 font-light">
+	<ul class="flex gap-size-xs-sm">
+		{
+			items.map((item) => (
+				<li class="relative group">
+					<a
+						href={item.link}
+						class="hover:underline hover:decoration-2 hover:decoration-kyle-highlight"
+					>
+						{item.name}
+					</a>
+				</li>
+			))
+		}
+	</ul>
+
+	<svg
+		id="themeChooser"
+		class="h-5 w-5 prose:h-[22px] prose:w-[22px] self-end mb-[3px] text-kyle-highlight cursor-pointer transition-all transition-1000"
+		xmlns="http://www.w3.org/2000/svg"
+		viewBox="-304 -304 608 608"
+	>
+		<title>Squircle: x^4 + y^4 = r^4</title>
+		<path
+			class="stroke-kyle-highlight"
+			opacity=".3"
+			fill="currentColor"
+			d="M0,288 C126.2,288,196.3563,288,242.1782,242.1782 C288,196.3563,288,126.2,288,0 C288,-126.2,288,-196.3563,242.1782,-242.1782 C196.3563,-288,126.2,-288,0,-288 C-126.2,-288,-196.3563,-288,-242.1782,-242.1782 C-288,-196.3563,-288,-126.2,-288,0 C-288,126.2,-288,196.3563,-242.1782,242.1782 C-196.3563,288,-126.2,288,0,288Z"
+		></path>
+		<path
+			class="stroke-kyle-highlight"
+			style="stroke-width: 36px;"
+			fill="transparent"
+			d="M0,288 C126.2,288,196.3563,288,242.1782,242.1782 C288,196.3563,288,126.2,288,0 C288,-126.2,288,-196.3563,242.1782,-242.1782 C196.3563,-288,126.2,-288,0,-288 C-126.2,-288,-196.3563,-288,-242.1782,-242.1782 C-288,-196.3563,-288,-126.2,-288,0 C-288,126.2,-288,196.3563,-242.1782,242.1782 C-196.3563,288,-126.2,288,0,288Z"
+		></path>
+	</svg>
+</div>

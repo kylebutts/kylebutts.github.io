@@ -139,7 +139,7 @@ FLOW
 	text-decoration-color: var(--color-zinc-400);
 }
 .prose :where(a:hover):not(:where([class~="not-prose"] *)) {
-	text-decoration-color: var(--color-zinc-500);
+	text-decoration-color: var(--color-kyle-highlight);
 }
 
 /* Headings */
@@ -148,6 +148,12 @@ FLOW
 	font-weight: bold;
 	--flow-space: var(--size-xl-2xl);
 	line-height: 1.1;
+  margin-left: -16px;
+  border-left-width: 3px;
+  border-left-color: var(--color-kyle-highlight);
+  padding-left: 16px;
+  text-indent: -2px;
+  font-weight: 700;
 }
 .prose :where(h2):not(:where([class~="not-prose"] *)) {
 	font-weight: bold;
@@ -193,8 +199,11 @@ FLOW
 	font-size: 1.21em !important;
 	padding-left: 1em !important;
 	text-align: left !important;
-	border-left: 2px;
-	border-color: var(--color-zinc-200);
+	border-left-width: 2px;
+  border-color: var(--color-kyle-highlight);
+	/* border-color: var(--color-zinc-200); */
+  padding-top: var(--size-3xs);
+  padding-bottom: var(--size-3xs);
 }
 .prose .katex-display + p {
 	--flow-space: var(--size-sm);
@@ -228,20 +237,20 @@ FLOW
 		padding-left: 1.5555556em;
 	}
 	& *::marker {
-		color: var(--color-zinc-400) /* oklch(0.705 0.015 286.067) = #9f9fa9 */;
+		color: var(--color-kyle-highlight) /* oklch(0.705 0.015 286.067) = #9f9fa9 */;
 	}
 	&::marker {
-		color: var(--color-zinc-400) /* oklch(0.705 0.015 286.067) = #9f9fa9 */;
+		color: var(--color-kyle-highlight) /* oklch(0.705 0.015 286.067) = #9f9fa9 */;
 	}
 }
 .prose :where(ol):not(:where([class~="not-prose"] *)) {
 	list-style-position: inside;
 	list-style-type: decimal;
 	& *::marker {
-		color: var(--color-zinc-400) /* oklch(0.705 0.015 286.067) = #9f9fa9 */;
+		color: var(--color-kyle-highlight) /* oklch(0.705 0.015 286.067) = #9f9fa9 */;
 	}
 	&::marker {
-		color: var(--color-zinc-400) /* oklch(0.705 0.015 286.067) = #9f9fa9 */;
+		color: var(--color-kyle-highlight) /* oklch(0.705 0.015 286.067) = #9f9fa9 */;
 	}
 }
 .prose :where(li):not(:where([class~="not-prose"] *)) {

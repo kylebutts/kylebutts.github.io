@@ -24,21 +24,24 @@ const includeLinks = true
 <Fragment>
 	<!-- TODO: color the decoration? -->
 	<h2
-		class="underline decoration-2 decoration-zinc-200 font-zinc-800 hover:font-zinc-50 cursor-pointer font-bold text-size-0"
+		class:list={[
+      "underline decoration-2 decoration-zinc-200 font-zinc-800 hover:font-zinc-50 font-bold text-size-1",
+      {'cursor-pointer': data.draft === false}
+    ]}
 	>
 		{
-			data.display === true ? (
-				<a href={`/papers/${slug}`} set:html={data.title} />
+			data.draft === true ? (
+        <Fragment set:html={data.title} />
 			) : (
-				<Fragment set:html={data.title} />
+        <a href={`/papers/${slug}`} set:html={data.title} />
 			)
 		}
 	</h2>
 
-	{author_names != "" && <p class="mt-size-3xs text-size--1">{author_names}</p>}
+	{author_names != "" && <p class="mt-size-3xs text-size-0">{author_names}</p>}
 
 	<p
-		class="mt-size-2xs text-alice-500 italic text-size--1"
+		class="mt-size-3xs text-kyle-highlight italic text-size--1"
 		set:html={data.status}
 	/>
 

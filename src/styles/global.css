@@ -31,6 +31,8 @@
 	--size-lg-xl: clamp(2.25rem, 1.7283rem + 2.6087vw, 3.75rem);
 	--size-xl-2xl: clamp(3.375rem, 2.8098rem + 2.8261vw, 5rem);
 	--size-2xl-3xl: clamp(4.5rem, 3.4565rem + 5.2174vw, 7.5rem);
+
+  --kyle-selected: var(--color-kyle-blue);
 }
 @theme {
   --spacing: 4px;
@@ -79,6 +81,21 @@
 	--spacing-size-lg-xl: var(--size-lg-xl);
 	--spacing-size-xl-2xl: var(--size-xl-2xl);
 	--spacing-size-2xl-3xl: var(--size-2xl-3xl);
+
+  --color-kyle-teal: #1A505A;
+  --color-kyle-navy: #002C55;
+  --color-kyle-magenta: #B3114B;
+  --color-kyle-cranberry: #E64173;
+  --color-kyle-purple: #5C4CBF;
+  --color-kyle-blue: #0188AC;
+  --color-kyle-green: oklch(67.4% 0.165 151deg);
+  --color-kyle-orange: #D65616;
+  --color-kyle-rose: #FB7185;
+  --color-kyle-yellow: #ffc517;
+  --color-kyle-highlight: var(--kyle-selected);
+
+
+
 
 	--color-aquamarine-50: #f4fffd;
 	--color-aquamarine-100: #e9fffb;
