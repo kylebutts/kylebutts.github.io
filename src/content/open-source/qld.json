@@ -1,0 +1,5 @@
+{
+	"title": "QLD.jl",
+	"url": "https://github.com/kylebutts/QLD.jl",
+	"description": "julia package (callable from R) that implements the quasi-long differencing event-study estimator proposed in Brown and Butts (2024)."
+}
