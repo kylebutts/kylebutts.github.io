@@ -30,8 +30,7 @@ export default defineConfig({
           inlineButtonBackgroundActiveOpacity: 0.4,
           inlineButtonBorder: "var(--color-kyle-highlight)",
           inlineButtonBorderOpacity: 1.0,
-          inlineButtonForeground: "var(--color-zinc-400)",
-          tooltipSuccessBackground: "var(--color-kyle-highlight)",
+          inlineButtonForeground: "var(--color-kyle-highlight)",
         }
 			},
 			shiki: {
