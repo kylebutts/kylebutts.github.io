@@ -9,10 +9,10 @@
     "preview": "astro preview"
   },
   "devDependencies": {
-    "astro": "5.4.2",
-    "@astrojs/tailwind": "6.0.0",
-    "@astrojs/mdx": "4.1.0",
-    "@astrojs/solid-js": "5.0.5",
+    "astro": "5.7.12",
+    "@astrojs/tailwind": "6.0.2",
+    "@astrojs/mdx": "4.2.6",
+    "@astrojs/solid-js": "5.0.10",
     "prettier": "^3.4.2",
     "prettier-plugin-astro": "^0.12.3",
     "prettier-plugin-tailwindcss": "^0.6.11",
@@ -23,7 +23,7 @@
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",
-    "@astrojs/sitemap": "^3.2.1",
+    "@astrojs/sitemap": "3.3.1",
     "@expressive-code/plugin-collapsible-sections": "^0.40.2",
     "@expressive-code/plugin-line-numbers": "^0.40.2",
     "@tailwindcss/postcss": "^4.0.9",
