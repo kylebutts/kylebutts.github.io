@@ -7,7 +7,6 @@ import PostAuthor from "../../components/blog/PostAuthor.astro"
 export async function getStaticPaths() {
 	const posts = await getCollection("blog")
 	return posts
-		.filter((post) => !post.data.draft)
 		.map((post) => {
 			return {
 				params: { slug: post.slug },
@@ -36,7 +35,7 @@ let dateText = new Date(post.data.date).toLocaleDateString("en-US", {
 	<Block prose flow>
 		<h1
 			class="mt-size-lg font-white cursor-pointer text-size-3 font-bold"
-			set:html={post.data.title}
+			set:html={`${post.data.draft ? "🚧 " : ""}${post.data.title}`}
 		/>
 
 		<p class="mt-size-3xs text-size--1 text-zinc-400">

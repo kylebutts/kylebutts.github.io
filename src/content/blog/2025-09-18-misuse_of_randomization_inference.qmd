@@ -1,0 +1,163 @@
+---
+title: 'On the use and misuse of Fisher Randomization Tests'
+description: Randomly assigning treatment or treatment dates do not show observational estimators are robust (except in special cases)
+author: 
+  - name: Kyle Butts
+    url: https://kylebutts.com/
+date: '2025-09-18'
+draft: true
+categories:
+  - Causal Inference
+  - Best Practices
+format:
+  gfm:
+    variant: +yaml_metadata_block+tex_math_dollars
+---
+
+From the earliest days of early on in the statistics literature (Fisher 1935), researchers have leveraged randomization inference as a credible way of assessing statistical significance of effects.
+The randomization procedure is considered the gold-standard because before you run the experiment, you can expect the treatment group and the control group to look the same on average. 
+We of course know that people are not all the same, but the randomization ensures us that the observable and unobservable characteristics all look the same (on average across experiments!). 
+However, after we randomize, we can have imbalance. 
+Maybe we assign treatment to a couple extra men or some extra tall people. 
+So even though we tried to randomize, we have some (unanticipated) selection into treatment.
+
+That means when we we estimate an effect, we can not tell whether this is a true effect or due to our treatment group having a few more men or being taller than average. 
+What are we to do? 
+The randomization inference approach asks the following question: "okay, well what if I rerandomized again and again? How much fluctuation in estimates can there be due to the random imbalance between treatment and control groups."
+Then, we can ask if our estimated effect looks like one of these random fluctuations or is it larger (i.e. standard p-value type inference). 
+
+One reason why I think this approach has become popularly used (and misued) is from the rise of synthetic control.
+Since you fundamentally only have a single treated unit, researchers needed some way to figure out how to do inference ($n = 1$ is probably too few for normal standard errors).
+For this reason, researchers reached for randomization inference. 
+This procedure randomly assigned "placebo treatments" to untreated units and estimated "placebo effects" of the policy.
+The resulting placebo estimates helped quantify how much random variation there was in outcomes over time.
+
+[Much work](https://arxiv.org/pdf/2401.07152) has shown that this procedure produces valid inference under the condition that the treated unit is selected uniformally at random.
+But, this connection is a bit tenuous. 
+Do we believe that treatment is randomly assigned across states? 
+Was California randomly selected to have a large cigarette tax? 
+Doubtful. And if so, why not just do difference-in-means?
+
+## Point 1: When not to do "placebo tests"
+
+This, I think, is the central problem in these placebo exercises. 
+In observational studies, and difference-in-differences settings in particular, we do not believe treatment is randomly assigned.
+We think there is endogenous take-up and are concerned that this take-up is correlated with trends! 
+That is, the units exposed to treatment are trending relative to the control units. 
+
+If we completely randomly assign placebo treatment to units, then by construction we have $\mathbb{E}(\Delta Y_i(0) \ | \ D_i = 1) = \mathbb{E}(\Delta Y_i(0) \ | \ D_i = 0)$. 
+If our concern is that our results are being driven by differential counterfactual trends, then creating placebo estimates where parallel trends holds don't make much sense.
+Note how this differs from the randomized experiment.
+There, we think that there is no selection (on average) but might be concerned that we accidentally have some imbalance. 
+Here, we might be nervous that there is selection, so we generate data without selection. 
+
+[Roth and Sant'Anna (2023)](https://psantanna.com/files/Roth_SantAnna_Staggered.pdf) show that when you do believe treatment is randomly assigned, then these randomization-type tests are valid.
+
+
+## Point 2: Randomization inference should follow the randomization protocol
+
+
+The second point to make is that, let's say you have a true quasi-experiment, i.e. you think conditional on some covariates, you have random assignment. 
+Since you believe in random assignment of treatment to some degree, you might want to reach for Fisher-style Randomization Tests. 
+The simplest way we would try this is to just randomly assign treatment to different units with a constant probability (or reshuffle the treatment vector randomly).
+This will prove not work, though, since we are not following the randomization procedure! 
+In our conditional random assignment setup, the probability of treatment can vary based on observable $\bm{X}_i$.
+That is, treatment might be correlated with observables; but our simple reshuffling will make treatment uncorrelated with $\bm{X}_i$!
+
+But, in this case, the fix is relatively simple.
+If you know the propensity score, you can draw treatment with probability $\pi_i$ for each individual.
+In practice, you might estimate the propensity score with a logistic regression and reshuffle with the estimated $\hat{\pi}_i$.
+Or, you could reshuffle treatment for individuals with $\bm{X}_i = \bm{x}$.
+
+To try and make this point more clear, let me show with a simple example.
+Here, we will generate male and female units.
+Females have higher error term variance than males.
+Also, the probability of treatment is 75% for females and 25% for males.
+We assume the true treatment effect for everyone is 0. 
+
+```{r}
+library(tidyverse)
+library(fixest)
+
+set.seed(20250981)
+N <- 750
+df <- tibble(
+  unit = 1:N, 
+  female = +(runif(N) > 0.5),
+  
+  ## Error term for woman is noisier
+  eps_sd = 1 + 6 * female,
+  eps = rnorm(N, mean = 0, sd = eps_sd),
+
+  ## Treatment probability is 25% for men, 75% for women
+  treat_prob = 0.25 + 0.5 * female,
+  treat = +(runif(N) <= treat_prob),
+
+  ## No selection
+  y0 = 10 + 2 * female + eps,
+  
+  ## No treatment effects
+  y1 = y0,
+  y = treat * y1 + (1 - treat) * y0
+)
+```
+
+```{r}
+(est_dim <- feols(y ~ i(treat) + i(female), data = df, vcov = "HC1"))
+```
+
+Here we estimate the treatment effect with a simple regression.
+I want you to notice the HC1 standard error on the treatment dummy is 0.433.
+
+```{r}
+## Placebo inference (assuming treatment is assigned to everyone with probability 50%)
+B <- 2500
+random_ests <- map_dbl(1:B, function(b) { 
+  df$placebo_treat = +(runif(N) <= 0.5)
+  est_ri <- feols(y ~ i(female) + i(placebo_treat), data = df)
+  return(coef(est_ri)["placebo_treat::1"])
+})
+
+sd(random_ests)
+```
+
+
+First, let me do the simple thing and just randomly assign individuals to treatment with equal probability.
+For each draw, I collect the treatment effect dummy and calculate the empirical standard deviation. 
+Note the value of 0.371 which understates the true standard deviation. 
+Our inference procedure is invalid!
+
+
+```{r}
+## Placebo inference (matching treatment probability)
+B <- 2500
+conditional_random_ests <- map_dbl(1:B, function(b) { 
+  df$placebo_treat = +(runif(N) <= df$treat_prob)
+  est_ri <- feols(y ~ i(female) + i(placebo_treat), data = df)
+  return(coef(est_ri)["placebo_treat::1"])
+})
+
+sd(conditional_random_ests)
+```
+
+Now let's repeat by redrawing treatment with the true propensity score.
+Notice how our estimated standard deviation is 0.434, right on the money! 
+
+A bit of a nerdy addendum: [Roth and Rambachan](https://arxiv.org/pdf/2008.00602) have a very nice paper in JASA that shows that when you have treatment effect heterogeneity that correlates with propensity score, the HC1 standard error is generally conservative. 
+It does not show up that way here since everyone has an effect of 0. 
+But, you can try generating mean 0 but heterogeneous effects that are correlated with gender, to test this for yourself!
+
+
+### Conclusion
+
+So what should you take from this blog post? 
+Two key takeaways:
+
+1. If you think you have some form of randomization in your treatment assignment, you can leverage this to use the powerful randomization inference procedure.
+
+2. If you do not think of your treatment as being randomly assigned (ahem DID users), then I don't recommend "placebo" treatments!
+
+
+
+
+
