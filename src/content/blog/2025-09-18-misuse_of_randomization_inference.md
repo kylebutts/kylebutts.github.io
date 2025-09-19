@@ -7,7 +7,7 @@ author:
   - name: Kyle Butts
     url: https://kylebutts.com/
 date: '2025-09-18'
-draft: true
+draft: false
 categories:
   - Causal Inference
   - Best Practices
