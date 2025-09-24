@@ -23,7 +23,7 @@ Treatment often occurs at a point in space: a [new apartment is constructed](htt
 Evaluating the effects of this treatment, like all causal inference, requires finding a good control group.
 
 This blog post is meant to serve as a starting point when thinking about this.
-I will cover two papers, one of [my own](https://www.sciencedirect.com/science/article/pii/S0094119022000705) and an excellent [paper](https://michaelpollmann.github.io/files/pollmann_spatial_treatments.pdf) by [Michael Pollman](https://michaelpollmann.github.io/). 
+I will cover two papers, one of [my own](https://www.sciencedirect.com/science/article/pii/S0094119022000705) and an excellent [paper](https://michaelpollmann.github.io/files/pollmann_spatial_treatments.pdf) by [Michael Pollmann](https://michaelpollmann.github.io/). 
 They both offer a different strategy for selecting a control group, so I want to summarize each strategy and the relative advantages and disadvantages. 
 
 As a leading example, we will consider evaluating the impact of a new apartment on rents in the local area.
@@ -57,9 +57,9 @@ But, as you move outwards from the business area, you tend to enter more "reside
 Then, the inner ring will consist mostly of apartments on dense streets and the outer ring will be mostly residential streets.
 If there are shocks to specifically residential homes or specifically to apartments, the inner and outer ring will be on differential trends.
 
-## Pollman (WP)
+## Pollmann (WP)
 
-Michael Pollman's paper (R&R at Econometrica) takes an alternative approach. 
+Michael Pollmann's paper (R&R at Econometrica) takes an alternative approach. 
 Instead of comparing units that are really close to treatment to slightly further away, they focus on the case of finding comparable locations that could have been plausible treatment location.
 In our apartment example, we would be looking for parcels that were very likely to have a new apartment built there, but did not due to random chance. 
 
@@ -74,7 +74,7 @@ Imagine looking at a bunch of parcels and measuring information about that parce
 Then, you would find comparison parcels that are similar along all these dimensions (i.e. matching).
 
 However, Pollman points out that often times treatment is not assigned to a location based solely on the location's own characteristics, but also depending on the characteristics of the neighborhood.
-It might matter that a parcel is underdeveloped for apartment consteruction, but it might also matter the characteristics of the surrounding parcels (e.g. are there a lot of consumptive amenities that people will pay for nearby?).
+It might matter that a parcel is underdeveloped for apartment construction, but it might also matter the characteristics of the surrounding parcels (e.g. are there a lot of consumptive amenities that people will pay for nearby?).
 Another example is there being a difference between there being a lot of low-income people in a building versus being on a street with lots of low-income buildings.
 Therefore, we should really be thinking about matching both on the location's own $X$s *and* the neighboring unit's $X$s. 
 

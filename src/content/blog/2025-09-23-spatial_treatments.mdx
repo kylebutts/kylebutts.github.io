@@ -5,7 +5,7 @@ author:
   - name: Kyle Butts
     url: https://kylebutts.com/
 date: '2025-09-23'
-draft: true
+draft: false
 categories:
   - Causal Inference
   - Spatial Treatments
@@ -32,7 +32,7 @@ this. I will cover two papers, one of [my
 own](https://www.sciencedirect.com/science/article/pii/S0094119022000705)
 and an excellent
 [paper](https://michaelpollmann.github.io/files/pollmann_spatial_treatments.pdf)
-by [Michael Pollman](https://michaelpollmann.github.io/). They both
+by [Michael Pollmann](https://michaelpollmann.github.io/). They both
 offer a different strategy for selecting a control group, so I want to
 summarize each strategy and the relative advantages and disadvantages.
 
@@ -80,9 +80,9 @@ mostly residential streets. If there are shocks to specifically
 residential homes or specifically to apartments, the inner and outer
 ring will be on differential trends.
 
-## Pollman (WP)
+## Pollmann (WP)
 
-Michael Pollman’s paper (R&R at Econometrica) takes an alternative
+Michael Pollmann’s paper (R&R at Econometrica) takes an alternative
 approach. Instead of comparing units that are really close to treatment
 to slightly further away, they focus on the case of finding comparable
 locations that could have been plausible treatment location. In our
@@ -111,7 +111,7 @@ dimensions (i.e. matching).
 However, Pollman points out that often times treatment is not assigned
 to a location based solely on the location’s own characteristics, but
 also depending on the characteristics of the neighborhood. It might
-matter that a parcel is underdeveloped for apartment consteruction, but
+matter that a parcel is underdeveloped for apartment construction, but
 it might also matter the characteristics of the surrounding parcels
 (e.g. are there a lot of consumptive amenities that people will pay for
 nearby?). Another example is there being a difference between there

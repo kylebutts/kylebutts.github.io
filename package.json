@@ -9,30 +9,30 @@
     "preview": "astro preview"
   },
   "devDependencies": {
-    "astro": "5.7.12",
+    "astro": "5.13.10",
     "@astrojs/tailwind": "6.0.2",
-    "@astrojs/mdx": "4.2.6",
-    "@astrojs/solid-js": "5.0.10",
-    "prettier": "^3.4.2",
+    "@astrojs/mdx": "4.3.6",
+    "@astrojs/solid-js": "5.1.1",
+    "prettier": "^3.6.2",
     "prettier-plugin-astro": "^0.12.3",
-    "prettier-plugin-tailwindcss": "^0.6.11",
+    "prettier-plugin-tailwindcss": "^0.6.14",
     "rehype-katex": "^7.0.1",
     "remark-math": "^6.0.0",
-    "solid-js": "^1.9.3",
-    "tailwindcss": "^4.0.9"
+    "solid-js": "^1.9.9",
+    "tailwindcss": "^4.1.13"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",
-    "@astrojs/sitemap": "3.3.1",
+    "@astrojs/sitemap": "3.6.0",
     "@expressive-code/plugin-collapsible-sections": "^0.40.2",
     "@expressive-code/plugin-line-numbers": "^0.40.2",
-    "@tailwindcss/postcss": "^4.0.9",
-    "@tailwindcss/vite": "^4.0.9",
+    "@tailwindcss/postcss": "^4.1.13",
+    "@tailwindcss/vite": "^4.1.13",
     "astro-expressive-code": "^0.40.2",
     "astro-font": "^0.1.81",
-    "typescript": "^5.7.2"
+    "typescript": "^5.9.2"
   },
   "optionalDependencies": {
-    "@rollup/rollup-linux-x64-gnu": "^4.28.1"
+    "@rollup/rollup-linux-x64-gnu": "^4.52.2"
   }
 }
