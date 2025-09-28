@@ -8,10 +8,22 @@ import "../styles/global.css"
 
 // og-image by slug
 const {
+	title = "Kyle Butts",
 	description = "Kyle Butts -- Urban Economics and Applied Econometrics",
 	katex = false,
+	slug,
 } = Astro.props
-const ogImage = `https://kylebutts.com/og-images/default.png`
+
+const { url, site } = Astro
+
+// Use new dynamic OG image if slug is provided, fallback to default
+let ogImage: string
+if (slug) {
+	ogImage = new URL(`/og/${slug}.png`, site).href
+} else {
+	// Default fallback OG image
+	ogImage = new URL(`/public/og-images/default.png`, site).href
+}
 ---
 
 <!doctype html>
@@ -20,12 +32,20 @@ const ogImage = `https://kylebutts.com/og-images/default.png`
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
 		<link id="dynamic-favicon" rel="icon" type="image/x-icon" href="/favicon.png" />
-		<title>Kyle Butts</title>
+		<title>{title}</title>
 		<meta name="description" content={description} />
+		
+		<!-- Open Graph required tags -->
+		<meta property="og:title" content={title} />
+		<meta property="og:type" content="website" />
 		<meta property="og:image" content={ogImage} />
+		<meta property="og:description" content={description} />
+		<meta property="og:url" content={url} />
+		
+		<!-- Twitter Card tags -->
 		<meta property="twitter:image" content={ogImage} />
 		<meta name="twitter:card" content="summary_large_image" />
-		<meta name="twitter:title" content="Kyle Butts" />
+		<meta name="twitter:title" content={title} />
 		<meta name="twitter:description" content={description} />
 
 		<!-- <ClientRouter /> -->

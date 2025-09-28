@@ -1,5 +1,9 @@
 ---
 title: "Difference-in-Differences with Geocoded Microdata"
+author:
+  - name: "Kyle Butts"
+    url: https://kylebutts.com/
+    affiliation: University of Arkansas
 date: "2022-01-01"
 links:
   - name: Published
@@ -34,7 +38,10 @@ The motivation for such a design is that since both the 'treated' and the 'contr
 
 First, the problems with the standard ring method. In the below figure, I show 4 different "estimates" using the ring-3 method for the same data-generating process. The black line highlights the treatment effect curve which declines over distance and becomes zero after `0.75 miles`. The gray line shows the counterfactual shock, which under the <span class="text-coral-500">common shocks</span> is constant across distance and normalized to zero. For each estimate, the researcher compares the average change in outcomes in the `treated` section to the average change in outcomes in the `control` section, a difference-in-differences estimator.
 
-<Figure src="/images/rings_ex.png" alt="Example of Problems with 'Standard' Rings method" />
+<Figure
+  src="/images/rings_ex.png"
+  alt="Example of Problems with 'Standard' Rings method"
+/>
 
 The top left panel, shows the 'oracle' estimator where the researcher knows how far treatment effects travel (_this is a very hard thing to justify and is usually an ad-hoc choice_). In this case, the researcher is able to correctly identify the <span class="text-kyle-magenta">average treatment effect among the affected</span>. Note, however, that this estimate masks over interesting heterogeneity in treatment effects over distance, with the closest units experiencing twice as large of a treatment effect as the average. Later on, I propose an estimator that estimates the average treatment effect as a function of distance.
 
@@ -46,7 +53,10 @@ Researchers have recognized this problem and have proposed selecting alternate r
 
 The central idea behind my proposed estimator is instead of having a single treatment ring and a single control ring to have many rings. The furthest away ring will estimate the <span class="text-coral-500">common shock</span> while the other rings will each estimate the treatment effect for that distance from treatment. For example, see the below figure which recreates the results of [Linden and Rockoff (2008)](https://dx.doi.org/10.1257/aer.98.3.1103) who study the effects of a sexual offender arriving to your neighborhood on home prices. The top panel is the standard rings estimator. Notice they choose a cutoff and then assume the treatment effect is constant within the treated ring and that after their cutoff the effects are zero.
 
-<Figure src="/images/linden_rockoff.png" alt="Linden and Rockoff (2008) Analysis of Sexual Offender Arrival on Home Prices" />
+<Figure
+  src="/images/linden_rockoff.png"
+  alt="Linden and Rockoff (2008) Analysis of Sexual Offender Arrival on Home Prices"
+/>
 
 In contrast, the bottom panel performs the non-parametric rings estimator I propose in my paper. The figure more clearly shows that there are very large effects very close to the sexual offender's home and they decay to zero and then "treatment effect" estimates are centered at zero after `0.1 miles`. The results of my method (i) provide more interesting information on _heterogeneous_ treatment effects while (ii) not requiring the correct specification of the treatment effect distance.
 

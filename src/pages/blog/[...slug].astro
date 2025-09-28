@@ -31,7 +31,12 @@ let dateText = new Date(post.data.date).toLocaleDateString("en-US", {
 })
 ---
 
-<BaseLayout slug={post.slug} katex>
+<BaseLayout 
+	title={post.data.title}
+	description={post.data.description} 
+	slug={post.slug} 
+	katex
+>
 	<Block prose flow>
 		<h1
 			class="mt-size-lg font-white cursor-pointer text-size-3 font-bold"
