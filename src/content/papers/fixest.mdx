@@ -1,0 +1,32 @@
+---
+title: "Dynamic Treatment Effect Estimation with Interactive Fixed Effects and Short Panels"
+author:
+  - name: Laurent Berge
+    url: https://sites.google.com/site/laurentrberge/
+    affiliation: University of Bordeaux
+  - name: Kyle Butts
+    url: https://kylebutts.com/
+    affiliation: University of Arkansas
+  - name: Grant McDermott
+    url: https://grantmcdermott.com/
+    affiliation: Amazon
+date: "2026-01-25"
+categories:
+  - "Statistical Software"
+  - "Applied Econometrics"
+status: "Under Review"
+summary: "Companion paper to the `fixest` package"
+---
+
+import { Figure, LargeBlock } from "../../components/mdx/";
+
+## Abstract
+
+fixest is an R package for fast and flexible econometric estimation, providing a comprehensive toolkit for applied researchers. 
+The package particularly excels at fixed-effects estimation, supported by a novel fixed-point acceleration algorithm implemented in C++.
+This algorithm achieves rapid convergence across a broad class of data contexts and further enables estimation of complex models, including those with varying slopes, in a highly efficient manner.
+Beyond computational speed, fixest provides a unified syntax for a wide variety of models: ordinary least squares, instrumental variables, generalized linear models, maximum likelihood, and difference-in-differences estimators. 
+An expressive formula interface enables multiple estimations, stepwise regressions, and variable interpolation in a single call, while users can make on-the-fly inference adjustments using a variety of built-in robust standard errors. 
+Finally, fixest provides methods for publication-ready regression tables and coefficient plots. 
+Benchmarks against leading alternatives in R, Python, and Julia demonstrate best-in-class performance, and the paper includes many worked examples illustrating the core functionality.
+

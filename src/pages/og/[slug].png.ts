@@ -21,11 +21,11 @@ export const GET: APIRoute = async ({ params }) => {
     let content: any = undefined;
 
     // Look for blog post first
-    content = blogPosts.find((post) => post.slug === decodedSlug);
+    content = blogPosts.find((post) => post.id === decodedSlug);
 
     // If not found in blog, look in papers
     if (!content) {
-      content = papers.find((paper) => paper.slug === decodedSlug);
+      content = papers.find((paper) => paper.id === decodedSlug);
     }
 
     // If still not found, try to match by title
@@ -68,12 +68,16 @@ export async function getStaticPaths() {
 
   const paths = [
     ...blogPosts.map((post) => ({
-      params: { slug: post.slug },
+      params: { slug: post.id },
     })),
     ...papers.map((paper) => ({
-      params: { slug: paper.slug },
+      params: { slug: paper.id },
     })),
   ];
+
+  console.log(
+    `OG image paths: ${paths.length} total (blog: ${blogPosts.length}, papers: ${papers.length})`,
+  );
 
   return paths;
 }

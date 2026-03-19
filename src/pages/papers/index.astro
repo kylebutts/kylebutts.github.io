@@ -55,7 +55,7 @@ let workInProgress = papers.filter((paper) => paper.data.order < 2)
 					<li class="grid grid-cols-[2em_1fr]">
 						<p class="mt-[3px] text-size-0">{i + 1}. </p>
 						<div>
-							<PaperInfo data={paper.data} slug={paper.slug} />
+							<PaperInfo data={paper.data} slug={paper.id} />
 						</div>
 					</li>
 				)
@@ -75,7 +75,7 @@ let workInProgress = papers.filter((paper) => paper.data.order < 2)
 					<li class="grid grid-cols-[2em_1fr]">
 						<p class="mt-[3px] text-size-0">{i + 1}. </p>
 						<div>
-							<PaperInfo data={paper.data} slug={paper.slug} />
+							<PaperInfo data={paper.data} slug={paper.id} />
 						</div>
 					</li>
 				)
@@ -95,7 +95,7 @@ let workInProgress = papers.filter((paper) => paper.data.order < 2)
 							<li class="grid grid-cols-[2em_1fr]">
 								<p class="mt-[3px] text-size-0">{i + 1}. </p>
 								<div>
-									<PaperInfo data={paper.data} slug={paper.slug} />
+									<PaperInfo data={paper.data} slug={paper.id} />
 								</div>
 							</li>
 						)

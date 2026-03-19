@@ -1,5 +1,5 @@
 ---
-import { getCollection } from "astro:content"
+import { getCollection, render } from "astro:content"
 import Block from "../../components/Block.astro"
 import BaseLayout from "../../layouts/BaseLayout.astro"
 import PostAuthor from "../../components/blog/PostAuthor.astro"
@@ -9,14 +9,14 @@ export async function getStaticPaths() {
 	return posts
 		.map((post) => {
 			return {
-				params: { slug: post.slug },
+				params: { slug: post.id },
 				props: { post },
 			}
 		})
 }
 
 const { post } = Astro.props
-const { Content } = await post.render()
+const { Content } = await render(post)
 let authors = post.data.author
 authors = authors.sort((a, b) => {
 	const aLastName = a.name.split(" ").slice(-1)[0]
@@ -34,7 +34,7 @@ let dateText = new Date(post.data.date).toLocaleDateString("en-US", {
 <BaseLayout 
 	title={post.data.title}
 	description={post.data.description} 
-	slug={post.slug} 
+	slug={post.id} 
 	katex
 >
 	<Block prose flow>

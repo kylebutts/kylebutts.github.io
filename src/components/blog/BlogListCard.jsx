@@ -9,7 +9,7 @@ export default function BlogCard({ post }) {
     <li class="border-l-2 border-zinc-200 hover:border-kyle-highlight px-4 py-2">
       <h2 class="font-white cursor-pointer text-size-1 font-bold">
         <a
-          href={`/blog/${post.slug}`}
+          href={`/blog/${post.id}`}
           innerHTML={`${post.data.draft ? "🚧 " : ""}${post.data.title}`}
         ></a>
       </h2>

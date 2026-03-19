@@ -1,5 +1,5 @@
 ---
-import { getCollection } from "astro:content"
+import { getCollection, render } from "astro:content"
 import Block from "../../components/Block.astro"
 import BaseLayout from "../../layouts/BaseLayout.astro"
 import PaperInfo from "../../components/paper/PaperInfo.astro"
@@ -7,24 +7,24 @@ import PaperInfo from "../../components/paper/PaperInfo.astro"
 export async function getStaticPaths() {
 	const papers = await getCollection("papers")
 	return papers.map((paper) => ({
-		params: { slug: paper.slug },
+		params: { slug: paper.id },
 		props: { paper },
 	}))
 }
 
 const { paper } = Astro.props
-const { Content } = await paper.render()
+const { Content } = await render(paper)
 ---
 
 <BaseLayout 
 	title={paper.data.title}
 	description={paper.data.summary || "Research paper by Kyle Butts"}
-	slug={paper.slug} 
+	slug={paper.id} 
 	katex
 >
 	<Block>
     <div class="border-l-2 border-zinc-200 px-4 py-2">
-      <PaperInfo data={paper.data} includeSummary />
+      <PaperInfo data={paper.data} slug={paper.id} includeSummary />
     </div>
 	</Block>
 	<div class="mt-size-2xl"></div>
