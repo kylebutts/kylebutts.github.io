@@ -1,5 +1,5 @@
 ---
-title: "Simple Difference-in-Differences Estimation in Fixed-T Panels"
+title: "Direct and Indirect Treatment Effects With Time-Varying Covariates"
 author:
   - name: Nicholas Brown
     url: https://sites.google.com/msu.edu/nicholasbrown
@@ -10,9 +10,9 @@ author:
   - name: Joakim Westerlund
     url: https://www.deakin.edu.au/about-deakin/people/joakim-westerlund
     affiliation: Lund University and Deakin University
-date: "2023-05-24"
+date: "2026-04-22"
 categories:
-  - "Working Paper"
+  - "Published"
   - "Applied Econometrics"
   - "Factor Model"
 links:
@@ -20,12 +20,12 @@ links:
     url: "/files/DID-via-CCE.pdf"
   - name: Github
     url: https://github.com/kylebutts/Difference-in-Differences-via-CCE
-status: "Conditionally Accepted at Journal of Applied Econometrics"
+status: "Journal of Applied Econometrics, 2026"
 summary: "We propose a factor-model imputation estimator using a common correlated effects model. This model allows to decompose treatment effects into a direct effect and effects mediated by covariates."
 ---
 
-import { Figure, LargeBlock } from "../../components/mdx/";
+import { Figure, LargeBlock } from "../../components/mdx/"
 
 ## Abstract
 
-The present paper proposes a new treatment effects estimator that is valid when the number of time periods is small, and the parallel trends condition holds conditional on covariates and unobserved heterogeneity in the form of interactive fixed effects. The estimator also allow the control variables to be affected by treatment and it enables estimation of the resulting indirect effect on the outcome variable. The asymptotic properties of the estimator are established and their accuracy in small samples is investigated using Monte Carlo simulations. The empirical usefulness of the estimator is illustrated using as an example the effect of increased trade competition on firm markups in China.
+We propose a simple approach to treatment effect estimation in panel data that is valid when the number of time periods is small and the parallel trends condition is violated due to the presence of interactive fixed effects. The procedure allows the covariates to be affected by treatment and enables separation of the part of the estimated treatment effect that is due to the covariates from the part that is not. The asymptotic properties of the new approach are established, and their accuracy in small samples is investigated using Monte Carlo simulations. The procedure is illustrated using as an example the effect of increased trade competition on firm markups in China. We estimate that about half of the impact of China's entrance into the WTO on markup dispersion came from the changes in industry-level productivity.

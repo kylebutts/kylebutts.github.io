@@ -16,19 +16,19 @@ const { paper } = Astro.props
 const { Content } = await render(paper)
 ---
 
-<BaseLayout 
+<BaseLayout
 	title={paper.data.title}
 	description={paper.data.summary || "Research paper by Kyle Butts"}
-	slug={paper.id} 
+	slug={paper.id}
 	katex
 >
 	<Block>
-    <div class="border-l-2 border-zinc-200 px-4 py-2">
-      <PaperInfo data={paper.data} slug={paper.id} includeSummary />
-    </div>
+		<div class="border-l-2 border-zinc-200 px-4 py-2">
+			<PaperInfo data={paper.data} slug={paper.id} includeSummary />
+		</div>
 	</Block>
 	<div class="mt-size-2xl"></div>
 	<Block prose flow>
-    <Content />
-  </Block>
+		<Content />
+	</Block>
 </BaseLayout>

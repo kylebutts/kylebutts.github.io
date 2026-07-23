@@ -25,7 +25,7 @@ status: "<i>R Journal</i>, 2022"
 summary: "We present statistical software to implement imputation estimator for difference-in-differences."
 ---
 
-import { Figure, LargeBlock } from "../../components/mdx/";
+import { Figure, LargeBlock } from "../../components/mdx/"
 
 ## Abstract
 
@@ -39,7 +39,7 @@ $$
 y_{it} = \mu_i + \eta_t + \tau D_{it} + \varepsilon_{it},
 $$
 
-where $D_{it}$ is an idicator variable that equals one when unit $i$ is currently experiencing treatment at time $t$. Researchers aim to estimate the effects of treatment and summarize it as the **Average Treatment Effect on the Treatment**, $\tau$.
+where $D_{it}$ is an indicator variable that equals one when unit $i$ is currently experiencing treatment at time $t$. Researchers aim to estimate the effects of treatment and summarize it as the **Average Treatment Effect on the Treatment**, $\tau$.
 
 _If the two-way fixed effects model is correctly specified and the parallel trends assumption is satisfied, then OLS is fine and even BLUE! (woohoo 🎉🎉)_ So what's with all these new Diff-in-Diff doesn't work well problems?
 
@@ -67,8 +67,7 @@ the average of $\tau_{gt}$ across all $(g,t)$ observed in the sample.
 
 ### Estimating Overall Average Treatment Effect
 
-If we knew $\mu_i$ and $\eta_t$, then we could move terms around in our model
-and have:
+If we knew $\mu_i$ and $\eta_t$, then we could move terms around in our model and have:
 
 $$
 y_{it} - \mu_i - \eta_t = \tau_{gt} D_{it} + \varepsilon_{it}.

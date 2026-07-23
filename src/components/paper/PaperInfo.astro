@@ -25,15 +25,15 @@ const includeLinks = true
 	<!-- TODO: color the decoration? -->
 	<h2
 		class:list={[
-      "underline decoration-2 decoration-zinc-200 hover:decoration-zinc-400 font-zinc-800 hover:font-zinc-50 font-bold text-size-1",
-      {'cursor-pointer': data.draft === false}
-    ]}
+			"underline decoration-2 decoration-zinc-200 hover:decoration-zinc-400 font-zinc-800 hover:font-zinc-50 font-bold text-size-1",
+			{ "cursor-pointer": data.draft === false },
+		]}
 	>
 		{
 			data.draft === true ? (
-        <Fragment set:html={data.title} />
+				<Fragment set:html={data.title} />
 			) : (
-        <a href={`/papers/${slug}`} set:html={data.title} />
+				<a href={`/papers/${slug}`} set:html={data.title} />
 			)
 		}
 	</h2>
@@ -48,18 +48,22 @@ const includeLinks = true
 	{
 		includeLinks && (
 			<p class="mt-size-xs text-size--1">
-				<PaperLink
-					name="Details"
-					url={`/papers/${slug}`}
-					includeRightBar={true}
-				/>
-				{(data.links || []).map((link, i) => (
+				{!includeSummary && (
 					<PaperLink
-						name={link.name}
-						url={link.url}
-						includeRightBar={i < (data.links || []).length - 1}
+						name="Details"
+						url={`/papers/${slug}`}
+						includeRightBar={(data.links || []).length > 0}
 					/>
-				))}
+				)}
+				{(data.links || []).map((link, i) => {
+					return (
+						<PaperLink
+							name={link.name}
+							url={link.url}
+							includeRightBar={i < (data.links || []).length - 1}
+						/>
+					)
+				})}
 			</p>
 		)
 	}
