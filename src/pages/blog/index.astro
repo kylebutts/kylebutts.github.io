@@ -1,4 +1,5 @@
 ---
+import "../../styles/listing.css"
 import Layout from "../../layouts/Layout.astro"
 import BlogListCard from "../../components/blog/BlogListCard.jsx"
 import { getCollection } from "astro:content"
@@ -14,8 +15,9 @@ let posts = posts_unsorted.sort((a, b) => {
 posts = posts.filter((post) => import.meta.env.DEV || !post.data.draft)
 ---
 
-<Layout content prose>
-  <ul class="flex flex-col gap-y-size-sm">
-    {posts.map((post, i) => <BlogListCard post={post} />)}
+<Layout>
+  <h2 class="listing-heading offset-border-left">Blog</h2>
+  <ul class="listing">
+    {posts.map((post) => <BlogListCard post={post} />)}
   </ul>
 </Layout>

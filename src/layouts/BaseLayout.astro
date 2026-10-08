@@ -31,17 +31,22 @@ if (slug) {
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
-		<link id="dynamic-favicon" rel="icon" type="image/x-icon" href="/favicon.png" />
+		<link
+			id="dynamic-favicon"
+			rel="icon"
+			type="image/x-icon"
+			href="/favicon.png"
+		/>
 		<title>{title}</title>
 		<meta name="description" content={description} />
-		
+
 		<!-- Open Graph required tags -->
 		<meta property="og:title" content={title} />
 		<meta property="og:type" content="website" />
 		<meta property="og:image" content={ogImage} />
 		<meta property="og:description" content={description} />
 		<meta property="og:url" content={url} />
-		
+
 		<!-- Twitter Card tags -->
 		<meta property="twitter:image" content={ogImage} />
 		<meta name="twitter:card" content="summary_large_image" />
@@ -67,12 +72,12 @@ if (slug) {
 			const root = document.documentElement
 			const storedColor = localStorage.getItem("color")
 			let color = storedColor || colors[0]
-      function changeFavicon(src) {
+			function changeFavicon(src) {
 				let link = document.createElement("link")
-        let oldLink = document.getElementById("dynamic-favicon")
+				let oldLink = document.getElementById("dynamic-favicon")
 				link.id = "dynamic-favicon"
 				link.rel = "shortcut icon"
-        link.type="image/x-icon"
+				link.type = "image/x-icon"
 				link.href = src
 				if (oldLink) {
 					document.head.removeChild(oldLink)
@@ -81,7 +86,7 @@ if (slug) {
 			}
 
 			root.style.setProperty("--kyle-selected", "var(--color-" + color + ")")
-      changeFavicon("/favicon/favicon_" + color + ".png")
+			changeFavicon("/favicon/favicon_" + color + ".png")
 		</script>
 	</head>
 
@@ -118,22 +123,22 @@ if (slug) {
 					localStorage.setItem("color", color)
 					root.style.setProperty(
 						"--kyle-selected",
-						"var(--color-" + color + ")"
+						"var(--color-" + color + ")",
 					)
 
-          function changeFavicon(src) {
-            let link = document.createElement("link")
-            let oldLink = document.getElementById("dynamic-favicon")
-            link.id = "dynamic-favicon"
-            link.rel = "shortcut icon"
-            link.type="image/x-icon"
-            link.href = src
-            if (oldLink) {
-              document.head.removeChild(oldLink)
-            }
-            document.head.appendChild(link)
-          }
-          changeFavicon("/favicon/favicon_" + color + ".png")
+					function changeFavicon(src) {
+						let link = document.createElement("link")
+						let oldLink = document.getElementById("dynamic-favicon")
+						link.id = "dynamic-favicon"
+						link.rel = "shortcut icon"
+						link.type = "image/x-icon"
+						link.href = src
+						if (oldLink) {
+							document.head.removeChild(oldLink)
+						}
+						document.head.appendChild(link)
+					}
+					changeFavicon("/favicon/favicon_" + color + ".png")
 				})
 			}
 		</script>

@@ -1,6 +1,6 @@
 ---
 import PaperLink from "./PaperLink.astro"
-const { data, slug = "", includeSummary = false } = Astro.props
+const { data, slug = "", includeSummary = false, compact = false } = Astro.props
 
 // Write function to combine names with commas (including oxford comma and the word and)
 function combineNames(names) {
@@ -18,6 +18,21 @@ const author_names = data.author
 	? combineNames(data.author.map((author) => author.name))
 	: ""
 
+const paperInfo = (() => {
+	switch (data.status) {
+		case "Published":
+			return data.journal
+				? `<i>${data.journal}</i>${data.year ? `, ${data.year}` : ""}`
+				: ""
+		case "R&R":
+			return data.journal ? `R&R at <i>${data.journal}</i>` : ""
+		case "Under Review":
+			return ""
+		default:
+			return ""
+	}
+})()
+
 const includeLinks = true
 ---
 
@@ -25,7 +40,10 @@ const includeLinks = true
 	<!-- TODO: color the decoration? -->
 	<h2
 		class:list={[
-			"underline decoration-2 decoration-zinc-200 hover:decoration-zinc-400 font-zinc-800 hover:font-zinc-50 font-bold text-size-1",
+			"text-zinc-800",
+			compact
+				? "font-semibold text-[1.3125rem] leading-[1.35] [&_a:hover]:underline [&_a:focus-visible]:underline underline-offset-4 decoration-1"
+				: "font-bold text-size-1 underline decoration-2 decoration-zinc-200 hover:decoration-zinc-400",
 			{ "cursor-pointer": data.draft === false },
 		]}
 	>
@@ -38,21 +56,47 @@ const includeLinks = true
 		}
 	</h2>
 
-	{author_names != "" && <p class="mt-size-3xs text-size-0">{author_names}</p>}
+	{
+		author_names != "" && (
+			<p
+				class:list={[
+					compact
+						? "mt-1.5 text-[0.9375rem] text-zinc-600 leading-[1.5]"
+						: "mt-size-3xs text-size-0",
+				]}
+			>
+				{author_names}
+			</p>
+		)
+	}
 
-	<p
-		class="mt-size-3xs text-kyle-highlight italic text-size--1"
-		set:html={data.status}
-	/>
+	{
+		paperInfo && (
+			<p
+				class:list={[
+					compact
+						? "mt-0.5 text-[0.9375rem] text-zinc-600 leading-[1.5]"
+						: "mt-size-3xs text-kyle-highlight italic text-size--1",
+				]}
+				set:html={paperInfo}
+			/>
+		)
+	}
 
 	{
 		includeLinks && (
-			<p class="mt-size-xs text-size--1">
+			<p
+				class:list={[
+					compact
+						? "mt-1.5 flex flex-wrap gap-x-4 gap-y-1 text-[0.875rem] text-kyle-highlight leading-[1.5]"
+						: "mt-size-xs text-size--1",
+				]}
+			>
 				{!includeSummary && (
 					<PaperLink
 						name="Details"
 						url={`/papers/${slug}`}
-						includeRightBar={(data.links || []).length > 0}
+						includeRightBar={!compact && (data.links || []).length > 0}
 					/>
 				)}
 				{(data.links || []).map((link, i) => {
@@ -60,7 +104,7 @@ const includeLinks = true
 						<PaperLink
 							name={link.name}
 							url={link.url}
-							includeRightBar={i < (data.links || []).length - 1}
+							includeRightBar={!compact && i < (data.links || []).length - 1}
 						/>
 					)
 				})}

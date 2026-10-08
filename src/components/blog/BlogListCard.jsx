@@ -6,21 +6,21 @@ export default function BlogCard({ post }) {
   });
 
   return (
-    <li class="border-l-2 border-zinc-200 hover:border-kyle-highlight px-4 py-2">
-      <h2 class="font-white cursor-pointer text-size-1 font-bold">
+    <li >
+      <h2 class="listing-title">
         <a
           href={`/blog/${post.id}`}
           innerHTML={`${post.data.draft ? "🚧 " : ""}${post.data.title}`}
         ></a>
       </h2>
 
-      <p class="mt-size-3xs text-size--1 text-zinc-400">
+      <p class="listing-date">
         <time datetime={post.data.date}>{dateText}</time>
       </p>
 
       <p
         innerHTML={post.data.description}
-        class="mt-size-2xs md:mt-size-xs text-size--1"
+        class="listing-description"
       ></p>
     </li>
   );

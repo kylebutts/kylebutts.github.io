@@ -1,51 +1,25 @@
 ---
 import Layout from "../../layouts/Layout.astro"
 import { getCollection } from "astro:content"
-const repos = await getCollection("open-source")
+import "../../styles/listing.css"
+const items = await getCollection("open-source")
 ---
 
-<style>
-	.offset-border-left {
-		margin-left: -16px;
-		border-left-width: 3px;
-		border-left-color: var(--color-kyle-highlight, #b3114b);
-		padding-left: 16px;
-		text-indent: -2px;
-	}
-</style>
-
 <Layout>
-	<div class="offset-border-left prose mt-size-xs mb-size-md">
-		<p>
-			<span class="text-kyle-highlight font-bold">Note:</span> If you have questions
-			regarding my open-source software, please try to ask me via opening an issue
-			on Github. By answering your question there, I generate public information.
-		</p>
-	</div>
-
-	<ul class="flex flex-col gap-y-size-sm mt-2 mb-size-lg">
-		{
-			repos.map((repo, i) => {
-				return (
-					<>
-						<div class="my-size-sm w-full border-t-2 border-dashed border-zinc-200" />
-						<li>
-							<div>
-								<a
-									class="underline decoration-2 decoration-zinc-200 hover:decoration-kyle-highlight font-zinc-800 hover:font-zinc-50 cursor-pointer font-bold text-size-1 text-mono"
-									href={repo.data.url}
-									set:html={repo.data.title}
-								/>
-
-								<p
-									class="mt-size-3xs prose text-size-0 text-zinc-600 dark:text-zinc-400"
-									set:html={repo.data.description}
-								/>
-							</div>
-						</li>
-					</>
-				)
-			})
-		}
-	</ul>
+  <h2 class="listing-heading offset-border-left">Open Source</h2>
+  <p class="listing-intro">
+    If you have questions regarding my open-source software, please try to ask me
+    via opening an issue on GitHub. By answering your question there, I generate
+    public information.
+  </p>
+  <ul class="listing">
+    {items.map((repo) => (
+      <li>
+        <h3 class="listing-title">
+          <a href={repo.data.url} set:html={repo.data.title} />
+        </h3>
+        <p class="listing-description" set:html={repo.data.description} />
+      </li>
+    ))}
+  </ul>
 </Layout>

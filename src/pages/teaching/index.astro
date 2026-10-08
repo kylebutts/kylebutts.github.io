@@ -1,37 +1,20 @@
 ---
 import Layout from "../../layouts/Layout.astro"
 import { getCollection } from "astro:content"
-const courses = await getCollection("courses")
+import "../../styles/listing.css"
+const items = await getCollection("courses")
 ---
 
 <Layout>
-	<ol class="flex flex-col gap-y-size-lg">
-		<ul class="flex flex-col gap-y-size-sm my-2">
-			{
-				courses.map((course, i) => {
-					return (
-						<>
-							<li>
-								<div>
-									<a
-										class="underline decoration-2 decoration-zinc-200 hover:decoration-kyle-highlight font-zinc-800 hover:font-zinc-50 cursor-pointer font-bold text-size-1 text-mono"
-										href={course.data.url}
-										set:html={course.data.title}
-									/>
-
-									<p
-										class="mt-size-3xs prose text-size-0 text-zinc-600 dark:text-zinc-400"
-										set:html={course.data.description}
-									/>
-								</div>
-							</li>
-							{i !== courses.length - 1 && (
-								<div class="my-size-sm w-full border-t-2 border-dashed border-zinc-200" />
-							)}
-						</>
-					)
-				})
-			}
-		</ul>
-	</ol>
+  <h2 class="listing-heading offset-border-left">Teaching</h2>
+  <ul class="listing">
+    {items.map((course) => (
+      <li>
+        <h3 class="listing-title">
+          <a href={course.data.url} set:html={course.data.title} />
+        </h3>
+        <p class="listing-description" set:html={course.data.description} />
+      </li>
+    ))}
+  </ul>
 </Layout>
