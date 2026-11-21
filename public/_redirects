@@ -1,5 +1,4 @@
 # Recipes cookbook: built from github.com/kylebutts/recipes and published to
 # GitHub Pages at kylebutts.github.io/recipes/. Proxy it under /recipes/ so it
 # keeps the kylebutts.com origin without moving the recipes repo into this one.
-/recipes       /recipes/                                     301
 /recipes/*     https://kylebutts.github.io/recipes/:splat    200
