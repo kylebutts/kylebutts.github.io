@@ -3,12 +3,12 @@ title: >-
   Placebo treatment distributions in difference-in-differences and synthetic
   control
 description: >-
-  Pt. 2. Randomly assigning treatment do not show observational estimators are
-  robust (except in special cases)
+  Pt. 2. Randomly assigning treatment does not show that observational
+  estimators are robust (except in special cases)
 author:
   - name: Kyle Butts
     url: https://kylebutts.com/
-date: '2026-11-23'
+date: '2026-11-27'
 draft: true
 categories:
   - Causal Inference
@@ -19,7 +19,7 @@ format:
 ---
 
 
-I am back, once again, to discuss \`\`placebo treatment’’ graphs.
+I am back, once again, to discuss “placebo treatment” robustness checks.
 
 I wrote [this
 thread](https://x.com/kylefbutts/status/2119804888800788623?a=_2htsnoNP_40G17ZWZM&s=20)
@@ -28,14 +28,14 @@ because of constant referee requests. Since then I’ve been asked to
 review two more (one per week!) that do the same thing. But, what
 inspired this blog post is that they made a [Stata
 module](https://ideas.repec.org/c/boc/bocode/s459225.html) to make these
-dumb graphs even easier to make! Just to show you how severe this is, I
-did a quick google search “green innovation zones china economics paper”
-and just started opening links:
+dumb graphs even easier to produce! Just to show you how severe this is,
+I did a quick Google search “green innovation zones china economics
+paper” and just started opening links:
 
-![Collage of 18 different density plots. Each plot contains a
-distribution of estimates from a ‘placebo randomization’ strategy where
-treatment is randomized and a DID is
-estimated.](placebo_dist_figures/collage.jpeg)
+![Collage of a large number of different density plots. Each plot
+contains a distribution of estimates from a ‘placebo randomization’
+strategy where treatment is randomized and a DID is
+estimated.](2026-11-23-placebo_dist_figures/collage.jpeg)
 
 <!--
 https://www.sciencedirect.com/science/article/pii/S1043951X22001328#f0020
@@ -68,7 +68,7 @@ the same “robustness check” (among other things). The idea for this
 “robustness check” comes from the Fisher randomization inference
 approach where you randomly shuffle treatment and estimate placebo
 treatment effects. The distribution of the placebo treatment effects
-serve as the reference sample distribution under the null hypothesis.
+serves as the reference sample distribution under the null hypothesis.
 This method is valid specifically when you have complete random
 assignment of treatment. To be clear, this is not a form of a robustness
 check. It is a way to quantify the sample distribution and to do
@@ -79,22 +79,27 @@ If you think about the Fisher randomization procedure, the distributions
 should always be centered at zero. You’re asking if a random fraction of
 your sample, $p$ percent, looks different than the remaining $1 - p$
 percent of the sample. Well no, not on average (across randomizations),
-since it is a completely randomly sampl of $p$ percent! It is completely
+since it is a completely random sample of $p$ percent! It is completely
 unsurprising it is centered on zero.
 
 Aside: Note that, in reality, the treated units’ outcome might have
 treatment effects. However, this doesn’t matter since each unit is
-equally likely to be treated ($+\tau_i$) and untreated ($-\tau_i$), so
-on average the units’ treatment effect cancels out.
+equally likely to be placebo-treated ($+\tau_i$) and placebo-untreated
+($-\tau_i$), so on average the units’ treatment effect cancels out. Any
+real treatment effects are differenced out in expectation so this does
+not affect the centered-at-zero claim.
 
 So, people have taken this to DID and synthetic control estimators and
 done the exact same thing: randomly shuffle treatment and reestimate
 your DID / synthetic control estimate. Still, there’s nothing special
 here; randomly assigning $p$ units to treatment and $1 - p$ units to
-control ensures that parallel trends holds ($\Delta Y_i$ is the same for
-both randomly assigned groups)! All 18 of these papers did the same
-thing and all found the distribution is centered on zero: “Wow the green
-innovation zones are the most exogenous thing ever!”
+control ensures that parallel trends hold ($\Delta Y_i$ is the same for
+both randomly assigned groups)! Synthetic control is a bit more
+complicated (it won’t always be centered on zero, but should
+approximately be for the set of controls in the convex hull) All 18 of
+these papers did the same thing and all found the distribution is
+centered on zero: “Wow the green innovation zones are the most exogenous
+thing ever!”
 
 However, we are not concerned if a *randomly assigned* treatment group
 has different trends than the other units. We are concerned that the
@@ -105,30 +110,126 @@ I think maybe the largest culprit of this is the placebo distributions
 in the synthetic control literature. Since inference is so hard in this
 setting (one treated unit only a few post-periods), non-standard
 inference methods are required. The first one is the “spaghetti plot”
-where treatment is randomly assigned. This shows up in the classic
-Abadie et. al. paper and is shown to be valid *when treatment is
-randomly assigned*. But, I don’t think people realize that if treatment
-is not randomly assigned, this inference method is not proven to work!
+where treatment is randomly assigned. This shows up in Abadie et
+al. (2010) and is shown to be valid *when treatment is randomly
+assigned* in Abadie (2021). But, I don’t think people realize that if
+treatment is not randomly assigned, this inference method is not proven
+to work!
 
 There’s a bigger conversation to be had around “robustness checks” and
 what a good one should look like. I feel we often tell students “to do
 robustness checks”, but fail to explain what makes a good robustness
 check. So, they try to do *something* to fill out that part of their
 paper. Quite a few have seen that spaghetti plot and thought, “that’s
-one I can do!” And low and behold, it produces a “robust” result, so it
-makes it into the paper.
+one I can do!” And lo and behold, the check produces a “robust” result,
+so it makes it into the paper.
 
 To do my part, here is what I think makes a good robustness check: 1.
-Propose a reason why someone might have a substantiative issue with your
+Propose a reason why someone might have a substantive issue with your
 result. 2. Try to directly demonstrate that issue is not a problem in
 your context (e.g. collect a new variable, consider a falsification
 group, show a data-processing decision does not change result.) However,
-I think the key point is the issue should be substaniative, that is the
-issue should be a large concern to the central point of the paper. In
-that context, reaching for “off the shelf” robustness checks to do, is
-not the way forward.
+I think the key point is the issue should be substantive, that is the
+issue should be a large concern to the central point of the paper. In my
+opinion, reaching for “off the shelf” robustness checks to do, is not
+the way forward.
 
 Instead, like in all scholarly pursuit, you should try to think of all
 the ways you can to prove yourself wrong and then convince yourself
 those reasons are not of a concern. That is how you ensure your result
 is “robust”.
+
+## Example of placebo simulation
+
+To illustrate, we are going to create a very simple simulated dataset.
+We are going to generate the outcome to have a linear time-trend with a
+unit-specific slope. That slope is randomly drawn and units with the
+`n_treat` largest slopes will be treated. This means, that parallel
+trends is designed to fail since treated units have a larger time-trend
+than untreated units. When we generate the outcome, there will be no
+treatment effects.
+
+``` r
+library(fixest)
+library(tidyverse)
+set.seed(20261127)
+
+N <- 1000
+n_treat <- 200
+T <- 12
+t0 <- 9
+
+## Make trends correlated with treatment (pre-trends does not hold!)
+growth <- rnorm(N, 0, 0.2)
+is_treat <- rank(growth + rnorm(N, 0, 0.6)) > (N - n_treat)
+
+df <- expand_grid(unit = 1:N, t = 1:T) |>
+  mutate(
+    growth = growth[unit],
+    treat = is_treat[unit],
+    D = as.integer(treat & t >= t0),
+    # true effect = 0
+    y = growth * t + rnorm(n(), 0, 0.5)
+  )
+```
+
+The OLS estimate shows the magnitude of the non-parallel trends bias:
+
+``` r
+did_estimate <- feols(
+  y ~ D | unit + t,
+  data = df
+) |>
+  coef() |>
+  _[["D"]]
+
+did_estimate
+```
+
+    [1] 0.4573544
+
+Now, let’s do the placebo simulation where we randomly assign placebo
+treatment and reestimate our DID coefficient:
+
+``` r
+placebo <- replicate(1000, {
+  fake <- sample(1:N, n_treat)
+  model <- feols(
+    y ~ D | unit + t,
+    data = df |> mutate(D = as.integer(unit %in% fake & t >= t0))
+  )
+  c(
+    coefficient = coef(model)[["D"]],
+    p_value = pvalue(model)[["D"]]
+  )
+}) |>
+  t() |>
+  as_tibble()
+
+ggplot(placebo, aes(x = coefficient)) +
+  geom_density(
+    aes(color = "kdensity coefficient"),
+    linewidth = 0.6,
+    trim = TRUE,
+    key_glyph = "path"
+  ) +
+  geom_point(aes(y = p_value, color = "p_value"), shape = 1, size = 1.8) +
+  geom_vline(
+    xintercept = did_estimate,
+    color = "grey55",
+    linetype = "longdash"
+  ) +
+  scale_color_manual(
+    values = c("kdensity coefficient" = "#1A476F", "p_value" = "#90353B"),
+    name = NULL
+  ) +
+  labs(title = "Placebo Test", x = "coefficient", y = "p_value") +
+  ggthemes::theme_stata() +
+  theme(legend.position = "bottom")
+```
+
+![](2026-11-23-placebo_estimates_in_did_files/figure-commonmark/unnamed-chunk-3-1.png)
+
+Wow, my result is robust!
+
+<!-- `ssc install didplacebo`, a command so you can generate 500 estimates of zero without typing much code -->
